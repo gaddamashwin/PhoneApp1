@@ -15,18 +15,29 @@ namespace PhoneApp1
         public async Task<T> ReadFromFile<T>(string filename)
         {
             T result = default(T);
-            StorageFile sampleFile = await ApplicationData.Current.LocalFolder.CreateFileAsync(filename,CreationCollisionOption.OpenIfExists);
-            using (IRandomAccessStream readStream = await sampleFile.OpenAsync(FileAccessMode.Read))
+            StorageFile sampleFile;
+            try
             {
-                if (readStream.Size > 0)
-                {
-                    IInputStream inputStream = readStream.GetInputStreamAt(0);
-                    DataContractSerializer serializer1 = new DataContractSerializer(typeof(T));
-                    result = (T)serializer1.ReadObject(inputStream.AsStreamForRead());
-                }
-                readStream.Dispose();
+               sampleFile = await ApplicationData.Current.LocalFolder.GetFileAsync(filename);
             }
-            
+            catch (Exception)
+            {
+                sampleFile = null;
+            }
+
+            if (sampleFile == null)
+            {
+                using (IRandomAccessStream readStream = await sampleFile.OpenAsync(FileAccessMode.Read))
+                {
+                    if (readStream.Size > 0)
+                    {
+                        IInputStream inputStream = readStream.GetInputStreamAt(0);
+                        DataContractSerializer serializer1 = new DataContractSerializer(typeof(T));
+                        result = (T)serializer1.ReadObject(inputStream.AsStreamForRead());
+                    }
+                    readStream.Dispose();
+                }
+            }
             return result;
         }
 
