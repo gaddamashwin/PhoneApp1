@@ -9,7 +9,7 @@ namespace PhoneApp1.Service
 {
     public class Security
     {
-        public const string UserInfoFile = "UserDetails";
+        public const string UserInfoFile = "UserDetails1";
 
         public static async Task SaveUserInfo(string userName, string password)
         {
@@ -17,24 +17,30 @@ namespace PhoneApp1.Service
             UserInfo user = new UserInfo();
             user.UserName = userName;
             await storage.WriteFromFile<UserInfo>(UserInfoFile, user);
+            userInfo = user;
         }
 
-        private static UserInfo userInfo = null;
-        public static async Task<UserInfo> GetUserInfo()
+        public static async Task SetUserInfo()
         {
             if (userInfo == null)
             {
                 StorageHelper storage = new StorageHelper();
                 userInfo = await storage.ReadFromFile<UserInfo>(UserInfoFile);
             }
-            return userInfo;
         }
 
+        private static UserInfo userInfo = null;
+        
+        public static UserInfo GetUserInfo
+        {
+            get { return userInfo; }
+        }
+        
         public static async Task DeleteUserInfo()
         {
-            StorageHelper storage = new StorageHelper();
-            await storage.DeleteFile(UserInfoFile);
             userInfo = null;
+            StorageHelper storage = new StorageHelper();
+            await storage.WriteFromFile<UserInfo>(UserInfoFile, new UserInfo());
         }
     }
 }

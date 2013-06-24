@@ -13,10 +13,12 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
 
+    
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="Transparent" Loaded="LayoutRoot_Loaded">
+        
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <!--<RowDefinition Height="Auto"/>-->
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -40,20 +42,83 @@
          -->
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
-            <TextBlock Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
+        <!--<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">-->
+            <!--<TextBlock Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>-->
+            <!--<TextBlock Name="txtuser" Text="User Name" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>-->
+            <!--Pivot Control-->
+           
+        <!--</StackPanel>-->
+        <phone:Pivot Title="MY APPLICATION">
+            <!--Pivot item one-->
+            <phone:PivotItem Header="Collections">
+                <Grid Height="Auto">
+                    <ListBox SelectionChanged="lstCollection_SelectionChanged_1" AllowDrop="False" ScrollViewer.ManipulationMode="System" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="lstCollection" Margin="12,17,0,28" ItemsSource="{Binding CollectionItems}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="{StaticResource PhoneAccentBrush}" BorderThickness="5" >
+                                    <StackPanel>
+                                        <TextBlock  Foreground="{StaticResource PhoneForegroundBrush}" FontSize="40" Text="{Binding ItemDescription}" />
+                                        <TextBlock  Foreground="{StaticResource PhoneForegroundBrush}" FontSize="30" FontStyle="Italic" Text="{Binding ItemId}"/>
+                                        
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <ContentPresenter
+                                            HorizontalAlignment="Stretch" 
+                                            VerticalAlignment="Stretch" />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox >
+                </Grid>
+            </phone:PivotItem>
 
+            <!--Pivot item two-->
+            <phone:PivotItem Header="Convert">
+                <Grid Height="Auto">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="Title" Grid.Row="0" Text="Title" Foreground="Gray" GotFocus="SearchTB_GotFocus" LostFocus="SearchTB_LostFocus" />
+                    <TextBox x:Name="Content" Grid.Row="1" Text="Content" Foreground="Gray" GotFocus="SearchTB_GotFocus" LostFocus="SearchTB_LostFocus" />
+                    <Button x:Name="btnSubmit" Click="btnSubmit_Click_1" Grid.Column="0" Grid.Row="2" Content="Submit" />
+                </Grid>
+            </phone:PivotItem>
+
+            <phone:PivotItem Header="My Account">
+                <Grid Height="Auto">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Button x:Name="btnLogoff" Click="btnLogoff_Click_2" Grid.Column="0" Grid.Row="0" Content="Log Off" />
+                </Grid>
+            </phone:PivotItem>
+        </phone:Pivot>
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Button Content="Home" HorizontalAlignment="Left" Height="194" Margin="0,10,0,0" VerticalAlignment="Top" Width="220"/>
-            <Button Content="Button" HorizontalAlignment="Left" Height="194" Margin="225,10,0,0" VerticalAlignment="Top" Width="220"/>
-            <Button Content="Button" HorizontalAlignment="Left" Height="194" Margin="0,209,0,0" VerticalAlignment="Top" Width="220"/>
-            <Button Content="Button" HorizontalAlignment="Left" Height="194" Margin="225,209,0,0" VerticalAlignment="Top" Width="220"/>
-            <Button Name="btnLogoff" Click="btnLogoff_Click_1" Content="Log off;" HorizontalAlignment="Left" Height="194" Margin="0,403,0,0" VerticalAlignment="Top" Width="220"/>
-
-        </Grid>
+        <!--<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <TextBlock Name="txtuser" Text="User Name" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
+            <Button Content="Home" HorizontalAlignment="Left" Height="194" Margin="0,27,0,0" VerticalAlignment="Top" Width="220"/>
+            <Button Content="Button" HorizontalAlignment="Left" Height="194" Margin="225,27,0,0" VerticalAlignment="Top" Width="220"/>
+            <Button Content="Button" HorizontalAlignment="Left" Height="194" Margin="0,229,0,0" VerticalAlignment="Top" Width="220"/>
+            <Button Content="Button" HorizontalAlignment="Left" Height="194" Margin="225,230,0,0" VerticalAlignment="Top" Width="220"/>
+            <Button Name="btnLogoff" Click="btnLogoff_Click_1" Content="Log off;" HorizontalAlignment="Left" Height="194" Margin="0,428,0,-15" VerticalAlignment="Top" Width="220"/>
+        </Grid>-->
 
         <!--Uncomment to see an alignment grid to help ensure your controls are
             aligned on common boundaries.  The image has a top margin of -32px to

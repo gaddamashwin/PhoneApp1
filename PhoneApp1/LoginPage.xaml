@@ -20,19 +20,21 @@
         </Grid.RowDefinitions>
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="PageTitle" Text="HOME PAGE" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="56" FontFamily="Comic Sans MS" />
+            <TextBlock x:Name="PageTitle" Text="LOGIN PAGE" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="56" />
         </StackPanel>
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Grid.Background>
-                <ImageBrush />
-            </Grid.Background>
-            <TextBox Height="76" HorizontalAlignment="Left" Margin="28,111,0,0" Name="textBox1" Text="" VerticalAlignment="Top" Width="422" />
-            <TextBox Height="72" HorizontalAlignment="Left" Margin="28,254,0,0" Name="textBox2" Text="" VerticalAlignment="Top" Width="422" />
-            <Button Content="Sign in " Height="72" HorizontalAlignment="Left" Margin="251,361,0,0" Name="btnSignIn" VerticalAlignment="Top" Width="180" Click="btnSignIn_Click" />
-            <Button Content="Create New Account !" Height="72" HorizontalAlignment="Left" Margin="33,489,0,0" Name="btnRegister" VerticalAlignment="Top" Width="398" Click="btnRegister_Click" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="46,75,0,0" Name="textBlock1" Text="User Name" VerticalAlignment="Top" Foreground="White" FontWeight="Normal" FontFamily="Verdana" FontSize="24" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="46,0,0,396" Name="textBlock2" Text="Password" VerticalAlignment="Bottom" Foreground="White" FontWeight="Normal" FontFamily="Verdana" FontSize="24" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBox GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" Name="UserID" Text="UserID" Grid.Row="0" />
+            <TextBox GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" Name="Password" Text="Password" Grid.Row="1" />
+            <Button Content="Sign in " Name="btnSignIn" Grid.Row="2" Click="btnSignIn_Click" />
+            <Button Content="Register" Name="btnRegister" Grid.Row="3" Click="btnRegister_Click" />
         </Grid>
     </Grid>
 </phone:PhoneApplicationPage>

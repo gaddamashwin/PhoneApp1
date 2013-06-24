@@ -34,9 +34,10 @@ namespace PhoneApp1
             NavigationService.Navigate(new Uri("/RegistrationPage.xaml", UriKind.Relative));
         }
 
-        private async void LayoutRoot_Loaded(object sender, RoutedEventArgs e)
+        private void LayoutRoot_Loaded(object sender, RoutedEventArgs e)
         {
-            if (await Security.GetUserInfo() != null)
+            var user = Security.GetUserInfo;
+            if (user != null && user.UserName !=null)
             {
                 NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
             }
