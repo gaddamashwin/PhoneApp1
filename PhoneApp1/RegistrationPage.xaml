@@ -20,8 +20,9 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="PageTitle" Text="Create New Account" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="40" />
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
@@ -35,7 +36,7 @@
             </Grid.RowDefinitions>
             <TextBox GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" Name="UserID" Text="UserID" Grid.Row="0" Background="#BFF8F8F8" />
             <TextBox GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" Name="Password" Text="Password" Grid.Row="1" Background="#BFF8F8F8"/>
-            <TextBox GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" Name="Re-enter" Text="Re-enter" Grid.Row="2" Background="#BFF8F8F8" />
+            <TextBox GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" Name="Re_enter" Text="Re-enter" Grid.Row="2" Background="#BFF8F8F8" />
             <TextBox GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" Name="textBox4" Text="Email" Grid.Row="3" Background="#BFF8F8F8"  />
             <Button Content="Register" Name="btnRegister" Grid.Row="4" />
         </Grid>

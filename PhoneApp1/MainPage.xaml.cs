@@ -18,12 +18,16 @@ namespace PhoneApp1
         public DateTime ItemId { get; set; }
         public string ItemDescription { get; set; }
         public string Link { get; set; }
+        public Brush ForegroundBrush { get; set; }
+        public bool IsEnabled { get; set; }
 
-        public Testitems(int id, string des, string link)
+        public Testitems(int id, string des, string link, Brush foregroundBrush, bool isEnabled)
         {
             this.ItemId = DateTime.Now;
             this.ItemDescription = des;
             this.Link = link;
+            this.ForegroundBrush = foregroundBrush;
+            this.IsEnabled = isEnabled;
         }
     }
 
@@ -38,18 +42,13 @@ namespace PhoneApp1
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();
             CollectionItems = new List<Testitems>();
-            CollectionItems.Add(new Testitems(1, "Microsoft", "www.google.com"));
-            CollectionItems.Add(new Testitems(2, "Google", "www.google.com"));
-            CollectionItems.Add(new Testitems(3, "Apple", "www.google.com"));
-            CollectionItems.Add(new Testitems(4, "Facebook", "www.google.com"));
-            CollectionItems.Add(new Testitems(5, "Intel", "www.google.com"));
-            CollectionItems.Add(new Testitems(6, "GE", "www.google.com"));
-            CollectionItems.Add(new Testitems(7, "Linkedin", "www.google.com"));
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
+            CollectionItems.Add(new Testitems(1, "Microsoft", "www.google.com", (Brush)Application.Current.Resources["PhoneContrastForegroundBrush"], false));
+            CollectionItems.Add(new Testitems(2, "Google", "www.google.com", (Brush)Application.Current.Resources["PhoneForegroundBrush"], true));
+            CollectionItems.Add(new Testitems(3, "Apple", "www.google.com", (Brush)Application.Current.Resources["PhoneForegroundBrush"], true));
+            CollectionItems.Add(new Testitems(4, "Facebook", "www.google.com", (Brush)Application.Current.Resources["PhoneForegroundBrush"], true));
+            CollectionItems.Add(new Testitems(5, "Intel", "www.google.com", (Brush)Application.Current.Resources["PhoneForegroundBrush"], true));
+            CollectionItems.Add(new Testitems(6, "GE", "www.google.com", (Brush)Application.Current.Resources["PhoneForegroundBrush"], true));
+            CollectionItems.Add(new Testitems(7, "Linkedin", "www.google.com", (Brush)Application.Current.Resources["PhoneContrastForegroundBrush"],false));
         }
 
         private async void btnLogoff_Click_1(object sender, RoutedEventArgs e)
@@ -72,42 +71,33 @@ namespace PhoneApp1
         private void lstCollection_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             Testitems item = (Testitems)e.AddedItems[0];
-            NavigationService.Navigate(new Uri("/Play.xaml", UriKind.Relative));
+            if (item.IsEnabled) NavigationService.Navigate(new Uri("/Play.xaml", UriKind.Relative));
+            else MessageBox.Show("Cannot play!");
         }
 
         //The foreground color of the text in SearchTB is set to Magenta when SearchTB
         //gets focus.
-        private void SearchTB_GotFocus(object sender, RoutedEventArgs e)
+        private void TB_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox txt = (TextBox)sender;
             if (txt.Text == txt.Name) txt.Text = "";
-            SolidColorBrush Brush1 = new SolidColorBrush();
-            Brush1.Color = Colors.Black;
-            txt.Foreground = Brush1;
-
+            txt.Foreground = (Brush)Application.Current.Resources["PhoneTextBoxForegroundColor"];
         }
 
         //The foreground color of the text in SearchTB is set to Blue when SearchTB
         //loses focus. Also, if SearchTB loses focus and no text is entered, the
         //text "Search" is displayed.
-        private void SearchTB_LostFocus(object sender, RoutedEventArgs e)
+        private void TB_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox txt = (TextBox)sender;
             if (txt.Text == String.Empty)
             {
                 txt.Text = txt.Name;
-                SolidColorBrush Brush2 = new SolidColorBrush();
-                Brush2.Color = Colors.Black;
-                txt.Foreground = Brush2;
+                txt.Foreground = (Brush)Application.Current.Resources["PhoneTextBoxForegroundColor"];
             }
         }
 
         private void btnSubmit_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnLogoff_Click_2(object sender, RoutedEventArgs e)
         {
 
         }

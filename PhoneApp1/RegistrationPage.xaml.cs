@@ -24,9 +24,7 @@ namespace PhoneApp1
         {
             TextBox txt = (TextBox)sender;
             if (txt.Text == txt.Name) txt.Text = "";
-            SolidColorBrush Brush1 = new SolidColorBrush();
-            Brush1.Color = Colors.Black;
-            txt.Foreground = Brush1;
+            txt.Foreground = txt.Foreground = (Brush)Application.Current.Resources["PhoneTextBoxForegroundColor"];
 
         }
 
@@ -38,10 +36,8 @@ namespace PhoneApp1
             TextBox txt = (TextBox)sender;
             if (txt.Text == String.Empty)
             {
-                txt.Text = txt.Name;
-                SolidColorBrush Brush2 = new SolidColorBrush();
-                Brush2.Color = Colors.Black;
-                txt.Foreground = Brush2;
+                txt.Text = txt.Name.Replace("_","-");
+                txt.Foreground = txt.Foreground = (Brush)Application.Current.Resources["PhoneTextBoxForegroundColor"];
             }
         }
     }
