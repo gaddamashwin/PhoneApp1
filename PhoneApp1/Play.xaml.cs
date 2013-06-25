@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Windows.Media;
 using System.Threading;
+using Microsoft.Phone.Shell;
 
 namespace PhoneApp1
 {
@@ -17,74 +18,58 @@ namespace PhoneApp1
         public Play()
         {
             InitializeComponent();
-            //this.DataContext = this;
-            //btnPlay.Background = (Brush)Application.Current.Resources["PhoneAccentBrush"];
-            //media.CurrentStateChanged += new RoutedEventHandler(mediaPlayer_CurrentStateChanged);
+            this.DataContext = this;
+
+            ApplicationBar = new ApplicationBar();
+
+            ApplicationBarIconButton playbutton = new ApplicationBarIconButton();
+            playbutton.IconUri = new Uri("/Images/play.png", UriKind.Relative);
+            playbutton.Text = "play";
+            ApplicationBar.Buttons.Add(playbutton);
+            playbutton.Click += new EventHandler(PlayMedia);
         }
 
-        //public double Duration { get; set; }
-
-        //DependencyProperty property = DependencyProperty.Register("Progress", typeof(double), typeof(Play), new PropertyMetadata(0.0));
-
-        //public double Progress
-        //{
-        //    get
-        //    {
-        //        return (double)GetValue(property);
-        //    }
-        //    set
-        //    {
-        //        SetValue(property, value);
-        //    }
-        //}
-
-        //void mediaPlayer_CurrentStateChanged(object sender, RoutedEventArgs e)
-        //{
-        //    if (media.CurrentState == MediaElementState.Playing)
-        //    {
-        //        Duration = media.NaturalDuration.TimeSpan.TotalSeconds;
-        //        ThreadPool.QueueUserWorkItem(o =>
-        //        {
-        //            while (true)
-        //            {
-        //                Dispatcher.BeginInvoke(new Action(() => Progress = media.Position.TotalSeconds * 100 / Duration));
-        //                Thread.Sleep(0);
-        //            }
-        //        });
-        //    }
-        //}
-
-        private void StopMedia(object sender, RoutedEventArgs e)
+        public string Description
         {
-            media.Stop();
-            btnStop.Background = (Brush)Application.Current.Resources["PhoneAccentBrush"];
-            btnPause.Background = (Brush)Application.Current.Resources["Transparent"];
-            btnPlay.Background = (Brush)Application.Current.Resources["Transparent"]; 
-        }
-        private void PauseMedia(object sender, RoutedEventArgs e)
-        {
-            media.Pause();
-            btnStop.Background = (Brush)Application.Current.Resources["Transparent"];
-            btnPause.Background = (Brush)Application.Current.Resources["PhoneAccentBrush"];
-            btnPlay.Background = (Brush)Application.Current.Resources["Transparent"]; 
-        }
-        private void PlayMedia(object sender, RoutedEventArgs e)
-        {
-            media.Play();
-            btnStop.Background = (Brush)Application.Current.Resources["Transparent"];
-            btnPause.Background = (Brush)Application.Current.Resources["Transparent"];
-            btnPlay.Background = (Brush)Application.Current.Resources["PhoneAccentBrush"]; 
+            get { return (string)GetValue(DescriptionProperty); }
+            set { SetValue(DescriptionProperty, value); }
         }
 
-        //private void media_CurrentStateChanged(object sender, RoutedEventArgs e)
-        //{
-        //    btnStop.Background = (Brush)Application.Current.Resources["Transparent"];
-        //    btnPause.Background = (Brush)Application.Current.Resources["Transparent"];
-        //    btnPlay.Background = (Brush)Application.Current.Resources["Transparent"];
-        //    if (media.CurrentState == MediaElementState.Playing) btnPlay.Background = (Brush)Application.Current.Resources["PhoneAccentBrush"];
-        //    if (media.CurrentState == MediaElementState.Paused) btnPause.Background = (Brush)Application.Current.Resources["PhoneAccentBrush"];
-        //    if (media.CurrentState == MediaElementState.Stopped) btnStop.Background = (Brush)Application.Current.Resources["PhoneAccentBrush"];
+        public static readonly DependencyProperty DescriptionProperty = DependencyProperty.Register("Description", typeof(string), typeof(Play), new PropertyMetadata(""));
 
-        //} 
+        public string Link
+        {
+            get { return (string)GetValue(LinkProperty); }
+            set { SetValue(LinkProperty, value); }
+        }
+
+        public static readonly DependencyProperty LinkProperty = DependencyProperty.Register("Link", typeof(string), typeof(Play), new PropertyMetadata(""));
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            Description = NavigationContext.QueryString["Description"];
+            Link = NavigationContext.QueryString["Link"];
+        }
+
+
+        private void PlayMedia(object sender, EventArgs e)
+        {
+            ApplicationBarIconButton btn = (ApplicationBarIconButton)ApplicationBar.Buttons[0];
+
+            if (btn.Text == "play")
+            {
+                media.Play();
+                btn.Text = "pause";
+                btn.IconUri = new Uri("/Images/pause.png", UriKind.Relative);
+            }
+            else if (btn.Text == "pause")
+            {
+                media.Pause();
+                btn.Text = "play";
+                btn.IconUri = new Uri("/Images/play.png", UriKind.Relative);
+            }            
+        }
+
     }
 }

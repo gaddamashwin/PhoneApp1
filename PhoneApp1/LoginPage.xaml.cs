@@ -26,8 +26,13 @@ namespace PhoneApp1
 
         private async void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
-            await Security.SaveUserInfo(UserID.Text, Password.Text);
-            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+            if(string.IsNullOrEmpty(UserID.Text) || UserID.Text == UserID.Name) MessageBox.Show("UserID is required.");
+            else if (string.IsNullOrEmpty(Password.Text) || Password.Text == Password.Name) MessageBox.Show("Password is required.");
+            else
+            {
+                await Security.SaveUserInfo(UserID.Text, Password.Text);
+                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+            }
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
@@ -50,8 +55,7 @@ namespace PhoneApp1
         {
             TextBox txt = (TextBox)sender;
             if (txt.Text == txt.Name) txt.Text = "";
-            txt.Foreground = txt.Foreground = (Brush)Application.Current.Resources["PhoneTextBoxForegroundColor"];
-
+            txt.Foreground = new SolidColorBrush((Color)Application.Current.Resources["PhoneTextBoxForegroundColor"]);
         }
 
         //The foreground color of the text in SearchTB is set to Blue when SearchTB
@@ -63,7 +67,7 @@ namespace PhoneApp1
             if (txt.Text == String.Empty)
             {
                 txt.Text = txt.Name;
-                txt.Foreground = txt.Foreground = (Brush)Application.Current.Resources["PhoneTextBoxForegroundColor"];
+                txt.Foreground = new SolidColorBrush((Color)Application.Current.Resources["PhoneTextBoxForegroundColor"]);
             }
         }
     }

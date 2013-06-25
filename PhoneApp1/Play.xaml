@@ -29,24 +29,18 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-            <MediaElement x:Name="media" AutoPlay="False" Source="Sample1.mp3" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" />
-
-            <!--<ProgressBar x:Name="mainBar" Height="20" Width="400" Value="{Binding ElementName=Main,Path=Progress}"></ProgressBar>-->
-            <!-- Stops media playback.-->
-            <Button x:Name="btnStop" Click="StopMedia" Grid.Column="0" Grid.Row="1" Content="Stop" />
-            <!-- Pauses media playback. -->
-            <Button x:Name="btnPause" Click="PauseMedia" Grid.Column="1" Grid.Row="1" Content="Pause" />
-            <!-- Begins media playback. -->
-            <Button  x:Name="btnPlay" Click="PlayMedia" Grid.Column="2" Grid.Row="1" Content="Play" />
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <MediaElement x:Name="media" AutoPlay="False" Source="{Binding Link}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" />
+            <TextBlock Text="{Binding Description}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3"></TextBlock>
         </Grid>
     </Grid>
 

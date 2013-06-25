@@ -42,13 +42,13 @@ namespace PhoneApp1
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();
             CollectionItems = new List<Testitems>();
-            CollectionItems.Add(new Testitems(1, "Microsoft", "www.google.com", (Brush)Application.Current.Resources["PhoneContrastForegroundBrush"], false));
-            CollectionItems.Add(new Testitems(2, "Google", "www.google.com", (Brush)Application.Current.Resources["PhoneForegroundBrush"], true));
-            CollectionItems.Add(new Testitems(3, "Apple", "www.google.com", (Brush)Application.Current.Resources["PhoneForegroundBrush"], true));
-            CollectionItems.Add(new Testitems(4, "Facebook", "www.google.com", (Brush)Application.Current.Resources["PhoneForegroundBrush"], true));
-            CollectionItems.Add(new Testitems(5, "Intel", "www.google.com", (Brush)Application.Current.Resources["PhoneForegroundBrush"], true));
-            CollectionItems.Add(new Testitems(6, "GE", "www.google.com", (Brush)Application.Current.Resources["PhoneForegroundBrush"], true));
-            CollectionItems.Add(new Testitems(7, "Linkedin", "www.google.com", (Brush)Application.Current.Resources["PhoneContrastForegroundBrush"],false));
+            CollectionItems.Add(new Testitems(1, "Microsoft", "Sample3.wav", (Brush)Application.Current.Resources["PhoneContrastForegroundBrush"], false));
+            CollectionItems.Add(new Testitems(2, "Google", "Sample1.mp3", (Brush)Application.Current.Resources["PhoneForegroundBrush"], true));
+            CollectionItems.Add(new Testitems(3, "Apple", "Sample3.wav", (Brush)Application.Current.Resources["PhoneForegroundBrush"], true));
+            CollectionItems.Add(new Testitems(4, "Facebook", "Sample3.wav", (Brush)Application.Current.Resources["PhoneForegroundBrush"], true));
+            CollectionItems.Add(new Testitems(5, "Intel", "Sample3.wav", (Brush)Application.Current.Resources["PhoneForegroundBrush"], true));
+            CollectionItems.Add(new Testitems(6, "GE", "Sample3.wav", (Brush)Application.Current.Resources["PhoneForegroundBrush"], true));
+            CollectionItems.Add(new Testitems(7, "Linkedin", "Sample3.wav", (Brush)Application.Current.Resources["PhoneContrastForegroundBrush"], false));
         }
 
         private async void btnLogoff_Click_1(object sender, RoutedEventArgs e)
@@ -64,15 +64,19 @@ namespace PhoneApp1
             {
                 NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
             }
+            lstCollection.SelectedIndex = -1;
         }
 
         public List<Testitems> CollectionItems { get; set; }
 
         private void lstCollection_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            Testitems item = (Testitems)e.AddedItems[0];
-            if (item.IsEnabled) NavigationService.Navigate(new Uri("/Play.xaml", UriKind.Relative));
-            else MessageBox.Show("Cannot play!");
+            if (lstCollection.SelectedIndex != -1)
+            {
+                Testitems item = (Testitems)e.AddedItems[0];
+                if (item.IsEnabled) NavigationService.Navigate(new Uri(string.Format("/Play.xaml?Description={0}&Link={1}", item.ItemDescription, item.Link), UriKind.Relative));
+                else MessageBox.Show("Cannot play!");
+            }
         }
 
         //The foreground color of the text in SearchTB is set to Magenta when SearchTB
@@ -81,7 +85,7 @@ namespace PhoneApp1
         {
             TextBox txt = (TextBox)sender;
             if (txt.Text == txt.Name) txt.Text = "";
-            txt.Foreground = (Brush)Application.Current.Resources["PhoneTextBoxForegroundColor"];
+            txt.Foreground = new SolidColorBrush((Color)Application.Current.Resources["PhoneTextBoxForegroundColor"]);
         }
 
         //The foreground color of the text in SearchTB is set to Blue when SearchTB
@@ -93,13 +97,14 @@ namespace PhoneApp1
             if (txt.Text == String.Empty)
             {
                 txt.Text = txt.Name;
-                txt.Foreground = (Brush)Application.Current.Resources["PhoneTextBoxForegroundColor"];
+                txt.Foreground = new SolidColorBrush((Color)Application.Current.Resources["PhoneTextBoxForegroundColor"]);
             }
         }
 
         private void btnSubmit_Click_1(object sender, RoutedEventArgs e)
         {
-
+            if (string.IsNullOrEmpty(Title.Text) || Title.Text == Title.Name) MessageBox.Show("Title is required.");
+            if (string.IsNullOrEmpty(Content.Text) || Content.Text == Content.Name) MessageBox.Show("Content is required.");
         }
 
         // Sample code for building a localized ApplicationBar

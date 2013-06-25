@@ -37,8 +37,8 @@
             <TextBox GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" Name="UserID" Text="UserID" Grid.Row="0" Background="#BFF8F8F8" />
             <TextBox GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" Name="Password" Text="Password" Grid.Row="1" Background="#BFF8F8F8"/>
             <TextBox GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" Name="Re_enter" Text="Re-enter" Grid.Row="2" Background="#BFF8F8F8" />
-            <TextBox GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" Name="textBox4" Text="Email" Grid.Row="3" Background="#BFF8F8F8"  />
-            <Button Content="Register" Name="btnRegister" Grid.Row="4" />
+            <TextBox GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" Name="Email" Text="Email" Grid.Row="3" Background="#BFF8F8F8"  />
+            <Button Content="Register" Name="btnRegister" Grid.Row="4" Click="btnRegister_Click" />
         </Grid>
     </Grid>
 
