@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ISTORE2Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ISTORE2ModelStoreContainer" />
+        <Function Name="FileContentInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Title" Type="varchar" Mode="In" />
+          <Parameter Name="Content" Type="varchar" Mode="In" />
+          <Parameter Name="url" Type="varchar" Mode="In" />
+          <Parameter Name="File" Type="varchar" Mode="In" />
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="SpeechRate" Type="int" Mode="In" />
+          <Parameter Name="VoiceID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="FileContentMyCollSelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="FileContentUpdateStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Status" Type="varchar" Mode="In" />
+          <Parameter Name="FileContenetID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetFileContentNew" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetVoices" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ISTORE2Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ISTORE2Entities" p1:LazyLoadingEnabled="true" >
+          <FunctionImport Name="FileContentInsert">
+            <Parameter Name="Title" Mode="In" Type="String" />
+            <Parameter Name="Content" Mode="In" Type="String" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="File" Mode="In" Type="String" />
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="SpeechRate" Mode="In" Type="Int32" />
+            <Parameter Name="VoiceID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="FileContentMyCollSelectAll" ReturnType="Collection(ISTORE2Model.FileContentMyCollSelectAll_Result)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="FileContentUpdateStatus">
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="FileContenetID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetFileContentNew" ReturnType="Collection(ISTORE2Model.GetFileContentNew_Result)" />
+          <FunctionImport Name="GetVoices" ReturnType="Collection(ISTORE2Model.GetVoices_Result)" />
+        </EntityContainer>
+        <ComplexType Name="FileContentMyCollSelectAll_Result">
+          <Property Type="String" Name="ContentTitle" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="CreatedDatetime" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Download" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="Filepath" Nullable="false" MaxLength="8" />
+        </ComplexType>
+        <ComplexType Name="GetFileContentNew_Result">
+          <Property Type="String" Name="Content" Nullable="false" MaxLength="8000" />
+          <Property Type="String" Name="OutFile" Nullable="false" MaxLength="104" />
+          <Property Type="String" Name="Voice" Nullable="false" MaxLength="250" />
+          <Property Type="Int32" Name="FileContenetID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetVoices_Result">
+          <Property Type="Int32" Name="VoiceID" Nullable="false" />
+          <Property Type="String" Name="Voice" Nullable="false" MaxLength="250" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ISTORE2ModelStoreContainer" CdmEntityContainer="ISTORE2Entities" >
+          <FunctionImportMapping FunctionImportName="FileContentInsert" FunctionName="ISTORE2Model.Store.FileContentInsert" />
+          <FunctionImportMapping FunctionImportName="FileContentMyCollSelectAll" FunctionName="ISTORE2Model.Store.FileContentMyCollSelectAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ISTORE2Model.FileContentMyCollSelectAll_Result">
+                <ScalarProperty Name="ContentTitle" ColumnName="ContentTitle" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="Download" ColumnName="Download" />
+                <ScalarProperty Name="Filepath" ColumnName="Filepath" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="FileContentUpdateStatus" FunctionName="ISTORE2Model.Store.FileContentUpdateStatus" />
+          <FunctionImportMapping FunctionImportName="GetFileContentNew" FunctionName="ISTORE2Model.Store.GetFileContentNew">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ISTORE2Model.GetFileContentNew_Result">
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="OutFile" ColumnName="OutFile" />
+                <ScalarProperty Name="Voice" ColumnName="Voice" />
+                <ScalarProperty Name="FileContenetID" ColumnName="FileContenetID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetVoices" FunctionName="ISTORE2Model.Store.GetVoices">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ISTORE2Model.GetVoices_Result">
+                <ScalarProperty Name="VoiceID" ColumnName="VoiceID" />
+                <ScalarProperty Name="Voice" ColumnName="Voice" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
