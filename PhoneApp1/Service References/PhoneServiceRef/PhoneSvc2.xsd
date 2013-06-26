@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/PhoneService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/PhoneService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfVoices">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Voices" nillable="true" type="tns:Voices" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfVoices" nillable="true" type="tns:ArrayOfVoices" />
+  <xs:complexType name="Voices">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Voice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VoiceID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Voices" nillable="true" type="tns:Voices" />
+  <xs:complexType name="ArrayOfFileContentNew">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FileContentNew" nillable="true" type="tns:FileContentNew" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFileContentNew" nillable="true" type="tns:ArrayOfFileContentNew" />
+  <xs:complexType name="FileContentNew">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Content" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FileContenetID" type="xs:int" />
+      <xs:element minOccurs="0" name="OutFile" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Voice" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FileContentNew" nillable="true" type="tns:FileContentNew" />
+  <xs:complexType name="ArrayOfFileContentColl">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FileContentColl" nillable="true" type="tns:FileContentColl" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFileContentColl" nillable="true" type="tns:ArrayOfFileContentColl" />
+  <xs:complexType name="FileContentColl">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ContentTitle" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedDatetime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Download" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Filepath" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FileContentColl" nillable="true" type="tns:FileContentColl" />
+  <xs:complexType name="FileContentForInsert">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="content" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="file" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="speechRate" type="xs:int" />
+      <xs:element minOccurs="0" name="title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="url" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="userID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="voiceID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FileContentForInsert" nillable="true" type="tns:FileContentForInsert" />
+</xs:schema>

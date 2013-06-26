@@ -10,8 +10,6 @@
     mc:Ignorable="d"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
-
-
     <phone:PhoneApplicationPage.Resources>
         <Style x:Key="PivotHeaderItemStyle1" TargetType="Primitives:PivotHeaderItem">
             <Setter Property="Background" Value="Transparent"/>
@@ -78,32 +76,9 @@
         <StaticResource ResourceKey="PhoneForegroundBrush"/>
     </phone:PhoneApplicationPage.Foreground>
     <Grid x:Name="LayoutRoot" Background="Transparent" Loaded="LayoutRoot_Loaded">
-        <!-- LOCALIZATION NOTE:
-            To localize the displayed strings copy their values to appropriately named
-            keys in the app's neutral language resource file (AppResources.resx) then
-            replace the hard-coded text value between the attributes' quotation marks
-            with the binding clause whose path points to that string name.
-
-            For example:
-
-                Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"
-
-            This binding points to the template's string resource named "ApplicationTitle".
-
-            Adding supported languages in the Project Properties tab will create a
-            new resx file per language that can carry the translated values of your
-            UI strings. The binding in these examples will cause the value of the
-            attributes to be drawn from the .resx file that matches the
-            CurrentUICulture of the app at run time.
-         -->
-
-        <!--TitlePanel contains the name of the application and page title-->
-        <!--<StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>-->
-        <!--<TextBlock Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>-->
-        <phone:Pivot Title="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"  >
+            <phone:Pivot Name="myPivot" Title="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"  >
             <!--Pivot item one-->
-            <phone:PivotItem Header="Collections">
+            <phone:PivotItem Header="Collections" Name="pivotCollections">
                 <Grid Height="Auto">
                     <ListBox SelectionChanged="lstCollection_SelectionChanged_1" AllowDrop="False" ScrollViewer.ManipulationMode="System" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="lstCollection" Margin="12,17,0,28" ItemsSource="{Binding CollectionItems}">
                         <ListBox.ItemTemplate>
@@ -139,7 +114,7 @@
             </phone:PivotItem>
 
             <!--Pivot item two-->
-            <phone:PivotItem Header="Convert">
+            <phone:PivotItem Header="Convert" Name="pivotConvert">
                 <Grid Height="Auto">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -162,23 +137,6 @@
                 </Grid>
             </phone:PivotItem>
         </phone:Pivot>
-        <!--ContentPanel - place additional content here-->
-        <!--<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBlock Name="txtuser" Text="User Name" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
-            <Button Content="Home" HorizontalAlignment="Left" Height="194" Margin="0,27,0,0" VerticalAlignment="Top" Width="220"/>
-            <Button Content="Button" HorizontalAlignment="Left" Height="194" Margin="225,27,0,0" VerticalAlignment="Top" Width="220"/>
-            <Button Content="Button" HorizontalAlignment="Left" Height="194" Margin="0,229,0,0" VerticalAlignment="Top" Width="220"/>
-            <Button Content="Button" HorizontalAlignment="Left" Height="194" Margin="225,230,0,0" VerticalAlignment="Top" Width="220"/>
-            <Button Name="btnLogoff" Click="btnLogoff_Click_1" Content="Log off;" HorizontalAlignment="Left" Height="194" Margin="0,428,0,-15" VerticalAlignment="Top" Width="220"/>
-        </Grid>-->
-
-        <!--Uncomment to see an alignment grid to help ensure your controls are
-            aligned on common boundaries.  The image has a top margin of -32px to
-            account for the System Tray. Set this to 0 (or remove the margin altogether)
-            if the System Tray is hidden.
-
-            Before shipping remove this XAML and the image itself.-->
-        <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0,-32,0,0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
-    </Grid>
+      </Grid>
 
 </phone:PhoneApplicationPage>

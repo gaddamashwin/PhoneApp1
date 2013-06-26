@@ -22,13 +22,13 @@ namespace PhoneService
         IEnumerable<FileContentNew> GetFileContentNew();
 
         [OperationContract]
-        void FileContentUpdateStatus(string status, int fileContenetID);
+        string FileContentUpdateStatus(string status, int fileContenetID);
 
         [OperationContract]
-        IEnumerable<FileContentColl> FileContentMyCollSelectAll(int userID);
+        IEnumerable<FileContentColl> FileContentMyCollSelectAll(string userID);
 
         [OperationContract]
-        void FileContentInsert(string title, string content, string url, string file, int userID, int speechRate, int voiceID);
+        string FileContentInsert(FileContentForInsert fileContent);
     }
 
     [DataContract]
@@ -66,5 +66,16 @@ namespace PhoneService
         public string Voice { get; set; }
         [DataMember]
         public int FileContenetID { get; set; }
+    }
+
+    public class FileContentForInsert
+    { 
+        public string title { get; set; }
+        public string content { get; set; }
+        public string url { get; set; }
+        public string file { get; set; }
+        public string userID { get; set; }
+        public int speechRate { get; set; }
+        public int voiceID { get; set; }
     }
 }

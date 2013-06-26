@@ -10,6 +10,7 @@ using Microsoft.Phone.Shell;
 using PhoneApp1.Resources;
 using PhoneApp1.Service;
 using System.Windows.Media;
+using System.Threading.Tasks;
 
 namespace PhoneApp1
 {
@@ -103,10 +104,40 @@ namespace PhoneApp1
 
         private void btnSubmit_Click_1(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(Title.Text) || Title.Text == Title.Name) MessageBox.Show("Title is required.");
-            else if (string.IsNullOrEmpty(Content.Text) || Content.Text == Content.Name) MessageBox.Show("Content is required.");
-            else { }
+            try
+            {
+                if (string.IsNullOrEmpty(Title.Text) || Title.Text == Title.Name) MessageBox.Show("Title is required.");
+                else if (string.IsNullOrEmpty(Content.Text) || Content.Text == Content.Name) MessageBox.Show("Content is required.");
+                else
+                {
+                    PhoneServiceRef.PhoneSvcClient svc = new PhoneServiceRef.PhoneSvcClient();
+                    svc.FileContentInsertCompleted += svc_FileContentInsertCompleted;
+                    //svc.GetDataCompleted += svc_GetDataCompleted;
+                    //svc.GetDataAsync(1);
+                    PhoneServiceRef.FileContentForInsert fileContent = new PhoneServiceRef.FileContentForInsert();
+                    fileContent.content = Content.Text;
+                    fileContent.speechRate = 3;
+                    fileContent.title = Title.Text;
+                    fileContent.userID = Security.GetUserInfo.UserName;
+                    fileContent.voiceID = 1;
+                    svc.FileContentInsertAsync(fileContent);
+                    
+                    svc.CloseAsync();
+                    // 
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
+
+        void svc_FileContentInsertCompleted(object sender, PhoneServiceRef.FileContentInsertCompletedEventArgs e)
+        {
+            MessageBox.Show(e.Result);
+        }
+
 
         // Sample code for building a localized ApplicationBar
         //private void BuildLocalizedApplicationBar()

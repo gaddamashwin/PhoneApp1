@@ -113,6 +113,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Service References\PhoneServiceRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service\Security.cs" />
     <Compile Include="Service\StorageHelper.cs" />
   </ItemGroup>
@@ -146,6 +151,26 @@
     <None Include="Sample2.ogg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Service References\PhoneServiceRef\PhoneApp1.PhoneServiceRef.FileContentColl.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PhoneServiceRef\PhoneApp1.PhoneServiceRef.FileContentNew.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PhoneServiceRef\PhoneApp1.PhoneServiceRef.Voices.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PhoneServiceRef\PhoneSvc.wsdl" />
+    <None Include="Service References\PhoneServiceRef\PhoneSvc.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PhoneServiceRef\PhoneSvc1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PhoneServiceRef\PhoneSvc2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\AlignmentGrid.png" />
@@ -180,6 +205,13 @@
     <Content Include="Sample3.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Service References\PhoneServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\PhoneServiceRef\configuration.svcinfo" />
+    <None Include="Service References\PhoneServiceRef\configuration91.svcinfo" />
+    <None Include="Service References\PhoneServiceRef\PhoneSvc.disco" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\AppResources.resx">
@@ -187,7 +219,12 @@
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\PhoneServiceRef\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

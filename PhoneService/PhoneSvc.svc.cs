@@ -56,22 +56,33 @@ namespace PhoneService
             return entity.GetFileContentNew().ToList().ConvertAll<FileContentNew>(i => CopyProperties<FileContentNew>(i));
         }
 
-        public void FileContentUpdateStatus(string status, int fileContenetID)
+        public string FileContentUpdateStatus(string status, int fileContenetID)
         {
             ISTORE2Entities entity = new ISTORE2Entities();
             entity.FileContentUpdateStatus(status, fileContenetID);
+            return "Done";
         }
 
-        public IEnumerable<FileContentColl> FileContentMyCollSelectAll(int userID)
+        public IEnumerable<FileContentColl> FileContentMyCollSelectAll(string userID)
         {
             ISTORE2Entities entity = new ISTORE2Entities();
             return entity.FileContentMyCollSelectAll(userID).ToList().ConvertAll<FileContentColl>(i => CopyProperties<FileContentColl>(i));
         }
 
-        public void FileContentInsert(string title, string content, string url, string file, int userID, int speechRate, int voiceID)
+        public string FileContentInsert(FileContentForInsert fileContent)
         {
-            ISTORE2Entities entity = new ISTORE2Entities();
-            entity.FileContentInsert(title,content,url,file,userID,speechRate,voiceID);
+            try
+            {
+                ISTORE2Entities entity = new ISTORE2Entities();
+                entity.FileContentInsert(fileContent.title, fileContent.content, fileContent.url, fileContent.file, fileContent.userID, fileContent.speechRate, fileContent.voiceID);
+                entity.Dispose();
+                return "";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+           
         }
     }
 }

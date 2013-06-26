@@ -11,10 +11,11 @@ namespace PhoneService
 {
     using System;
     using System.Data.Entity;
+    using System.Data.Entity.Core.Objects;
     using System.Data.Entity.Infrastructure;
     //using System.Data.Objects;
     //using System.Data.Objects.DataClasses;
-    using System.Data.Entity.Core.Objects;
+
     using System.Linq;
     
     public partial class ISTORE2Entities : DbContext
@@ -30,7 +31,7 @@ namespace PhoneService
         }
     
     
-        public virtual int FileContentInsert(string title, string content, string url, string file, Nullable<int> userID, Nullable<int> speechRate, Nullable<int> voiceID)
+        public virtual int FileContentInsert(string title, string content, string url, string file, string userID, Nullable<int> speechRate, Nullable<int> voiceID)
         {
             var titleParameter = title != null ?
                 new ObjectParameter("Title", title) :
@@ -48,9 +49,9 @@ namespace PhoneService
                 new ObjectParameter("File", file) :
                 new ObjectParameter("File", typeof(string));
     
-            var userIDParameter = userID.HasValue ?
+            var userIDParameter = userID != null ?
                 new ObjectParameter("UserID", userID) :
-                new ObjectParameter("UserID", typeof(int));
+                new ObjectParameter("UserID", typeof(string));
     
             var speechRateParameter = speechRate.HasValue ?
                 new ObjectParameter("SpeechRate", speechRate) :
@@ -63,11 +64,11 @@ namespace PhoneService
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("FileContentInsert", titleParameter, contentParameter, urlParameter, fileParameter, userIDParameter, speechRateParameter, voiceIDParameter);
         }
     
-        public virtual ObjectResult<FileContentMyCollSelectAll_Result> FileContentMyCollSelectAll(Nullable<int> userID)
+        public virtual ObjectResult<FileContentMyCollSelectAll_Result> FileContentMyCollSelectAll(string userID)
         {
-            var userIDParameter = userID.HasValue ?
+            var userIDParameter = userID != null ?
                 new ObjectParameter("UserID", userID) :
-                new ObjectParameter("UserID", typeof(int));
+                new ObjectParameter("UserID", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FileContentMyCollSelectAll_Result>("FileContentMyCollSelectAll", userIDParameter);
         }
