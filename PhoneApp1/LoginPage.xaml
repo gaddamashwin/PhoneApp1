@@ -34,7 +34,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <TextBox GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" Name="UserID" Text="UserID" Grid.Row="0" />
-            <TextBox GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" Name="Password" Text="Password" Grid.Row="1" />
+            <PasswordBox Name="Password" Grid.Row="1" />
             <Button Content="Sign in " Name="btnSignIn" Grid.Row="2" Click="btnSignIn_Click" />
             <Button Content="Register" Name="btnRegister" Grid.Row="3" Click="btnRegister_Click" />
         </Grid>

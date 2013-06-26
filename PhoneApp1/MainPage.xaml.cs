@@ -104,7 +104,8 @@ namespace PhoneApp1
         private void btnSubmit_Click_1(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(Title.Text) || Title.Text == Title.Name) MessageBox.Show("Title is required.");
-            if (string.IsNullOrEmpty(Content.Text) || Content.Text == Content.Name) MessageBox.Show("Content is required.");
+            else if (string.IsNullOrEmpty(Content.Text) || Content.Text == Content.Name) MessageBox.Show("Content is required.");
+            else { }
         }
 
         // Sample code for building a localized ApplicationBar

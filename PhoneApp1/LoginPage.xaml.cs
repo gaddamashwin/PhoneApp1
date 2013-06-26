@@ -27,10 +27,10 @@ namespace PhoneApp1
         private async void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
             if(string.IsNullOrEmpty(UserID.Text) || UserID.Text == UserID.Name) MessageBox.Show("UserID is required.");
-            else if (string.IsNullOrEmpty(Password.Text) || Password.Text == Password.Name) MessageBox.Show("Password is required.");
+            else if (string.IsNullOrEmpty(Password.Password) || Password.Password == Password.Name) MessageBox.Show("Password is required.");
             else
             {
-                await Security.SaveUserInfo(UserID.Text, Password.Text);
+                await Security.SaveUserInfo(UserID.Text, Password.Password);
                 NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
             }
         }

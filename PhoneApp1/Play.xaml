@@ -31,16 +31,28 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <MediaElement x:Name="media" AutoPlay="False" Source="{Binding Link}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" />
+            <MediaElement x:Name="media" AutoPlay="False" Source="{Binding Link}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Stretch="Fill" MediaOpened="Element_MediaOpened" MediaEnded="Element_MediaEnded"  />
             <TextBlock Text="{Binding Description}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3"></TextBlock>
+
+            <!-- Volume slider. This slider allows a Volume range between 0 and 1. -->
+            <TextBlock Foreground="White" VerticalAlignment="Center" Margin="5" Grid.Column="0" Grid.Row="2" >Volume</TextBlock>
+            <Slider Name="volumeSlider" VerticalAlignment="Center" ValueChanged="ChangeMediaVolume" Grid.Column="0" Grid.Row="3"
+       Minimum="0" Maximum="10" Value="0.5"/>
+           
+
+            <!-- Seek to slider. Ths slider allows you to jump to different parts of the media playback. -->
+            <TextBlock Foreground="White" Margin="5"  VerticalAlignment="Center" Grid.Column="0" Grid.Row="4">Seek To</TextBlock>
+            <Slider Name="timelineSlider" Margin="5" ValueChanged="SeekToMediaPosition" Grid.Column="0" Grid.Row="5"/>
         </Grid>
     </Grid>
 
