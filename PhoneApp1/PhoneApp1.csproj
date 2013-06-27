@@ -35,7 +35,7 @@
     <NoStdLib>true</NoStdLib>
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>0</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -160,6 +160,16 @@
     <None Include="Service References\PhoneServiceRef\PhoneApp1.PhoneServiceRef.Voices.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\PhoneServiceRef\PhoneSvc.disco" />
+    <None Include="Service References\PhoneServiceRef\configuration91.svcinfo" />
+    <None Include="Service References\PhoneServiceRef\configuration.svcinfo" />
+    <None Include="Service References\PhoneServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="ServiceReferences.ClientConfig">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Service References\PhoneServiceRef\PhoneSvc.wsdl" />
     <None Include="Service References\PhoneServiceRef\PhoneSvc.xsd">
       <SubType>Designer</SubType>
@@ -170,7 +180,6 @@
     <None Include="Service References\PhoneServiceRef\PhoneSvc2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\AlignmentGrid.png" />
@@ -205,13 +214,6 @@
     <Content Include="Sample3.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Service References\PhoneServiceRef\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\PhoneServiceRef\configuration.svcinfo" />
-    <None Include="Service References\PhoneServiceRef\configuration91.svcinfo" />
-    <None Include="Service References\PhoneServiceRef\PhoneSvc.disco" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\AppResources.resx">

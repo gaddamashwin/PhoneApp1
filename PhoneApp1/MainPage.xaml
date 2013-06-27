@@ -76,7 +76,7 @@
         <StaticResource ResourceKey="PhoneForegroundBrush"/>
     </phone:PhoneApplicationPage.Foreground>
     <Grid x:Name="LayoutRoot" Background="Transparent" Loaded="LayoutRoot_Loaded">
-            <phone:Pivot Name="myPivot" Title="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"  >
+            <phone:Pivot Name="myPivot" Title="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" SelectionChanged="myPivot_SelectionChanged"  >
             <!--Pivot item one-->
             <phone:PivotItem Header="Collections" Name="pivotCollections">
                 <Grid Height="Auto">
@@ -85,8 +85,8 @@
                             <DataTemplate>
                                 <Border Background="{StaticResource PhoneAccentBrush}" BorderThickness="5" >
                                     <StackPanel>
-                                        <TextBlock Foreground="{Binding ForegroundBrush}" FontSize="40" Text="{Binding ItemDescription}" />
-                                        <TextBlock Foreground="{Binding ForegroundBrush}" FontSize="30" FontStyle="Italic" Text="{Binding ItemId}"/>
+                                        <TextBlock Foreground="{Binding ForegroundBrush}" FontSize="40" Text="{Binding ContentTitle}" />
+                                        <TextBlock Foreground="{Binding ForegroundBrush}" FontSize="30" FontStyle="Italic" Text="{Binding CreatedDatetime}"/>
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
@@ -123,7 +123,6 @@
                     </Grid.RowDefinitions>
                     <TextBox x:Name="Title" Grid.Row="0" Text="Title" Foreground="Gray" GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" />
                     <TextBox x:Name="Content" Grid.Row="1" Text="Content" Foreground="Gray" GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" />
-                    <Button x:Name="btnSubmit" Click="btnSubmit_Click_1" Grid.Column="0" Grid.Row="2" Content="Submit" />
                 </Grid>
             </phone:PivotItem>
 

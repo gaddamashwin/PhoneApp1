@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="49d467f9-d636-4499-8c6d-bf664e54dccc" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="9f55cd9c-26e9-4012-931f-e50d8ef0252b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
@@ -23,11 +23,11 @@
     <MetadataSource Address="http://localhost:62724/PhoneSvc.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="PhoneSvc.xsd" MetadataType="Schema" ID="10ee0913-5522-4a13-b414-856e1f40f73f" SourceId="1" SourceUrl="http://localhost:62724/PhoneSvc.svc?xsd=xsd0" />
-    <MetadataFile FileName="PhoneSvc.disco" MetadataType="Disco" ID="80e8e9a9-b863-4da0-b02b-38cb24f1a209" SourceId="1" SourceUrl="http://localhost:62724/PhoneSvc.svc?disco" />
-    <MetadataFile FileName="PhoneSvc.wsdl" MetadataType="Wsdl" ID="92799f76-8cf5-4b1a-91ea-402e276394c7" SourceId="1" SourceUrl="http://localhost:62724/PhoneSvc.svc?wsdl" />
-    <MetadataFile FileName="PhoneSvc1.xsd" MetadataType="Schema" ID="caad9b2c-5750-400c-8964-1feb278b04f6" SourceId="1" SourceUrl="http://localhost:62724/PhoneSvc.svc?xsd=xsd1" />
-    <MetadataFile FileName="PhoneSvc2.xsd" MetadataType="Schema" ID="d7d77e40-744a-4f52-9008-ecb6ae58805e" SourceId="1" SourceUrl="http://localhost:62724/PhoneSvc.svc?xsd=xsd2" />
+    <MetadataFile FileName="PhoneSvc.xsd" MetadataType="Schema" ID="8047df1d-f795-490a-bea1-26e1a0c0b429" SourceId="1" SourceUrl="http://localhost:62724/PhoneSvc.svc?xsd=xsd0" />
+    <MetadataFile FileName="PhoneSvc.disco" MetadataType="Disco" ID="c3e71ce4-bbd9-4cc7-9179-d986a824f906" SourceId="1" SourceUrl="http://localhost:62724/PhoneSvc.svc?disco" />
+    <MetadataFile FileName="PhoneSvc.wsdl" MetadataType="Wsdl" ID="b1ecf6a6-0b05-4ad9-b16d-09d5feb08bfa" SourceId="1" SourceUrl="http://localhost:62724/PhoneSvc.svc?wsdl" />
+    <MetadataFile FileName="PhoneSvc1.xsd" MetadataType="Schema" ID="7ab0ddcd-e40b-4988-a536-08b28ef32ab2" SourceId="1" SourceUrl="http://localhost:62724/PhoneSvc.svc?xsd=xsd1" />
+    <MetadataFile FileName="PhoneSvc2.xsd" MetadataType="Schema" ID="cbcd8ba8-1446-4112-b509-bdb9ed314a7e" SourceId="1" SourceUrl="http://localhost:62724/PhoneSvc.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
