@@ -23,16 +23,42 @@ namespace PhoneApp1
         {
             InitializeComponent();
         }
-
-        private async void btnSignIn_Click(object sender, RoutedEventArgs e)
+        private CookieContainer cc;
+        private void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
             if(string.IsNullOrEmpty(UserID.Text) || UserID.Text == UserID.Name) MessageBox.Show("UserID is required.");
             else if (string.IsNullOrEmpty(Password.Password) || Password.Password == Password.Name) MessageBox.Show("Password is required.");
             else
             {
+                AuthReference.AuthenticationServiceClient authService = new AuthReference.AuthenticationServiceClient();
+                cc = new CookieContainer();
+                authService.CookieContainer = cc;
+                authService.LoginCompleted += authService_LoginCompleted;
+                authService.LoginAsync(UserID.Text, Password.Password, "", true);
+            }
+        }
+
+        async void authService_LoginCompleted(object sender, AuthReference.LoginCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                MessageBox.Show("Login failed, you Jackwagon.");
+            }
+            else
+            {
+                MembershipServiceReference.MembershipServiceClient helloService = new MembershipServiceReference.MembershipServiceClient();
+                helloService.CookieContainer = cc;
+                helloService.IsAuthenticatedCompleted += helloService_IsAuthenticatedCompleted;
+                helloService.IsAuthenticatedAsync();
+
                 await Security.SaveUserInfo(UserID.Text, Password.Password);
                 NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
             }
+        }
+
+        void helloService_IsAuthenticatedCompleted(object sender, MembershipServiceReference.IsAuthenticatedCompletedEventArgs e)
+        {
+            MessageBox.Show("You're logged in, results from svc: " + e.Result);
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)

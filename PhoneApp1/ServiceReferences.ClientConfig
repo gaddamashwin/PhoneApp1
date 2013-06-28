@@ -2,16 +2,30 @@
     <system.serviceModel>
         <bindings>
             <basicHttpBinding>
-                <binding name="BasicHttpBinding_IPhoneSvc" maxBufferSize="2147483647"
+                <binding name="BasicHttpBinding_IPhoneSvc" maxBufferSize="2147483647" 
+                    maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+                <binding name="BasicHttpBinding_AuthenticationService" maxBufferSize="2147483647" enableHttpCookieContainer="true"
+                    maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+                <binding name="BasicHttpBinding_IMembershipService" maxBufferSize="2147483647"
                     maxReceivedMessageSize="2147483647">
                     <security mode="None" />
                 </binding>
             </basicHttpBinding>
         </bindings>
         <client>
-            <endpoint address="http://uscmpujmittal8.us.deloitte.com/PhoneService/PhoneSvc.svc" binding="basicHttpBinding"
-                bindingConfiguration="BasicHttpBinding_IPhoneSvc" contract="PhoneServiceRef.IPhoneSvc"
-                name="BasicHttpBinding_IPhoneSvc" />
+            <endpoint address="http://uscmpujmittal8.us.deloitte.com/PhoneService/PhoneSvc.svc"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_IPhoneSvc"
+                contract="PhoneServiceRef.IPhoneSvc" name="BasicHttpBinding_IPhoneSvc" />
+            <endpoint address="http://uscmpujmittal8.us.deloitte.com/PhoneService/Authentication.svc"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_AuthenticationService"
+                contract="AuthReference.AuthenticationService" name="BasicHttpBinding_AuthenticationService" />
+            <endpoint address="http://uscmpujmittal8.us.deloitte.com/PhoneService/MembershipService.svc"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_IMembershipService"
+                contract="MembershipServiceReference.IMembershipService" name="BasicHttpBinding_IMembershipService" />
         </client>
     </system.serviceModel>
 </configuration>

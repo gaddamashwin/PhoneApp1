@@ -113,6 +113,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Service References\AuthReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\MembershipServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\PhoneServiceRef\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -151,6 +161,21 @@
     <None Include="Sample2.ogg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Service References\AuthReference\Authentication.wsdl" />
+    <None Include="Service References\AuthReference\Authentication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AuthReference\Authentication1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AuthReference\AuthenticationService.wsdl" />
+    <None Include="Service References\MembershipServiceReference\MembershipService.wsdl" />
+    <None Include="Service References\MembershipServiceReference\MembershipService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MembershipServiceReference\MembershipService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\PhoneServiceRef\PhoneApp1.PhoneServiceRef.FileContentColl.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -164,6 +189,20 @@
     <None Include="Service References\PhoneServiceRef\configuration91.svcinfo" />
     <None Include="Service References\PhoneServiceRef\configuration.svcinfo" />
     <None Include="Service References\PhoneServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\AuthReference\Authentication.disco" />
+    <None Include="Service References\AuthReference\configuration91.svcinfo" />
+    <None Include="Service References\AuthReference\configuration.svcinfo" />
+    <None Include="Service References\AuthReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\MembershipServiceReference\MembershipService.disco" />
+    <None Include="Service References\MembershipServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\MembershipServiceReference\configuration.svcinfo" />
+    <None Include="Service References\MembershipServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -225,6 +264,8 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\AuthReference\" />
+    <WCFMetadataStorage Include="Service References\MembershipServiceReference\" />
     <WCFMetadataStorage Include="Service References\PhoneServiceRef\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

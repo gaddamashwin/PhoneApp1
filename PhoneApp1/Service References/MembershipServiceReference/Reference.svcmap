@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="ec403843-914e-4f99-889f-31088a176a50" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:62724/MembershipService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MembershipService.xsd" MetadataType="Schema" ID="cf4e36cc-2afc-425d-a09f-2b7b943a814c" SourceId="1" SourceUrl="http://localhost:62724/MembershipService.svc?xsd=xsd1" />
+    <MetadataFile FileName="MembershipService1.xsd" MetadataType="Schema" ID="6fa48262-9e4d-4b6c-b46e-34ee9c359b31" SourceId="1" SourceUrl="http://localhost:62724/MembershipService.svc?xsd=xsd0" />
+    <MetadataFile FileName="MembershipService.wsdl" MetadataType="Wsdl" ID="b3c44764-9f70-4902-9c98-b6f94f4e90f9" SourceId="1" SourceUrl="http://localhost:62724/MembershipService.svc?wsdl" />
+    <MetadataFile FileName="MembershipService.disco" MetadataType="Disco" ID="ae1b50aa-ae99-4bd6-926f-be601697ddcf" SourceId="1" SourceUrl="http://localhost:62724/MembershipService.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
