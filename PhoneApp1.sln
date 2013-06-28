@@ -8,6 +8,32 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneApp1", "PhoneApp1\Phon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneService", "PhoneService\PhoneService.csproj", "{A674DA29-0F4C-4BD7-800A-DD225CC1CF96}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SampleProject", "SampleProject", "{624CA941-73B1-4F46-94AA-D4895A25BF7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextToWav", "SampleProject\TextToWav.csproj", "{D9F0AC41-68E3-4F8C-BC08-BFB8501AE9D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextToWavLib", "SampleProject\TextToWavLib\TextToWavLib.csproj", "{4F1F2F90-478B-4338-ACCC-985A2643A2E6}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ReadToMe", "ReadToMe\", "{92DE6318-345C-4F4D-AF35-A2BB2333C954}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/ReadToMe"
+		Debug.AspNetCompiler.PhysicalPath = "ReadToMe\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\ReadToMe\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/ReadToMe"
+		Release.AspNetCompiler.PhysicalPath = "ReadToMe\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\ReadToMe\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "16974"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,8 +70,36 @@ Global
 		{A674DA29-0F4C-4BD7-800A-DD225CC1CF96}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A674DA29-0F4C-4BD7-800A-DD225CC1CF96}.Release|ARM.ActiveCfg = Release|Any CPU
 		{A674DA29-0F4C-4BD7-800A-DD225CC1CF96}.Release|x86.ActiveCfg = Release|Any CPU
+		{D9F0AC41-68E3-4F8C-BC08-BFB8501AE9D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9F0AC41-68E3-4F8C-BC08-BFB8501AE9D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9F0AC41-68E3-4F8C-BC08-BFB8501AE9D4}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{D9F0AC41-68E3-4F8C-BC08-BFB8501AE9D4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D9F0AC41-68E3-4F8C-BC08-BFB8501AE9D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9F0AC41-68E3-4F8C-BC08-BFB8501AE9D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9F0AC41-68E3-4F8C-BC08-BFB8501AE9D4}.Release|ARM.ActiveCfg = Release|Any CPU
+		{D9F0AC41-68E3-4F8C-BC08-BFB8501AE9D4}.Release|x86.ActiveCfg = Release|Any CPU
+		{4F1F2F90-478B-4338-ACCC-985A2643A2E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F1F2F90-478B-4338-ACCC-985A2643A2E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F1F2F90-478B-4338-ACCC-985A2643A2E6}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{4F1F2F90-478B-4338-ACCC-985A2643A2E6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4F1F2F90-478B-4338-ACCC-985A2643A2E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F1F2F90-478B-4338-ACCC-985A2643A2E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F1F2F90-478B-4338-ACCC-985A2643A2E6}.Release|ARM.ActiveCfg = Release|Any CPU
+		{4F1F2F90-478B-4338-ACCC-985A2643A2E6}.Release|x86.ActiveCfg = Release|Any CPU
+		{92DE6318-345C-4F4D-AF35-A2BB2333C954}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92DE6318-345C-4F4D-AF35-A2BB2333C954}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92DE6318-345C-4F4D-AF35-A2BB2333C954}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{92DE6318-345C-4F4D-AF35-A2BB2333C954}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{92DE6318-345C-4F4D-AF35-A2BB2333C954}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{92DE6318-345C-4F4D-AF35-A2BB2333C954}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{92DE6318-345C-4F4D-AF35-A2BB2333C954}.Release|ARM.ActiveCfg = Debug|Any CPU
+		{92DE6318-345C-4F4D-AF35-A2BB2333C954}.Release|x86.ActiveCfg = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D9F0AC41-68E3-4F8C-BC08-BFB8501AE9D4} = {624CA941-73B1-4F46-94AA-D4895A25BF7A}
+		{4F1F2F90-478B-4338-ACCC-985A2643A2E6} = {624CA941-73B1-4F46-94AA-D4895A25BF7A}
 	EndGlobalSection
 EndGlobal

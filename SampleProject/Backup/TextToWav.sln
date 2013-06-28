@@ -1,0 +1,37 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextToWav", "TextToWav.csproj", "{D9F0AC41-68E3-4F8C-BC08-BFB8501AE9D4}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextToWavLib", "TextToWavLib\TextToWavLib.csproj", "{4F1F2F90-478B-4338-ACCC-985A2643A2E6}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextToWavWeb", "http://localhost/TextToWavWeb/TextToWavWeb.csproj", "{B1F3190E-2536-44F4-A466-075121CD2A42}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{D9F0AC41-68E3-4F8C-BC08-BFB8501AE9D4}.Debug.ActiveCfg = Debug|.NET
+		{D9F0AC41-68E3-4F8C-BC08-BFB8501AE9D4}.Debug.Build.0 = Debug|.NET
+		{D9F0AC41-68E3-4F8C-BC08-BFB8501AE9D4}.Release.ActiveCfg = Release|.NET
+		{D9F0AC41-68E3-4F8C-BC08-BFB8501AE9D4}.Release.Build.0 = Release|.NET
+		{4F1F2F90-478B-4338-ACCC-985A2643A2E6}.Debug.ActiveCfg = Debug|.NET
+		{4F1F2F90-478B-4338-ACCC-985A2643A2E6}.Debug.Build.0 = Debug|.NET
+		{4F1F2F90-478B-4338-ACCC-985A2643A2E6}.Release.ActiveCfg = Release|.NET
+		{4F1F2F90-478B-4338-ACCC-985A2643A2E6}.Release.Build.0 = Release|.NET
+		{B1F3190E-2536-44F4-A466-075121CD2A42}.Debug.ActiveCfg = Debug|.NET
+		{B1F3190E-2536-44F4-A466-075121CD2A42}.Debug.Build.0 = Debug|.NET
+		{B1F3190E-2536-44F4-A466-075121CD2A42}.Release.ActiveCfg = Release|.NET
+		{B1F3190E-2536-44F4-A466-075121CD2A42}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

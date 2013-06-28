@@ -1,0 +1,58 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeFile="Site.Master.vb" Inherits="Site" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head runat="server">
+    <title>2Speech.us</title>
+    <meta name='keywords' content='Text to speech Read it to me' />
+    <meta name='site_name' content='2Speech' />
+    <meta name='title' content='2Speech' />
+    <meta name='description' content='Convert Text to speech' />
+    <meta name='url' content='http://www.2Speech.us/' />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
+
+    <!--<link rel='stylesheet' type='text/css' href='.\Styles\main_style.css?1332676067' title='wsite-theme-css' />-->
+    <script type="text/javascript" src="/Scripts/JScript.js"></script>
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server"></asp:ContentPlaceHolder>
+
+</head>
+<body>
+    <form runat="server">	
+        <div id="wrapper">
+	        <!--<div id="header">
+		        <div id="sitename"><span class='wsite-logo'><a href='/Default.aspx'><img src='/Styles/1332675207.png' alt="2Speech.us" style='margin-top:16px;max-height:48px;' /></a></span></div>
+		        <div id="navigation">
+                    <ul>
+                        <li id='active1'><a href='/Default.aspx'>Home</a></li>
+                        <asp:LoginView ID="LoginView1" runat="server">
+                            <AnonymousTemplate>
+                                <li id='Li1'>
+                                <a href='/Account/Login.aspx'>Login/Signup</a>
+                            </li>
+                            </AnonymousTemplate>
+                            <LoggedInTemplate>
+                                <li id='active2'><a href='/Secure/CollectInfo.aspx'>Covert To Speech</a></li>
+                                <li id='active3'><a href='/Secure/MyCollection.aspx'>My Collection</a></li>
+                                <li id='Li1'>
+                                <a href='/Account/Logout.aspx'>Logout</a>
+                                </li>
+                            </LoggedInTemplate>
+                        </asp:LoginView>
+                        <li id='active4'><a href='/About.aspx'>About</a></li> 
+                    </ul>
+                </div>
+	        </div>-->
+	        <div id="content"><div id='wsite-content' class='wsite-not-footer'>
+		        <div class='wsite-not-footer'>
+			         <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+		        </div>
+	        </div>
+        </div>
+        </div>
+    </form>
+</body>
+</html>

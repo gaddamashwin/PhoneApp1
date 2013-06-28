@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextToWav", "TextToWav.csproj", "{D9F0AC41-68E3-4F8C-BC08-BFB8501AE9D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextToWavLib", "TextToWavLib\TextToWavLib.csproj", "{4F1F2F90-478B-4338-ACCC-985A2643A2E6}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TextToWavWeb", "http://localhost/TextToWavWeb/TextToWavWeb.csproj", "{B1F3190E-2536-44F4-A466-075121CD2A42}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9F0AC41-68E3-4F8C-BC08-BFB8501AE9D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9F0AC41-68E3-4F8C-BC08-BFB8501AE9D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9F0AC41-68E3-4F8C-BC08-BFB8501AE9D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9F0AC41-68E3-4F8C-BC08-BFB8501AE9D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F1F2F90-478B-4338-ACCC-985A2643A2E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F1F2F90-478B-4338-ACCC-985A2643A2E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F1F2F90-478B-4338-ACCC-985A2643A2E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F1F2F90-478B-4338-ACCC-985A2643A2E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1F3190E-2536-44F4-A466-075121CD2A42}.Debug|Any CPU.ActiveCfg = Debug|.NET
+		{B1F3190E-2536-44F4-A466-075121CD2A42}.Release|Any CPU.ActiveCfg = Release|.NET
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
