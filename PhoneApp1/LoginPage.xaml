@@ -35,8 +35,8 @@
             </Grid.RowDefinitions>
             <TextBox GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" Name="UserID" Text="UserID" Grid.Row="0" />
             <PasswordBox Name="Password" Grid.Row="1" />
-            <Button Content="Sign in " Name="btnSignIn" Grid.Row="2" Click="btnSignIn_Click" />
-            <Button Content="Register" Name="btnRegister" Grid.Row="3" Click="btnRegister_Click" />
+            <!--<Button Content="Sign in " Name="btnSignIn" Grid.Row="2" Click="btnSignIn_Click" />-->
+            <!--<Button Content="Register" Name="btnRegister" Grid.Row="3" Click="btnRegister_Click" />-->
         </Grid>
     </Grid>
 </phone:PhoneApplicationPage>

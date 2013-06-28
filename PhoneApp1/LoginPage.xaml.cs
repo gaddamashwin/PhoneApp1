@@ -22,17 +22,30 @@ namespace PhoneApp1
         public Page1()
         {
             InitializeComponent();
+            ApplicationBar = new ApplicationBar();
+
+            ApplicationBarIconButton signInbutton = new ApplicationBarIconButton();
+            signInbutton.IconUri = new Uri("/Images/accept.png", UriKind.Relative);
+            signInbutton.Text = "Login";
+            ApplicationBar.Buttons.Add(signInbutton);
+            signInbutton.Click += new EventHandler(SignIn);
+
+            //ApplicationBarIconButton cancelInbutton = new ApplicationBarIconButton();
+            //cancelInbutton.IconUri = new Uri("/Images/cancel.png", UriKind.Relative);
+            //cancelInbutton.Text = "Cancel";
+            //ApplicationBar.Buttons.Add(cancelInbutton);
+            //cancelInbutton.Click += new EventHandler(Cancel);
         }
-        private CookieContainer cc;
-        private void btnSignIn_Click(object sender, RoutedEventArgs e)
+
+        private void SignIn(object sender, EventArgs e)
         {
             if(string.IsNullOrEmpty(UserID.Text) || UserID.Text == UserID.Name) MessageBox.Show("UserID is required.");
             else if (string.IsNullOrEmpty(Password.Password) || Password.Password == Password.Name) MessageBox.Show("Password is required.");
             else
             {
                 AuthReference.AuthenticationServiceClient authService = new AuthReference.AuthenticationServiceClient();
-                cc = new CookieContainer();
-                authService.CookieContainer = cc;
+                //cc = new CookieContainer();
+                //authService.CookieContainer = cc;
                 authService.LoginCompleted += authService_LoginCompleted;
                 authService.LoginAsync(UserID.Text, Password.Password, "", true);
             }
@@ -40,14 +53,14 @@ namespace PhoneApp1
 
         async void authService_LoginCompleted(object sender, AuthReference.LoginCompletedEventArgs e)
         {
-            if (e.Error != null)
+            if (e.Error != null || e.Result == false)
             {
-                MessageBox.Show("Login failed, you Jackwagon.");
+                MessageBox.Show("Login failed..");
             }
             else
             {
                 MembershipServiceReference.MembershipServiceClient helloService = new MembershipServiceReference.MembershipServiceClient();
-                helloService.CookieContainer = cc;
+                //helloService.CookieContainer = cc;
                 helloService.IsAuthenticatedCompleted += helloService_IsAuthenticatedCompleted;
                 helloService.IsAuthenticatedAsync();
 
@@ -61,11 +74,6 @@ namespace PhoneApp1
             MessageBox.Show("You're logged in, results from svc: " + e.Result);
         }
 
-        private void btnRegister_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/RegistrationPage.xaml", UriKind.Relative));
-        }
-
         private void LayoutRoot_Loaded(object sender, RoutedEventArgs e)
         {
             var user = Security.GetUserInfo;
@@ -75,8 +83,6 @@ namespace PhoneApp1
             }
         }
 
-        //The foreground color of the text in SearchTB is set to Magenta when SearchTB
-        //gets focus.
         private void TB_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox txt = (TextBox)sender;
@@ -84,9 +90,6 @@ namespace PhoneApp1
             txt.Foreground = new SolidColorBrush((Color)Application.Current.Resources["PhoneTextBoxForegroundColor"]);
         }
 
-        //The foreground color of the text in SearchTB is set to Blue when SearchTB
-        //loses focus. Also, if SearchTB loses focus and no text is entered, the
-        //text "Search" is displayed.
         private void TB_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox txt = (TextBox)sender;
