@@ -16,10 +16,10 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Width="Auto" Height="Auto" TextWrapping="Wrap" Grid.Row="0">
+        <TextBlock Width="Auto" Height="Auto"  TextWrapping="Wrap" Grid.Row="0" Style="{StaticResource PhoneTextTitle3Style}">
             2SPEECH lets you utilize your valuable time during commute or free time. Lets say you have an article or paper that your were supposed to read before you go work. Most of us don't find the time to get to it and the reading gets postponed forever. 2SPEECH has a solution for this.
         </TextBlock>
-        <TextBlock Width="Auto" Height="Auto" TextWrapping="Wrap"  FontWeight="Bold" Grid.Row="1">
+        <TextBlock Width="Auto" Height="Auto" TextWrapping="Wrap"  Grid.Row="1" Style="{StaticResource PhoneTextTitle2Style}">
             How does it work?
         </TextBlock>
     </Grid>

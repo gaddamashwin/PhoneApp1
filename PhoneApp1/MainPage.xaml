@@ -145,6 +145,16 @@
                     <Button x:Name="btnLogoff" Click="btnLogoff_Click_1" Grid.Column="0" Grid.Row="0" Content="Log Off" />
                 </Grid>
             </phone:PivotItem>
+
+            <phone:PivotItem Header="about" Name="pivotAbout">
+                <Grid Height="Auto">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <s:AboutControl></s:AboutControl>
+                </Grid>
+            </phone:PivotItem>
         </phone:Pivot>
       </Grid>
 

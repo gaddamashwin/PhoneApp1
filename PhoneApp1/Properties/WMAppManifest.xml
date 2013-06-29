@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{22b62171-e1b6-4a30-a4bc-8e085db80e8e}" Title="2Speech" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="SpeechApp author" Description="2SPEECH lets you utilize your valuable time during commute or free time. We all have article/paper that we want to read and cannot find the time to get to it and the reading gets postponed forever. 2SPEECH has a solution." Publisher="SpeechApp" PublisherID="{3cd69c15-07eb-4990-a8fc-45b0af478faa}">
+  <App xmlns="" ProductID="{22b62171-e1b6-4a30-a4bc-8e085db80e8e}" Title="2Speech" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Ashwin Gaddam" Description="2SPEECH lets you utilize your valuable time during commute or free time. We all have article/paper that we want to read and cannot find the time to get to it and the reading gets postponed forever. 2SPEECH has a solution." Publisher="2Speech.US" PublisherID="{3cd69c15-07eb-4990-a8fc-45b0af478faa}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />

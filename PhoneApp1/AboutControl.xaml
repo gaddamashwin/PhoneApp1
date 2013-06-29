@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="SpeechApp.AboutControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+    
+    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
+        <ScrollViewer>
+            <StackPanel Margin="0,-12,0,24">
+                <TextBlock
+                Style="{StaticResource PhoneTextExtraLargeStyle}"
+                Text="2Speech"
+                Foreground="{StaticResource PhoneAccentBrush}" />
+                <TextBlock
+                Style="{StaticResource PhoneTextLargeStyle}"
+                Text="by Ashwin Gaddam" />
+
+                <HyperlinkButton
+                NavigateUri="http://www.2Speech.us/"
+                TargetName="_new"
+                HorizontalAlignment="Left"
+                Content="www.2Speech.us" />
+
+                <StackPanel Orientation="Horizontal" Margin="0,18,0,0">
+                    <TextBlock
+                    Style="{StaticResource PhoneTextNormalStyle}"
+                    Text="Version:" />
+                    <TextBlock
+                    Margin="0"
+                    Style="{StaticResource PhoneTextNormalStyle}"
+                    x:Name="_versionText" />
+                </StackPanel>
+                <Button
+                  HorizontalAlignment="Left"
+                  Tag="Review"
+                  Click="HyperlinkButton_Click"
+                  Content="Review this app"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

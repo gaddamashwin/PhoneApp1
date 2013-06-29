@@ -65,7 +65,7 @@ namespace SpeechApp
             {
                 PhoneServiceRef.FileContentColl item = (PhoneServiceRef.FileContentColl)e.AddedItems[0];
                 if (!string.IsNullOrEmpty(item.Filepath)) NavigationService.Navigate(new Uri(string.Format("/Play.xaml?Description={0}&Link={1}", item.ContentTitle, item.Filepath), UriKind.Relative));
-                else MessageBox.Show("Cannot play!");
+                else MessageBox.Show("Conversion in progress...");
             }
         }
 
@@ -102,20 +102,26 @@ namespace SpeechApp
 
         private void myPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var pItem = (PivotItem)myPivot.SelectedItem;
-            string header = pItem.Header.ToString();
-            if (header.Contains("Home") || header.Contains("My Account"))
+            if (myPivot.SelectedIndex >= 0)
             {
-                ApplicationBar.IsVisible = false;
-            }
-            else 
-            {
-                var myButton = GetApplicationBarButton(header);
-                if(myButton != null)
+                var pItem = (PivotItem)myPivot.SelectedItem;
+                if (pItem != null)
                 {
-                    ApplicationBar.IsVisible = true;
-                    if(ApplicationBar.Buttons.Count > 0) ApplicationBar.Buttons.RemoveAt(0);
-                    ApplicationBar.Buttons.Add(myButton);
+                    string header = pItem.Header.ToString();
+                    if (header.Contains("Home") || header.Contains("My Account") || header.Contains("about"))
+                    {
+                        ApplicationBar.IsVisible = false;
+                    }
+                    else
+                    {
+                        var myButton = GetApplicationBarButton(header);
+                        if (myButton != null)
+                        {
+                            ApplicationBar.IsVisible = true;
+                            if (ApplicationBar.Buttons.Count > 0) ApplicationBar.Buttons.RemoveAt(0);
+                            ApplicationBar.Buttons.Add(myButton);
+                        }
+                    }
                 }
             }
         }
