@@ -102,15 +102,21 @@ namespace SpeechApp
 
         private void myPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (myPivot.SelectedIndex == 2)
+            var pItem = (PivotItem)myPivot.SelectedItem;
+            string header = pItem.Header.ToString();
+            if (header.Contains("Home") || header.Contains("My Account"))
             {
                 ApplicationBar.IsVisible = false;
             }
             else 
             {
+                var myButton = GetApplicationBarButton(header);
+                if(myButton != null)
+                {
                     ApplicationBar.IsVisible = true;
                     if(ApplicationBar.Buttons.Count > 0) ApplicationBar.Buttons.RemoveAt(0);
-                    ApplicationBar.Buttons.Add(GetApplicationBarButton(myPivot.SelectedIndex));
+                    ApplicationBar.Buttons.Add(myButton);
+                }
             }
         }
         #endregion
@@ -119,9 +125,9 @@ namespace SpeechApp
 
         private ApplicationBarIconButton refreshContentbutton = null;
         private ApplicationBarIconButton saveContentbutton = null;
-        public ApplicationBarIconButton GetApplicationBarButton(int PivotIndex)
+        public ApplicationBarIconButton GetApplicationBarButton(string header)
         {
-            if (PivotIndex == 0)
+            if (header.Contains("Collections"))
             {
                 if (refreshContentbutton == null)
                 {
@@ -132,7 +138,7 @@ namespace SpeechApp
                 }
                 return refreshContentbutton;
             }
-            else
+            else if (header.Contains("Convert"))
             {
                 if (saveContentbutton == null)
                 {
@@ -143,6 +149,7 @@ namespace SpeechApp
                 }
                 return saveContentbutton;
             }
+            return null;
         }
 
         void saveContent(string content, string title)
