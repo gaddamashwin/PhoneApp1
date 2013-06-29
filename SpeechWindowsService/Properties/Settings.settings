@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TextToWav.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ConnectionString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data Source=tcp:chq4p64syr.database.windows.net,1433;Initial Catalog=SpeechDB;Persist Security Info=True;User ID=SpeechUser;Password=Passwrd22</Value>
+    </Setting>
+    <Setting Name="URLPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://98.235.195.204/ReadToMe/</Value>
+    </Setting>
+    <Setting Name="OutFilePath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Users\ashwin\Documents\GitHub\PhoneApp1\ReadToMe\</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

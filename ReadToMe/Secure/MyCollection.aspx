@@ -18,7 +18,7 @@
         <Columns>
             <asp:BoundField DataField="ContentTitle" HeaderText="Title" />
             <asp:BoundField DataField="CreatedDatetime" HeaderText="Created On" />
-            <asp:HyperLinkField DataTextField="DownloadText" DataNavigateUrlFields="Download" Text="Downlaod" HeaderText="Download link" />
+            <asp:HyperLinkField DataTextField="Download" DataNavigateUrlFields="Filepath" HeaderText="Download link" />
         </Columns>
         <FooterStyle BackColor="#B5C7DE" ForeColor="#4A3C8C" />
         <HeaderStyle BackColor="#f47c20" Font-Bold="True" ForeColor="#F7F7F7" />
