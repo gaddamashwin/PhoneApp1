@@ -17,13 +17,13 @@
             </basicHttpBinding>
         </bindings>
         <client>
-            <endpoint address="http://uscmpujmittal8.us.deloitte.com/PhoneService/PhoneSvc.svc"
+            <endpoint address="http://speechservice.azurewebsites.net/PhoneSvc.svc"
                 binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_IPhoneSvc"
                 contract="PhoneServiceRef.IPhoneSvc" name="BasicHttpBinding_IPhoneSvc" />
-            <endpoint address="http://uscmpujmittal8.us.deloitte.com/PhoneService/Authentication.svc"
+            <endpoint address="http://speechservice.azurewebsites.net/Authentication.svc"
                 binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_AuthenticationService"
                 contract="AuthReference.AuthenticationService" name="BasicHttpBinding_AuthenticationService" />
-            <endpoint address="http://uscmpujmittal8.us.deloitte.com/PhoneService/MembershipService.svc"
+            <endpoint address="http://speechservice.azurewebsites.net/MembershipService.svc"
                 binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_IMembershipService"
                 contract="MembershipServiceReference.IMembershipService" name="BasicHttpBinding_IMembershipService" />
         </client>
