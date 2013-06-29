@@ -14,6 +14,7 @@ using Windows.Storage.Streams;
 using System.IO;
 using SpeechApp.Service;
 using System.Windows.Media;
+using Microsoft.Phone.Tasks;
 
 namespace SpeechApp
 {
@@ -22,13 +23,13 @@ namespace SpeechApp
         public Page1()
         {
             InitializeComponent();
-            ApplicationBar = new ApplicationBar();
+            //ApplicationBar = new ApplicationBar();
 
-            ApplicationBarIconButton signInbutton = new ApplicationBarIconButton();
-            signInbutton.IconUri = new Uri("/Images/accept.png", UriKind.Relative);
-            signInbutton.Text = "Login";
-            ApplicationBar.Buttons.Add(signInbutton);
-            signInbutton.Click += new EventHandler(SignIn);
+            //ApplicationBarIconButton signInbutton = new ApplicationBarIconButton();
+            //signInbutton.IconUri = new Uri("/Images/accept.png", UriKind.Relative);
+            //signInbutton.Text = "Login";
+            //ApplicationBar.Buttons.Add(signInbutton);
+            //signInbutton.Click += new EventHandler(SignIn);
 
             //ApplicationBarIconButton cancelInbutton = new ApplicationBarIconButton();
             //cancelInbutton.IconUri = new Uri("/Images/cancel.png", UriKind.Relative);
@@ -39,7 +40,7 @@ namespace SpeechApp
 
         private void SignIn(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(UserID.Text) || UserID.Text == UserID.Name) MessageBox.Show("UserID is required.");
+            if (string.IsNullOrEmpty(UserID.Text) || UserID.Text == UserID.Name) MessageBox.Show("UserID is required.");
             else if (string.IsNullOrEmpty(Password.Password) || Password.Password == Password.Name) MessageBox.Show("Password is required.");
             else
             {
@@ -98,6 +99,19 @@ namespace SpeechApp
                 txt.Text = txt.Name;
                 txt.Foreground = new SolidColorBrush((Color)Application.Current.Resources["PhoneTextBoxForegroundColor"]);
             }
+        }
+
+        private void btnSignIn_Click(object sender, RoutedEventArgs e)
+        {
+            SignIn(sender, e);
+        }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            //NavigationService.Navigate(new Uri("http://readtome.azurewebsites.net/Mobile/Register.aspx", UriKind.Absolute));
+            WebBrowserTask wtb = new WebBrowserTask();
+            wtb.Uri = new Uri("http://readtome.azurewebsites.net/Mobile/Register.aspx", UriKind.Absolute);
+            wtb.Show();
         }
     }
 }

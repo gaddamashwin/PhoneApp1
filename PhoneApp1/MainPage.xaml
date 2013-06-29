@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Primitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone"
+    xmlns:s="clr-namespace:SpeechApp"
     x:Class="SpeechApp.MainPage"
     mc:Ignorable="d"
     SupportedOrientations="Portrait" Orientation="Portrait"
@@ -76,7 +77,16 @@
         <StaticResource ResourceKey="PhoneForegroundBrush"/>
     </phone:PhoneApplicationPage.Foreground>
     <Grid x:Name="LayoutRoot" Background="Transparent" Loaded="LayoutRoot_Loaded">
-            <phone:Pivot Name="myPivot" Title="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" SelectionChanged="myPivot_SelectionChanged"  >
+        <phone:Pivot Name="myPivot" Title="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" SelectionChanged="myPivot_SelectionChanged"  >
+            <phone:PivotItem Header="Home" Name="pivotHome">
+                <Grid Height="Auto">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <s:HomeControl></s:HomeControl>
+                </Grid>
+            </phone:PivotItem>
             <!--Pivot item one-->
             <phone:PivotItem Header="Collections" Name="pivotCollections">
                 <Grid Height="Auto">
