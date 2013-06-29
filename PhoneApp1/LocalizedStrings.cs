@@ -1,6 +1,6 @@
-﻿using PhoneApp1.Resources;
+﻿using SpeechApp.Resources;
 
-namespace PhoneApp1
+namespace SpeechApp
 {
     /// <summary>
     /// Provides access to string resources.

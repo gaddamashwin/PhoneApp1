@@ -10,7 +10,7 @@ using Microsoft.Phone.Shell;
 using System.Windows.Media;
 using System.Text.RegularExpressions;
 
-namespace PhoneApp1
+namespace SpeechApp
 {
     public partial class Registration : PhoneApplicationPage
     {

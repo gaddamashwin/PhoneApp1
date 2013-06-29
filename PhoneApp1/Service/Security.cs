@@ -1,11 +1,11 @@
-﻿using PhoneApp1.DataModel;
+﻿using SpeechApp.DataModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PhoneApp1.Service
+namespace SpeechApp.Service
 {
     public class Security
     {

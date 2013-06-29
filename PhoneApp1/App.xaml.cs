@@ -6,9 +6,9 @@ using System.Windows.Markup;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using PhoneApp1.Resources;
+using SpeechApp.Resources;
 
-namespace PhoneApp1
+namespace SpeechApp
 {
     public partial class App : Application
     {
@@ -61,7 +61,7 @@ namespace PhoneApp1
         // This code will not execute when the application is reactivated
         private async void Application_Launching(object sender, LaunchingEventArgs e)
         {
-            await PhoneApp1.Service.Security.SetUserInfo();
+            await SpeechApp.Service.Security.SetUserInfo();
         }
 
         // Code to execute when the application is activated (brought to foreground)

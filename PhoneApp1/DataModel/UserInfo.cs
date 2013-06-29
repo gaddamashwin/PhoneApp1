@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PhoneApp1.DataModel
+namespace SpeechApp.DataModel
 {
     public class UserInfo
     {

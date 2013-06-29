@@ -10,7 +10,7 @@ using Microsoft.Phone.Shell;
 using System.Windows.Media;
 using System.Threading;
 
-namespace PhoneApp1
+namespace SpeechApp
 {
     public partial class Play : PhoneApplicationPage
     {

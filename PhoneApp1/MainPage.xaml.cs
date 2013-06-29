@@ -7,12 +7,12 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using PhoneApp1.Resources;
-using PhoneApp1.Service;
+using SpeechApp.Resources;
+using SpeechApp.Service;
 using System.Windows.Media;
 using System.Threading.Tasks;
 
-namespace PhoneApp1
+namespace SpeechApp
 {
     public partial class MainPage : PhoneApplicationPage
     {

@@ -12,10 +12,10 @@ using Windows.Storage;
 using System.Runtime.Serialization;
 using Windows.Storage.Streams;
 using System.IO;
-using PhoneApp1.Service;
+using SpeechApp.Service;
 using System.Windows.Media;
 
-namespace PhoneApp1
+namespace SpeechApp
 {
     public partial class Page1 : PhoneApplicationPage
     {

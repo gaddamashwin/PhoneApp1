@@ -79,7 +79,7 @@ namespace SpeechApp.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MY APPLICATION.
+        ///   Looks up a localized string similar to 2Speech.US.
         /// </summary>
         public static string ApplicationTitle {
             get {

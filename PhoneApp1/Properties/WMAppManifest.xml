@@ -2,7 +2,7 @@
 
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US"/>
-  <App xmlns="" ProductID="{22b62171-e1b6-4a30-a4bc-8e085db80e8e}" Title="PhoneApp1" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="PhoneApp1 author" Description="Sample description" Publisher="PhoneApp1" PublisherID="{3cd69c15-07eb-4990-a8fc-45b0af478faa}">
+  <App xmlns="" ProductID="{22b62171-e1b6-4a30-a4bc-8e085db80e8e}" Title="SpeechApp" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="SpeechApp author" Description="Sample description" Publisher="SpeechApp" PublisherID="{3cd69c15-07eb-4990-a8fc-45b0af478faa}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING"/>
@@ -15,12 +15,12 @@
       <DefaultTask  Name ="_default" NavigationPage="LoginPage.xaml"/>
     </Tasks>
     <Tokens>
-      <PrimaryToken TokenID="PhoneApp1Token" TaskName="_default">
+      <PrimaryToken TokenID="SpeechAppToken" TaskName="_default">
         <TemplateFlip>
           <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
-          <Title>PhoneApp1</Title>
+          <Title>SpeechApp</Title>
           <BackContent></BackContent>
           <BackBackgroundImageURI></BackBackgroundImageURI>
           <BackTitle></BackTitle>
