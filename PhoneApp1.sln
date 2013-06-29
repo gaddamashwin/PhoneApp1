@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneApp1", "PhoneApp1\PhoneApp1.csproj", "{22B62171-E1B6-4A30-A4BC-8E085DB80E8E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeechApp", "PhoneApp1\SpeechApp.csproj", "{22B62171-E1B6-4A30-A4BC-8E085DB80E8E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A674DA29-0F4C-4BD7-800A-DD225CC1CF96} = {A674DA29-0F4C-4BD7-800A-DD225CC1CF96}
 	EndProjectSection

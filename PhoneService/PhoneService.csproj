@@ -39,11 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.0.0-beta1\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.0.0-beta1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -63,6 +61,9 @@
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Providers">
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.1\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -71,7 +72,9 @@
     <Content Include="Authentication.svc" />
     <Content Include="MembershipService.svc" />
     <Content Include="PhoneSvc.svc" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileContentMyCollSelectAll_Result.cs">
@@ -113,7 +116,6 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
     <EntityDeploy Include="ReadtoMeModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ReadtoMeModel.Designer.cs</LastGenOutput>
@@ -131,6 +133,9 @@
       <DependentUpon>ReadtoMeModel.edmx</DependentUpon>
       <LastGenOutput>ReadtoMeModel.cs</LastGenOutput>
     </Content>
+    <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\SpeechService - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\SpeechService - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
