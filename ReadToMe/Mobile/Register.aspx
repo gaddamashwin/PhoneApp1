@@ -5,7 +5,12 @@
 <meta name='description' content='User registration page' />
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-    <asp:CreateUserWizard ID="RegisterUser" runat="server" EnableViewState="false">
+    <div data-role="page" id="one">
+    <div data-role="header">
+	    <h1>2Speech.us</h1>
+    </div><!-- /header -->
+    
+        <asp:CreateUserWizard ID="RegisterUser" runat="server" EnableViewState="false">
         <LayoutTemplate>
             <asp:PlaceHolder ID="wizardStepPlaceholder" runat="server"></asp:PlaceHolder>
             <asp:PlaceHolder ID="navigationPlaceholder" runat="server"></asp:PlaceHolder>
@@ -13,6 +18,7 @@
         <WizardSteps>
             <asp:CreateUserWizardStep ID="RegisterUserWizardStep" runat="server">
                 <ContentTemplate>
+                    <div data-role="content" >	
                     <h2>
                         Create a New Account
                     </h2>
@@ -27,7 +33,7 @@
                     </span>
                     <asp:ValidationSummary ID="RegisterUserValidationSummary" runat="server" CssClass="failureNotification" 
                          ValidationGroup="RegisterUserValidationGroup"/>
-                    <table>
+                    <table width="100%">
                         <tr>
                             <td colspan="3">Account Information</td>
                             <tr>
@@ -72,10 +78,12 @@
                               <td colspan="3"><asp:Button ID="CreateUserButton"  class="button" runat="server" CommandName="MoveNext" Text="Create User" ValidationGroup="RegisterUserValidationGroup"/></td>
                         </tr>
                     </table>
+                  </div>
                 </ContentTemplate>
                 <CustomNavigationTemplate>
                 </CustomNavigationTemplate>
             </asp:CreateUserWizardStep>
         </WizardSteps>
     </asp:CreateUserWizard>
+    
 </asp:Content>

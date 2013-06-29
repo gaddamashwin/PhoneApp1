@@ -60,10 +60,10 @@ namespace SpeechApp
             }
             else
             {
-                MembershipServiceReference.MembershipServiceClient helloService = new MembershipServiceReference.MembershipServiceClient();
-                //helloService.CookieContainer = cc;
-                helloService.IsAuthenticatedCompleted += helloService_IsAuthenticatedCompleted;
-                helloService.IsAuthenticatedAsync();
+                //MembershipServiceReference.MembershipServiceClient helloService = new MembershipServiceReference.MembershipServiceClient();
+                ////helloService.CookieContainer = cc;
+                //helloService.IsAuthenticatedCompleted += helloService_IsAuthenticatedCompleted;
+                //helloService.IsAuthenticatedAsync();
 
                 await Security.SaveUserInfo(UserID.Text, Password.Password);
                 NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
@@ -72,7 +72,7 @@ namespace SpeechApp
 
         void helloService_IsAuthenticatedCompleted(object sender, MembershipServiceReference.IsAuthenticatedCompletedEventArgs e)
         {
-            MessageBox.Show("You're logged in, results from svc: " + e.Result);
+            //MessageBox.Show("You're logged in, results from svc: " + e.Result);
         }
 
         private void LayoutRoot_Loaded(object sender, RoutedEventArgs e)
