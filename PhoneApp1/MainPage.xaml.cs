@@ -26,6 +26,20 @@ namespace SpeechApp
         }
 
         #region "Properties"
+
+
+        public bool IsProgressBarVisible
+        {
+            get { return (bool)GetValue(IsProgressBarVisibleProperty); }
+            set { SetValue(IsProgressBarVisibleProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsProgressBarVisible.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsProgressBarVisibleProperty =
+            DependencyProperty.Register("IsProgressBarVisible", typeof(bool), typeof(MainPage), new PropertyMetadata(false));
+
+        
+
         public List<PhoneServiceRef.FileContentColl> CollectionItems
         {
             get { return (List<PhoneServiceRef.FileContentColl>)GetValue(CollectionItemsProperty); }
@@ -160,6 +174,7 @@ namespace SpeechApp
 
         void saveContent(string content, string title)
         {
+            IsProgressBarVisible = true;
             PhoneServiceRef.FileContentForInsert fileContent = new PhoneServiceRef.FileContentForInsert();
             fileContent.content = content;
             fileContent.speechRate = 3;
@@ -186,6 +201,7 @@ namespace SpeechApp
 
         void UpdateContentCollection(string userName)
         {
+            IsProgressBarVisible = true;
             var svc = new PhoneServiceRef.PhoneSvcClient();
             //Get the data for the list
             svc.FileContentMyCollSelectAllAsync(userName);
@@ -195,16 +211,16 @@ namespace SpeechApp
 
         void svc_FileContentInsertCompleted(object sender, PhoneServiceRef.FileContentInsertCompletedEventArgs e)
         {
-            //btnSubmit.IsEnabled = true;
-            //btnSubmit.Content = "Submit";
             Content.Text = Content.Name;
             Title.Text = Title.Name;
-            //myPivot.SelectedIndex = 0;
+            IsProgressBarVisible = false;
             MessageBox.Show("Successfully submitted");
         }
 
         void svc_FileContentMyCollSelectAllCompleted(object sender, PhoneServiceRef.FileContentMyCollSelectAllCompletedEventArgs e)
         {
+            Title.Text = Title.Name;
+            IsProgressBarVisible = false;
             CollectionItems = e.Result.ToList();
         }
         #endregion

@@ -90,7 +90,11 @@
             <!--Pivot item one-->
             <phone:PivotItem Header="Collections" Name="pivotCollections">
                 <Grid Height="Auto">
-                    <ListBox SelectionChanged="lstCollection_SelectionChanged_1" AllowDrop="False" ScrollViewer.ManipulationMode="System" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="lstCollection" Margin="12,17,0,28" ItemsSource="{Binding CollectionItems}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ListBox Grid.Row="0" SelectionChanged="lstCollection_SelectionChanged_1" AllowDrop="False" ScrollViewer.ManipulationMode="System" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="lstCollection" Margin="12,17,0,28" ItemsSource="{Binding CollectionItems}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Border Background="{StaticResource PhoneAccentBrush}" BorderThickness="5" >
@@ -120,6 +124,7 @@
                             </Style>
                         </ListBox.ItemContainerStyle>
                     </ListBox>
+                    <ProgressBar Grid.Row="1" VerticalAlignment="Center" Height="10" Width="Auto" IsIndeterminate="{Binding IsProgressBarVisible}" Visibility="{Binding IsProgressBarVisible}" />
                 </Grid>
             </phone:PivotItem>
 
@@ -133,6 +138,8 @@
                     </Grid.RowDefinitions>
                     <TextBox x:Name="Title" Grid.Row="0" Text="Title" Foreground="Gray" GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" />
                     <TextBox x:Name="Content" TextWrapping="Wrap" Grid.Row="1" Text="Content" Foreground="Gray" GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" />
+
+                    <ProgressBar Grid.Row="2" VerticalAlignment="Center" Height="10" Width="Auto" IsIndeterminate="{Binding IsProgressBarVisible}" Visibility="{Binding IsProgressBarVisible}" />
                 </Grid>
             </phone:PivotItem>
 
