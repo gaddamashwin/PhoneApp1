@@ -102,7 +102,6 @@ namespace SpeechApp
             {
                 MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
-            
         }
 
         private void TB_GotFocus(object sender, RoutedEventArgs e)
@@ -117,7 +116,6 @@ namespace SpeechApp
             {
                 MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
-            
         }
 
         private void TB_LostFocus(object sender, RoutedEventArgs e)
@@ -184,6 +182,55 @@ namespace SpeechApp
                 MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
         }
+
+        private void RefreshContent(object sender, EventArgs e)
+        {
+            try
+            {
+                var user = Security.GetUserInfo;
+                UpdateContentCollection(user.UserName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
+            }
+        }
+        void svc_FileContentInsertCompleted(object sender, PhoneServiceRef.FileContentInsertCompletedEventArgs e)
+        {
+            try
+            {
+                Content.Text = Content.Name;
+                Title.Text = Title.Name;
+                IsProgressBarVisible = false;
+                MessageBox.Show("Successfully submitted");
+            }
+            catch (System.ServiceModel.CommunicationException)
+            {
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.NetworkException);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
+            }
+        }
+
+        void svc_FileContentMyCollSelectAllCompleted(object sender, PhoneServiceRef.FileContentMyCollSelectAllCompletedEventArgs e)
+        {
+            try
+            {
+                Title.Text = Title.Name;
+                IsProgressBarVisible = false;
+                CollectionItems = e.Result.ToList();
+            }
+            catch (System.ServiceModel.CommunicationException)
+            {
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.NetworkException);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
+            }
+        }
         #endregion
 
         #region "Functions"
@@ -238,12 +285,6 @@ namespace SpeechApp
             CollectionItems.Add(newFileContent);
         }
 
-        private void RefreshContent(object sender, EventArgs e)
-        {
-            var user = Security.GetUserInfo;
-            UpdateContentCollection(user.UserName);
-        }
-
         void UpdateContentCollection(string userName)
         {
             IsProgressBarVisible = true;
@@ -254,20 +295,6 @@ namespace SpeechApp
             svc.CloseAsync();
         }
 
-        void svc_FileContentInsertCompleted(object sender, PhoneServiceRef.FileContentInsertCompletedEventArgs e)
-        {
-            Content.Text = Content.Name;
-            Title.Text = Title.Name;
-            IsProgressBarVisible = false;
-            MessageBox.Show("Successfully submitted");
-        }
-
-        void svc_FileContentMyCollSelectAllCompleted(object sender, PhoneServiceRef.FileContentMyCollSelectAllCompletedEventArgs e)
-        {
-            Title.Text = Title.Name;
-            IsProgressBarVisible = false;
-            CollectionItems = e.Result.ToList();
-        }
         #endregion
 
     }

@@ -78,6 +78,10 @@ namespace SpeechApp
                     NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
                 }
             }
+            catch (System.ServiceModel.CommunicationException)
+            {
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.NetworkException);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
