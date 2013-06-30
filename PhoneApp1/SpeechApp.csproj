@@ -166,9 +166,6 @@
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Sample2.ogg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Service References\AuthReference\Authentication.wsdl" />
     <None Include="Service References\AuthReference\Authentication.xsd">
       <SubType>Designer</SubType>
@@ -257,12 +254,6 @@
     <Content Include="Images\refresh.png" />
     <Content Include="Images\save.png" />
     <Content Include="Images\stop.png" />
-    <Content Include="Sample1.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Sample3.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\AppResources.resx">
