@@ -54,50 +54,91 @@ namespace SpeechApp
         #region "UI Events"
         private async void btnLogoff_Click_1(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
-            await Security.DeleteUserInfo();
+            try
+            {
+                NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
+                await Security.DeleteUserInfo();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
 
         private void LayoutRoot_Loaded(object sender, RoutedEventArgs e)
         {
-            var user = Security.GetUserInfo;
-            if (user == null || user.UserName == null)
+            try
             {
-                NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
+                var user = Security.GetUserInfo;
+                if (user == null || user.UserName == null)
+                {
+                    NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
+                }
+                else
+                {
+                    UpdateContentCollection(user.UserName);
+                    //Set the lst collection index to -1 so that no list item is seleted by default
+                    lstCollection.SelectedIndex = -1;
+                }
             }
-            else
+            catch (Exception)
             {
-                UpdateContentCollection(user.UserName);
-                //Set the lst collection index to -1 so that no list item is seleted by default
-                lstCollection.SelectedIndex = -1;
+                
+                throw;
             }
         }
 
         private void lstCollection_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            if (lstCollection.SelectedIndex != -1)
+            try
             {
-                PhoneServiceRef.FileContentColl item = (PhoneServiceRef.FileContentColl)e.AddedItems[0];
-                if (!string.IsNullOrEmpty(item.Filepath)) NavigationService.Navigate(new Uri(string.Format("/Play.xaml?Description={0}&Link={1}", item.ContentTitle, item.Filepath), UriKind.Relative));
-                else MessageBox.Show("Conversion in progress...");
+                if (lstCollection.SelectedIndex != -1)
+                {
+                    PhoneServiceRef.FileContentColl item = (PhoneServiceRef.FileContentColl)e.AddedItems[0];
+                    if (!string.IsNullOrEmpty(item.Filepath)) NavigationService.Navigate(new Uri(string.Format("/Play.xaml?Description={0}&Link={1}", item.ContentTitle, item.Filepath), UriKind.Relative));
+                    else MessageBox.Show("Conversion in progress...");
+                }
             }
+            catch (Exception)
+            {
+                throw;
+            }
+            
         }
 
         private void TB_GotFocus(object sender, RoutedEventArgs e)
         {
-            TextBox txt = (TextBox)sender;
-            if (txt.Text == txt.Name) txt.Text = "";
-            txt.Foreground = new SolidColorBrush((Color)Application.Current.Resources["PhoneTextBoxForegroundColor"]);
+            try
+            {
+                TextBox txt = (TextBox)sender;
+                if (txt.Text == txt.Name) txt.Text = "";
+                txt.Foreground = new SolidColorBrush((Color)Application.Current.Resources["PhoneTextBoxForegroundColor"]);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
         }
 
         private void TB_LostFocus(object sender, RoutedEventArgs e)
         {
-            TextBox txt = (TextBox)sender;
-            if (txt.Text == String.Empty)
+            try
             {
-                txt.Text = txt.Name;
-                txt.Foreground = new SolidColorBrush((Color)Application.Current.Resources["PhoneTextBoxForegroundColor"]);
+                TextBox txt = (TextBox)sender;
+                if (txt.Text == String.Empty)
+                {
+                    txt.Text = txt.Name;
+                    txt.Foreground = new SolidColorBrush((Color)Application.Current.Resources["PhoneTextBoxForegroundColor"]);
+                }
             }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
         }
 
         private void SaveContent(object sender, EventArgs e)
@@ -110,34 +151,43 @@ namespace SpeechApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
             }
         }
 
         private void myPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (myPivot.SelectedIndex >= 0)
+            try
             {
-                var pItem = (PivotItem)myPivot.SelectedItem;
-                if (pItem != null)
+                if (myPivot.SelectedIndex >= 0)
                 {
-                    string header = pItem.Header.ToString();
-                    if (header.Contains("Home") || header.Contains("My Account") || header.Contains("about"))
+                    var pItem = (PivotItem)myPivot.SelectedItem;
+                    if (pItem != null)
                     {
-                        ApplicationBar.IsVisible = false;
-                    }
-                    else
-                    {
-                        var myButton = GetApplicationBarButton(header);
-                        if (myButton != null)
+                        string header = pItem.Header.ToString();
+                        if (header.Contains("Home") || header.Contains("My Account") || header.Contains("about"))
                         {
-                            ApplicationBar.IsVisible = true;
-                            if (ApplicationBar.Buttons.Count > 0) ApplicationBar.Buttons.RemoveAt(0);
-                            ApplicationBar.Buttons.Add(myButton);
+                            ApplicationBar.IsVisible = false;
+                        }
+                        else
+                        {
+                            var myButton = GetApplicationBarButton(header);
+                            if (myButton != null)
+                            {
+                                ApplicationBar.IsVisible = true;
+                                if (ApplicationBar.Buttons.Count > 0) ApplicationBar.Buttons.RemoveAt(0);
+                                ApplicationBar.Buttons.Add(myButton);
+                            }
                         }
                     }
                 }
             }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
         }
         #endregion
 

@@ -40,78 +40,127 @@ namespace SpeechApp
 
         private void SignIn(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(UserID.Text) || UserID.Text == UserID.Name) MessageBox.Show("UserID is required.");
-            else if (string.IsNullOrEmpty(Password.Password) || Password.Password == Password.Name) MessageBox.Show("Password is required.");
-            else
+            try
             {
-                AuthReference.AuthenticationServiceClient authService = new AuthReference.AuthenticationServiceClient();
-                //cc = new CookieContainer();
-                //authService.CookieContainer = cc;
-                authService.LoginCompleted += authService_LoginCompleted;
-                authService.LoginAsync(UserID.Text, Password.Password, "", true);
+                if (string.IsNullOrEmpty(UserID.Text) || UserID.Text == UserID.Name) MessageBox.Show("UserID is required.");
+                else if (string.IsNullOrEmpty(Password.Password) || Password.Password == Password.Name) MessageBox.Show("Password is required.");
+                else
+                {
+                    AuthReference.AuthenticationServiceClient authService = new AuthReference.AuthenticationServiceClient();
+                    //cc = new CookieContainer();
+                    //authService.CookieContainer = cc;
+                    authService.LoginCompleted += authService_LoginCompleted;
+                    authService.LoginAsync(UserID.Text, Password.Password, "", true);
+                }
             }
+            catch (Exception)
+            {
+                throw;
+            }
+            
         }
 
         async void authService_LoginCompleted(object sender, AuthReference.LoginCompletedEventArgs e)
         {
-            if (e.Error != null || e.Result == false)
+            try
             {
-                MessageBox.Show("Login failed..");
+                if (e.Error != null || e.Result == false)
+                {
+                    MessageBox.Show("Login failed..");
+                }
+                else
+                {
+                    //MembershipServiceReference.MembershipServiceClient helloService = new MembershipServiceReference.MembershipServiceClient();
+                    ////helloService.CookieContainer = cc;
+                    //helloService.IsAuthenticatedCompleted += helloService_IsAuthenticatedCompleted;
+                    //helloService.IsAuthenticatedAsync();
+
+                    await Security.SaveUserInfo(UserID.Text, Password.Password);
+                    NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                }
             }
-            else
+            catch (Exception)
             {
-                //MembershipServiceReference.MembershipServiceClient helloService = new MembershipServiceReference.MembershipServiceClient();
-                ////helloService.CookieContainer = cc;
-                //helloService.IsAuthenticatedCompleted += helloService_IsAuthenticatedCompleted;
-                //helloService.IsAuthenticatedAsync();
-
-                await Security.SaveUserInfo(UserID.Text, Password.Password);
-                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                throw;
             }
-        }
-
-        void helloService_IsAuthenticatedCompleted(object sender, MembershipServiceReference.IsAuthenticatedCompletedEventArgs e)
-        {
-            //MessageBox.Show("You're logged in, results from svc: " + e.Result);
+            
         }
 
         private void LayoutRoot_Loaded(object sender, RoutedEventArgs e)
         {
-            var user = Security.GetUserInfo;
-            if (user != null && user.UserName !=null)
+            try
             {
-                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                var user = Security.GetUserInfo;
+                if (user != null && user.UserName != null)
+                {
+                    NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                }
             }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
         }
 
         private void TB_GotFocus(object sender, RoutedEventArgs e)
         {
-            TextBox txt = (TextBox)sender;
-            if (txt.Text == txt.Name) txt.Text = "";
-            txt.Foreground = new SolidColorBrush((Color)Application.Current.Resources["PhoneTextBoxForegroundColor"]);
+            try
+            {
+                TextBox txt = (TextBox)sender;
+                if (txt.Text == txt.Name) txt.Text = "";
+                txt.Foreground = new SolidColorBrush((Color)Application.Current.Resources["PhoneTextBoxForegroundColor"]);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private void TB_LostFocus(object sender, RoutedEventArgs e)
         {
-            TextBox txt = (TextBox)sender;
-            if (txt.Text == String.Empty)
+            try
             {
-                txt.Text = txt.Name;
-                txt.Foreground = new SolidColorBrush((Color)Application.Current.Resources["PhoneTextBoxForegroundColor"]);
+                TextBox txt = (TextBox)sender;
+                if (txt.Text == String.Empty)
+                {
+                    txt.Text = txt.Name;
+                    txt.Foreground = new SolidColorBrush((Color)Application.Current.Resources["PhoneTextBoxForegroundColor"]);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
-            SignIn(sender, e);
+            try
+            {
+                SignIn(sender, e);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            //NavigationService.Navigate(new Uri("http://readtome.azurewebsites.net/Mobile/Register.aspx", UriKind.Absolute));
-            WebBrowserTask wtb = new WebBrowserTask();
-            wtb.Uri = new Uri("http://readtome.azurewebsites.net/Mobile/Register.aspx", UriKind.Absolute);
-            wtb.Show();
+            try
+            {
+                WebBrowserTask wtb = new WebBrowserTask();
+                wtb.Uri = new Uri("http://readtome.azurewebsites.net/Mobile/Register.aspx", UriKind.Absolute);
+                wtb.Show();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
         }
     }
 }
