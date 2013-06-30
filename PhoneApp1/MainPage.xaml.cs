@@ -59,10 +59,9 @@ namespace SpeechApp
                 NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
                 await Security.DeleteUserInfo();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
         }
 
@@ -82,10 +81,9 @@ namespace SpeechApp
                     lstCollection.SelectedIndex = -1;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
         }
 
@@ -100,9 +98,9 @@ namespace SpeechApp
                     else MessageBox.Show("Conversion in progress...");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
             
         }
@@ -115,9 +113,9 @@ namespace SpeechApp
                 if (txt.Text == txt.Name) txt.Text = "";
                 txt.Foreground = new SolidColorBrush((Color)Application.Current.Resources["PhoneTextBoxForegroundColor"]);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
             
         }
@@ -133,10 +131,9 @@ namespace SpeechApp
                     txt.Foreground = new SolidColorBrush((Color)Application.Current.Resources["PhoneTextBoxForegroundColor"]);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
             
         }
@@ -151,7 +148,7 @@ namespace SpeechApp
             }
             catch (Exception ex)
             {
-                //MessageBox.Show(ex.Message);
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
         }
 
@@ -182,12 +179,10 @@ namespace SpeechApp
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
-            
         }
         #endregion
 

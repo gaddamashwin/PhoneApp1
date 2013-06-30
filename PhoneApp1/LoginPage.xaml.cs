@@ -53,11 +53,10 @@ namespace SpeechApp
                     authService.LoginAsync(UserID.Text, Password.Password, "", true);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
-            
         }
 
         async void authService_LoginCompleted(object sender, AuthReference.LoginCompletedEventArgs e)
@@ -79,11 +78,10 @@ namespace SpeechApp
                     NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
-            
         }
 
         private void LayoutRoot_Loaded(object sender, RoutedEventArgs e)
@@ -96,12 +94,10 @@ namespace SpeechApp
                     NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
-            
         }
 
         private void TB_GotFocus(object sender, RoutedEventArgs e)
@@ -112,9 +108,9 @@ namespace SpeechApp
                 if (txt.Text == txt.Name) txt.Text = "";
                 txt.Foreground = new SolidColorBrush((Color)Application.Current.Resources["PhoneTextBoxForegroundColor"]);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
         }
 
@@ -129,9 +125,9 @@ namespace SpeechApp
                     txt.Foreground = new SolidColorBrush((Color)Application.Current.Resources["PhoneTextBoxForegroundColor"]);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
         }
 
@@ -141,11 +137,10 @@ namespace SpeechApp
             {
                 SignIn(sender, e);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
-
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
@@ -156,11 +151,10 @@ namespace SpeechApp
                 wtb.Uri = new Uri("http://readtome.azurewebsites.net/Mobile/Register.aspx", UriKind.Absolute);
                 wtb.Show();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
-            
         }
     }
 }

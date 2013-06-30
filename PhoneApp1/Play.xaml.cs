@@ -57,12 +57,10 @@ namespace SpeechApp
                 Description = NavigationContext.QueryString["Description"];
                 Link = NavigationContext.QueryString["Link"];
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
-            }
-            
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
+            }            
         }
 
 
@@ -85,11 +83,10 @@ namespace SpeechApp
                     btn.IconUri = new Uri("/Images/play.png", UriKind.Relative);
                 }            
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
-            
         }
 
         // Change the volume of the media.
@@ -99,10 +96,9 @@ namespace SpeechApp
             {
                 if (volumeSlider != null) media.Volume = (double)volumeSlider.Value;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
         }
 
@@ -121,10 +117,9 @@ namespace SpeechApp
                     media.Position = ts;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
             
         }
@@ -137,10 +132,9 @@ namespace SpeechApp
             {
                 timelineSlider.Maximum = media.NaturalDuration.TimeSpan.TotalMilliseconds;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
             
         }
@@ -153,10 +147,9 @@ namespace SpeechApp
                 timelineSlider.Value = timelineSlider.Maximum;
                 media.Stop();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
             
         }

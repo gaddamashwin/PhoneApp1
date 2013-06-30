@@ -71,12 +71,10 @@ namespace SpeechApp
                     _versionText.Text = "Unknown";
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
-            }
-            
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
+            }            
         }
 
         private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
@@ -93,12 +91,10 @@ namespace SpeechApp
                         break;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
-            
         }
     }
 }
