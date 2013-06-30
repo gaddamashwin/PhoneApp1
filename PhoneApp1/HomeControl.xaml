@@ -14,13 +14,27 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Width="Auto" Height="Auto"  TextWrapping="Wrap" Grid.Row="0" Style="{StaticResource PhoneTextTitle3Style}">
-            2SPEECH lets you utilize your valuable time during commute or free time. Lets say you have an article or paper that your were supposed to read before you go work. Most of us don't find the time to get to it and the reading gets postponed forever. 2SPEECH has a solution for this.
+        <TextBlock Width="Auto" Height="Auto"  TextWrapping="Wrap" Grid.Row="0" Style="{StaticResource PhoneTextTitle2Style}">
+            Not finding enough time to read all that you want to read? Then 2speech is something you will be interested in. 
         </TextBlock>
-        <TextBlock Width="Auto" Height="Auto" TextWrapping="Wrap"  Grid.Row="1" Style="{StaticResource PhoneTextTitle2Style}">
-            How does it work?
+        <TextBlock Width="Auto" Height="Auto" TextWrapping="Wrap"  Grid.Row="1" Style="{StaticResource PhoneTextTitle3Style}">
+            Follow these 3 simple steps and you will never miss on anything that you want to read:
+        </TextBlock>
+        <TextBlock Width="Auto" Height="Auto" TextWrapping="Wrap"  Grid.Row="2" Style="{StaticResource PhoneTextTitle3Style}">
+            1. Create an account.
+        </TextBlock>
+        <TextBlock Width="Auto" Height="Auto" TextWrapping="Wrap"  Grid.Row="3" Style="{StaticResource PhoneTextTitle3Style}">
+            2. Login on your computer and save the link or material that you want to listen to
+        </TextBlock>
+        <TextBlock Width="Auto" Height="Auto" TextWrapping="Wrap"  Grid.Row="4" Style="{StaticResource PhoneTextTitle3Style}">
+            3. Plugin your earphones and listen to your article from anywhere on your cell phone by logging into your account.
+        </TextBlock>
+        <TextBlock Width="Auto" Height="Auto" TextWrapping="Wrap"  Grid.Row="5" Style="{StaticResource PhoneTextTitle3Style}">
+            So easy yet so useful. Try it and let us know what you think about it.
         </TextBlock>
     </Grid>
 </UserControl>
