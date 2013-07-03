@@ -28,7 +28,7 @@
             1. Create an account.
         </TextBlock>
         <TextBlock Name="txt4" Width="Auto" Margin="5" Height="Auto" TextWrapping="Wrap"  Grid.Row="3" Style="{StaticResource PhoneTextTitle3Style}">
-            2. Copy and paste the article that you want to listen to give it a title and submit it.
+            2. Copy and paste the article that you want to listen to, give it a title and submit it.
         </TextBlock>
         <TextBlock Name="txt5" Width="Auto" Margin="5" Height="Auto" TextWrapping="Wrap"  Grid.Row="4" Style="{StaticResource PhoneTextTitle3Style}">
             3. Plugin your earphones and listen to your article from anywhere on your cell phone by logging into your account.

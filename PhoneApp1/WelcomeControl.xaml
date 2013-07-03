@@ -25,12 +25,13 @@
             Next...
         </TextBlock>
         <TextBlock Name="txt3" Width="Auto" Margin="5" Height="Auto" TextWrapping="Wrap"  Grid.Row="2" Style="{StaticResource PhoneTextTitle3Style}">
-            1. Copy and paste the article that you have to read give it a title and submit it. (http://www.2speech.us you can upload the text file or copy the link of website that you have to read).
+            1. Copy and paste the article that you have to read, give it a title and submit it. 
         </TextBlock>
         <TextBlock Name="txt4" Width="Auto" Margin="5" Height="Auto" TextWrapping="Wrap"  Grid.Row="3" Style="{StaticResource PhoneTextTitle3Style}">
-            2. Plug in your earphones and listen to your article from anywhere on your cell phone.
+            You can do more at http://www.2speech.us, upload text file or extract content link of website that you have to read.
         </TextBlock>
         <TextBlock Name="txt5" Width="Auto" Margin="5" Height="Auto" TextWrapping="Wrap"  Grid.Row="4" Style="{StaticResource PhoneTextTitle3Style}">
+            2. Plug in your earphones and listen to your article from anywhere on your cell phone.
         </TextBlock>
         <TextBlock Name="txt6" Width="Auto" Margin="4" Height="Auto" TextWrapping="Wrap"  Grid.Row="5" Style="{StaticResource PhoneTextTitle3Style}">
             So easy yet so useful. Try it and let us know what you think about it.
