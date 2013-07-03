@@ -1,0 +1,6 @@
+<MarketplaceDetails>
+  <SmallAppTile>PhoneAppListImage.png</SmallAppTile>
+  <ScreenShots>Collections.png;Convert.png;Play.png;HomePage.png;Login.png;;;;</ScreenShots>
+  <ScreenShotsWXGA>Collect_768.png;Convert_768.png;Home_768.png;Play_768.png;;;;;</ScreenShotsWXGA>
+  <ScreenShots720P>Collection_720.png;Convert_720.png;Home_720.png;Login_720.png;play_720.png;;;;</ScreenShots720P>
+</MarketplaceDetails>
