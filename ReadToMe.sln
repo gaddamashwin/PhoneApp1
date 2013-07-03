@@ -68,9 +68,9 @@ Global
 		{22B62171-E1B6-4A30-A4BC-8E085DB80E8E}.Release|ARM.ActiveCfg = Release|ARM
 		{22B62171-E1B6-4A30-A4BC-8E085DB80E8E}.Release|ARM.Build.0 = Release|ARM
 		{22B62171-E1B6-4A30-A4BC-8E085DB80E8E}.Release|ARM.Deploy.0 = Release|ARM
-		{22B62171-E1B6-4A30-A4BC-8E085DB80E8E}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{22B62171-E1B6-4A30-A4BC-8E085DB80E8E}.Release|Mixed Platforms.Build.0 = Release|x86
-		{22B62171-E1B6-4A30-A4BC-8E085DB80E8E}.Release|Mixed Platforms.Deploy.0 = Release|x86
+		{22B62171-E1B6-4A30-A4BC-8E085DB80E8E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{22B62171-E1B6-4A30-A4BC-8E085DB80E8E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{22B62171-E1B6-4A30-A4BC-8E085DB80E8E}.Release|Mixed Platforms.Deploy.0 = Release|Any CPU
 		{22B62171-E1B6-4A30-A4BC-8E085DB80E8E}.Release|x86.ActiveCfg = Release|x86
 		{22B62171-E1B6-4A30-A4BC-8E085DB80E8E}.Release|x86.Build.0 = Release|x86
 		{22B62171-E1B6-4A30-A4BC-8E085DB80E8E}.Release|x86.Deploy.0 = Release|x86

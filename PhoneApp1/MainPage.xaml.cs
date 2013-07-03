@@ -11,18 +11,28 @@ using SpeechApp.Resources;
 using SpeechApp.Service;
 using System.Windows.Media;
 using System.Threading.Tasks;
+using Microsoft.Phone.Tasks;
+using SpeechApp.DataModel;
 
 namespace SpeechApp
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        private UserInfo user;
         // Constructor
         public MainPage()
         {
-            InitializeComponent();
-            this.DataContext = this;
-
-            ApplicationBar = new ApplicationBar();
+            try
+            {
+                InitializeComponent();
+                refreshControls();
+                this.DataContext = this;
+                ApplicationBar = new ApplicationBar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
+            }
         }
 
         #region "Properties"
@@ -52,12 +62,39 @@ namespace SpeechApp
         #endregion
 
         #region "UI Events"
+
+        private void btnSignIn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                SignIn(sender, e);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
+            }
+        }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                WebBrowserTask wtb = new WebBrowserTask();
+                wtb.Uri = new Uri("http://readtome.azurewebsites.net/Mobile/Register.aspx", UriKind.Absolute);
+                wtb.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
+            }
+        }
+
         private async void btnLogoff_Click_1(object sender, RoutedEventArgs e)
         {
             try
             {
-                NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
                 await Security.DeleteUserInfo();
+                refreshControls();
             }
             catch (Exception ex)
             {
@@ -69,17 +106,12 @@ namespace SpeechApp
         {
             try
             {
-                var user = Security.GetUserInfo;
-                if (user == null || user.UserName == null)
-                {
-                    NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
-                }
-                else
-                {
-                    UpdateContentCollection(user.UserName);
-                    //Set the lst collection index to -1 so that no list item is seleted by default
-                    lstCollection.SelectedIndex = -1;
-                }
+                if (user != null && user.UserName != null)
+               {
+                UpdateContentCollection(user.UserName);
+                //Set the lst collection index to -1 so that no list item is seleted by default
+                lstCollection.SelectedIndex = -1;
+               }
             }
             catch (Exception ex)
             {
@@ -231,6 +263,41 @@ namespace SpeechApp
                 MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
         }
+
+        async void authService_LoginCompleted(object sender, AuthReference.LoginCompletedEventArgs e)
+        {
+            try
+            {
+                if (e.Error != null || e.Result == false)
+                {
+                    MessageBox.Show("Login failed..");
+                }
+                else
+                {
+                    //MembershipServiceReference.MembershipServiceClient helloService = new MembershipServiceReference.MembershipServiceClient();
+                    ////helloService.CookieContainer = cc;
+                    //helloService.IsAuthenticatedCompleted += helloService_IsAuthenticatedCompleted;
+                    //helloService.IsAuthenticatedAsync();
+
+                    await Security.SaveUserInfo(UserID.Text, Password.Password);
+                    refreshControls();
+                    RefreshContent(null,null);
+                }
+            }
+            catch (System.ServiceModel.CommunicationException)
+            {
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.NetworkException);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
+            }
+            finally
+            {
+                UserID.Text = UserID.Name;
+                Password.Password = "";
+            }
+        }
         #endregion
 
         #region "Functions"
@@ -264,6 +331,42 @@ namespace SpeechApp
             return null;
         }
 
+        void refreshControls()
+        {
+            user = Security.GetUserInfo;
+            myPivot.SelectionChanged -= myPivot_SelectionChanged;
+            if (user == null || user.UserName == null)
+            {
+                if (!myPivot.Items.Contains(pivotHome)) myPivot.Items.Add(pivotHome);
+                if (!myPivot.Items.Contains(pivotLogin)) myPivot.Items.Add(pivotLogin);
+                if (myPivot.Items.Contains(pivotCollections)) myPivot.Items.Remove(pivotCollections);
+                if (myPivot.Items.Contains(pivotConvert)) myPivot.Items.Remove(pivotConvert);
+                if (myPivot.Items.Contains(pivotAccount)) myPivot.Items.Remove(pivotAccount);
+                if (myPivot.Items.Contains(pivotAbout))
+                {
+                    myPivot.Items.Remove(pivotAbout);
+                    myPivot.Items.Add(pivotAbout);
+                }
+                if (myPivot.Items.Contains(pivotWelome)) myPivot.Items.Remove(pivotWelome);
+            }
+            else
+            {
+                if (myPivot.Items.Contains(pivotHome)) myPivot.Items.Remove(pivotHome);
+                if (myPivot.Items.Contains(pivotLogin)) myPivot.Items.Remove(pivotLogin);
+                if (!myPivot.Items.Contains(pivotWelome)) myPivot.Items.Add(pivotWelome);
+                if (!myPivot.Items.Contains(pivotCollections)) myPivot.Items.Add(pivotCollections);
+                if (!myPivot.Items.Contains(pivotConvert)) myPivot.Items.Add(pivotConvert);
+                if (!myPivot.Items.Contains(pivotAccount)) myPivot.Items.Add(pivotAccount);
+                if (myPivot.Items.Contains(pivotAbout))
+                {
+                    myPivot.Items.Remove(pivotAbout);
+                    myPivot.Items.Add(pivotAbout);
+                }
+            }
+            myPivot.SelectedIndex = 0;
+            myPivot.SelectionChanged += myPivot_SelectionChanged;
+        }
+
         void saveContent(string content, string title)
         {
             IsProgressBarVisible = true;
@@ -295,6 +398,28 @@ namespace SpeechApp
             svc.CloseAsync();
         }
 
+        private void SignIn(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(UserID.Text) || UserID.Text == UserID.Name) MessageBox.Show("UserID is required.");
+                else if (string.IsNullOrEmpty(Password.Password) || Password.Password == Password.Name) MessageBox.Show("Password is required.");
+                else
+                {
+                    AuthReference.AuthenticationServiceClient authService = new AuthReference.AuthenticationServiceClient();
+                    //cc = new CookieContainer();
+                    //authService.CookieContainer = cc;
+                    authService.LoginCompleted += authService_LoginCompleted;
+                    authService.LoginAsync(UserID.Text, Password.Password, "", true);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
+            }
+        }
+
+       
         #endregion
 
     }

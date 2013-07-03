@@ -16,18 +16,24 @@ namespace SpeechApp
     {
         public Play()
         {
-            InitializeComponent();
-            this.DataContext = this;
+            try
+            {
+                InitializeComponent();
+                this.DataContext = this;
 
-            ApplicationBar = new ApplicationBar();
-            media.Volume = (double)volumeSlider.Value;
+                ApplicationBar = new ApplicationBar();
+                media.Volume = (double)volumeSlider.Value;
 
-            ApplicationBarIconButton playbutton = new ApplicationBarIconButton();
-            playbutton.IconUri = new Uri("/Images/play.png", UriKind.Relative);
-            playbutton.Text = "play";
-            ApplicationBar.Buttons.Add(playbutton);
-            playbutton.Click += new EventHandler(PlayMedia);
-
+                ApplicationBarIconButton playbutton = new ApplicationBarIconButton();
+                playbutton.IconUri = new Uri("/Images/play.png", UriKind.Relative);
+                playbutton.Text = "play";
+                ApplicationBar.Buttons.Add(playbutton);
+                playbutton.Click += new EventHandler(PlayMedia);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
+            }
         }
 
         #region "Properties"

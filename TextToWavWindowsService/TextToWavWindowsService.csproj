@@ -75,6 +75,7 @@
     <ProjectReference Include="..\SampleProject\TextToWavLib\TextToWavLib.csproj">
       <Project>{4f1f2f90-478b-4338-accc-985a2643a2e6}</Project>
       <Name>TextToWavLib</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

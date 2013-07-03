@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="SpeechApp.HomeControl"
+﻿<UserControl x:Class="SpeechApp.WelcomeControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,7 +9,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="480" d:DesignWidth="480">
     
-    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
+    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}" Loaded="LayoutRoot_Loaded">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -19,19 +19,18 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Name="txt1" Width="Auto" Margin="7" Height="Auto"  TextWrapping="Wrap" Grid.Row="0" Style="{StaticResource PhoneTextTitle2Style}">
-            Not finding enough time to read all that you want to read? Then 2speech is something you will be interested in. 
+            
         </TextBlock>
         <TextBlock Name="txt2" Width="Auto" Margin="4" Height="Auto" TextWrapping="Wrap"  Grid.Row="1" Style="{StaticResource PhoneTextTitle3Style}">
-            Follow these 3 simple steps and you will never miss on anything that you want to read:
+            Next...
         </TextBlock>
         <TextBlock Name="txt3" Width="Auto" Margin="5" Height="Auto" TextWrapping="Wrap"  Grid.Row="2" Style="{StaticResource PhoneTextTitle3Style}">
-            1. Create an account.
+            Copy and paste the article that you have to read give it a title and submit it. (http://www.2speech.us you can upload the text file or copy the link of website that you have to read).
         </TextBlock>
         <TextBlock Name="txt4" Width="Auto" Margin="5" Height="Auto" TextWrapping="Wrap"  Grid.Row="3" Style="{StaticResource PhoneTextTitle3Style}">
-            2. Copy and paste the article that you want to listen to give it a title and submit it.
+            Plug in your earphones and listen to your article from anywhere on your cell phone.
         </TextBlock>
         <TextBlock Name="txt5" Width="Auto" Margin="5" Height="Auto" TextWrapping="Wrap"  Grid.Row="4" Style="{StaticResource PhoneTextTitle3Style}">
-            3. Plugin your earphones and listen to your article from anywhere on your cell phone by logging into your account.
         </TextBlock>
         <TextBlock Name="txt6" Width="Auto" Margin="4" Height="Auto" TextWrapping="Wrap"  Grid.Row="5" Style="{StaticResource PhoneTextTitle3Style}">
             So easy yet so useful. Try it and let us know what you think about it.

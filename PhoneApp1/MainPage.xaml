@@ -87,6 +87,33 @@
                     <s:HomeControl></s:HomeControl>
                 </Grid>
             </phone:PivotItem>
+
+            <phone:PivotItem Header="Home" Name="pivotWelome">
+                <Grid Height="Auto">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <s:WelcomeControl></s:WelcomeControl>
+                </Grid>
+            </phone:PivotItem>
+
+            <phone:PivotItem Header="Login" Name="pivotLogin">
+                <Grid Height="Auto">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBox GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" Name="UserID" Text="UserID" Grid.Row="0" />
+                    <PasswordBox Name="Password" Grid.Row="1" />
+                    <Button Content="Sign in " Name="btnSignIn" Grid.Row="2" Click="btnSignIn_Click" />
+                    <Button Content="Register" Name="btnRegister" Grid.Row="3" Click="btnRegister_Click" />
+                </Grid>
+            </phone:PivotItem>
+
             <!--Pivot item one-->
             <phone:PivotItem Header="Collections" Name="pivotCollections">
                 <Grid Height="Auto">
@@ -143,7 +170,7 @@
                 </Grid>
             </phone:PivotItem>
 
-            <phone:PivotItem Header="My Account">
+            <phone:PivotItem Header="My Account" Name="pivotAccount">
                 <Grid Height="Auto">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
