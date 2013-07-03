@@ -136,38 +136,6 @@ namespace SpeechApp
             }
         }
 
-        private void TB_GotFocus(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                TextBox txt = (TextBox)sender;
-                if (txt.Text == txt.Name) txt.Text = "";
-                txt.Foreground = new SolidColorBrush((Color)Application.Current.Resources["PhoneTextBoxForegroundColor"]);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
-            }
-        }
-
-        private void TB_LostFocus(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                TextBox txt = (TextBox)sender;
-                if (txt.Text == String.Empty)
-                {
-                    txt.Text = txt.Name;
-                    txt.Foreground = new SolidColorBrush((Color)Application.Current.Resources["PhoneTextBoxForegroundColor"]);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
-            }
-            
-        }
-
         private void SaveContent(object sender, EventArgs e)
         {
             try
@@ -274,14 +242,9 @@ namespace SpeechApp
                 }
                 else
                 {
-                    //MembershipServiceReference.MembershipServiceClient helloService = new MembershipServiceReference.MembershipServiceClient();
-                    ////helloService.CookieContainer = cc;
-                    //helloService.IsAuthenticatedCompleted += helloService_IsAuthenticatedCompleted;
-                    //helloService.IsAuthenticatedAsync();
-
                     await Security.SaveUserInfo(UserID.Text, Password.Password);
                     refreshControls();
-                    RefreshContent(null,null);
+                    RefreshContent(null, null);
                 }
             }
             catch (System.ServiceModel.CommunicationException)
@@ -296,7 +259,62 @@ namespace SpeechApp
             {
                 UserID.Text = UserID.Name;
                 Password.Password = "";
+                TB_LostFocus(UserID, null);
+                CheckPasswordWatermark();
             }
+        }
+        #endregion
+
+        #region textboxbackgroundText
+
+        private void TB_GotFocus(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                TextBox txt = (TextBox)sender;
+                if (txt.Text == txt.Name) txt.Text = "";
+                txt.Foreground = new SolidColorBrush((Color)Application.Current.Resources["PhoneTextBoxForegroundColor"]);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
+            }
+        }
+
+        private void TB_LostFocus(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                TextBox txt = (TextBox)sender;
+                if (txt.Text == String.Empty)
+                {
+                    txt.Text = txt.Name;
+                    txt.Foreground = (SolidColorBrush)Application.Current.Resources["PhoneTextBoxReadOnlyBrush"];
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
+            }
+
+        }
+
+        private void PasswordLostFocus(object sender, RoutedEventArgs e)
+        {
+            CheckPasswordWatermark();
+        }
+
+        public void CheckPasswordWatermark()
+        {
+            var passwordEmpty = string.IsNullOrEmpty(Password.Password);
+            PasswordWatermark.Opacity = passwordEmpty ? 100 : 0;
+            Password.Opacity = passwordEmpty ? 0 : 100;
+        }
+
+        private void PasswordGotFocus(object sender, RoutedEventArgs e)
+        {
+            PasswordWatermark.Opacity = 0;
+            Password.Opacity = 100;
         }
         #endregion
 
