@@ -28,6 +28,7 @@ namespace SpeechApp
                 refreshControls();
                 this.DataContext = this;
                 ApplicationBar = new ApplicationBar();
+                ApplicationBar.IsVisible = true;
             }
             catch (Exception ex)
             {

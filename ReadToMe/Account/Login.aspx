@@ -35,6 +35,7 @@
                         <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password" 
                              CssClass="failureNotification" ErrorMessage="Password is required." ToolTip="Password is required." 
                              ValidationGroup="LoginUserValidationGroup">*</asp:RequiredFieldValidator>
+                        <a runat="server" href="ResetPassword.aspx" >Forgot your password?</a> 
                     </p>
                     <p>
                         <asp:CheckBox ID="RememberMe" runat="server"/>

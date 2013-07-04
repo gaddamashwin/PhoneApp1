@@ -31,6 +31,9 @@
                             <LoggedInTemplate>
                                 <li id='active2'><a href='/Secure/CollectInfo.aspx'>Covert To Speech</a></li>
                                 <li id='active3'><a href='/Secure/MyCollection.aspx'>My Collection</a></li>
+                                <li id='Li2'>
+                                <a href='/Account/ChangePassword.aspx'>Change Password</a>
+                                </li>
                                 <li id='Li1'>
                                 <a href='/Account/Logout.aspx'>Logout</a>
                                 </li>
@@ -45,8 +48,13 @@
 			         <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
 		        </div>
 	        </div>
+                
+        </div>
+             <div>
+            <a href="/PrivacyPolicy.aspx">Privacy Policy</a>
         </div>
         </div>
+       
     </form>
 </body>
 </html>
