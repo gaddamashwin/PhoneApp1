@@ -48,7 +48,11 @@
                                 <td><asp:TextBox ID="Email" runat="server" CssClass="textEntry"></asp:TextBox><a href="#" class="hintanchor" onmouseover="showhint('Please enter a valid email address. This would be help to reset your password if you forget it.', this, event, '150px')">[?]</a></td>
                                 <td><asp:RequiredFieldValidator ID="EmailRequired" runat="server" ControlToValidate="Email" 
                                      CssClass="failureNotification" ErrorMessage="E-mail is required." ToolTip="E-mail is required." 
-                                     ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator></td>
+                                     ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="regexEmailValid" runat="server" 
+                                        ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="Email" 
+                                        CssClass="failureNotification" ErrorMessage="Invalid Email Format" ValidationGroup="RegisterUserValidationGroup"></asp:RegularExpressionValidator>
+                                </td>
                             </tr>
                             <tr>
                                 <td><asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Password:</asp:Label></td>

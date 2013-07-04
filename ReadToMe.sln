@@ -38,6 +38,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextToWav", "SpeechWindowsS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextToWavWindowsService", "TextToWavWindowsService\TextToWavWindowsService.csproj", "{0B82976D-DD75-404C-9487-27BBFAA42708}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GmailEmail", "GmailEmail\GmailEmail.csproj", "{D2BEC390-06C7-439E-AA0A-3BCB0B5D1715}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -146,6 +148,18 @@ Global
 		{0B82976D-DD75-404C-9487-27BBFAA42708}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{0B82976D-DD75-404C-9487-27BBFAA42708}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{0B82976D-DD75-404C-9487-27BBFAA42708}.Release|x86.ActiveCfg = Release|Any CPU
+		{D2BEC390-06C7-439E-AA0A-3BCB0B5D1715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2BEC390-06C7-439E-AA0A-3BCB0B5D1715}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2BEC390-06C7-439E-AA0A-3BCB0B5D1715}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{D2BEC390-06C7-439E-AA0A-3BCB0B5D1715}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D2BEC390-06C7-439E-AA0A-3BCB0B5D1715}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D2BEC390-06C7-439E-AA0A-3BCB0B5D1715}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D2BEC390-06C7-439E-AA0A-3BCB0B5D1715}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2BEC390-06C7-439E-AA0A-3BCB0B5D1715}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2BEC390-06C7-439E-AA0A-3BCB0B5D1715}.Release|ARM.ActiveCfg = Release|Any CPU
+		{D2BEC390-06C7-439E-AA0A-3BCB0B5D1715}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D2BEC390-06C7-439E-AA0A-3BCB0B5D1715}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D2BEC390-06C7-439E-AA0A-3BCB0B5D1715}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -153,5 +167,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D9F0AC41-68E3-4F8C-BC08-BFB8501AE9D4} = {624CA941-73B1-4F46-94AA-D4895A25BF7A}
 		{4F1F2F90-478B-4338-ACCC-985A2643A2E6} = {624CA941-73B1-4F46-94AA-D4895A25BF7A}
+		{D2BEC390-06C7-439E-AA0A-3BCB0B5D1715} = {624CA941-73B1-4F46-94AA-D4895A25BF7A}
 	EndGlobalSection
 EndGlobal
