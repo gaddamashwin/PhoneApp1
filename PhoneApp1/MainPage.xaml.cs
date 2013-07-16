@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Threading.Tasks;
 using Microsoft.Phone.Tasks;
 using SpeechApp.DataModel;
+using Microsoft.Live;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace SpeechApp
 {
@@ -25,10 +27,8 @@ namespace SpeechApp
             try
             {
                 InitializeComponent();
-                refreshControls();
-                this.DataContext = this;
-                ApplicationBar = new ApplicationBar();
-                ApplicationBar.IsVisible = true;
+                InitializePage();
+
             }
             catch (Exception ex)
             {
@@ -62,8 +62,7 @@ namespace SpeechApp
             DependencyProperty.Register("CollectionItems", typeof(List<PhoneServiceRef.FileContentColl>), typeof(MainPage), new PropertyMetadata(null));
         #endregion
 
-        #region "UI Events"
-
+        #region "Authentication"
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -73,6 +72,59 @@ namespace SpeechApp
             catch (Exception ex)
             {
                 MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
+            }
+        }
+
+        private void SignIn(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(UserID.Text) || UserID.Text == UserID.Name) MessageBox.Show("UserID is required.");
+                else if (string.IsNullOrEmpty(Password.Password) || Password.Password == Password.Name) MessageBox.Show("Password is required.");
+                else
+                {
+                    AuthReference.AuthenticationServiceClient authService = new AuthReference.AuthenticationServiceClient();
+                    //cc = new CookieContainer();
+                    //authService.CookieContainer = cc;
+                    authService.LoginCompleted += authService_LoginCompleted;
+                    authService.LoginAsync(UserID.Text, Password.Password, "", true);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
+            }
+        }
+
+        async void authService_LoginCompleted(object sender, AuthReference.LoginCompletedEventArgs e)
+        {
+            try
+            {
+                if (e.Error != null || e.Result == false)
+                {
+                    MessageBox.Show("Login failed..");
+                }
+                else
+                {
+                    await Security.SaveUserInfo(UserID.Text, Password.Password);
+                    refreshControls();
+                    RefreshContent(null, null);
+                }
+            }
+            catch (System.ServiceModel.CommunicationException)
+            {
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.NetworkException);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
+            }
+            finally
+            {
+                UserID.Text = UserID.Name;
+                Password.Password = "";
+                TB_LostFocus(UserID, null);
+                CheckPasswordWatermark();
             }
         }
 
@@ -95,6 +147,7 @@ namespace SpeechApp
             try
             {
                 await Security.DeleteUserInfo();
+                this.authClient.Logout();
                 refreshControls();
             }
             catch (Exception ex)
@@ -102,12 +155,89 @@ namespace SpeechApp
                 MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
         }
+        
+        #endregion
+
+        #region "Live Authentication"
+        
+        private void InitializePage()
+        {
+            try
+            {
+                refreshControls();
+                this.DataContext = this;
+                ApplicationBar = new ApplicationBar();
+                ApplicationBar.IsVisible = false;
+
+                myPivot.Visibility = System.Windows.Visibility.Visible;
+                mainProgress.Visibility = System.Windows.Visibility.Collapsed;
+                mainProgress.IsIndeterminate = false;
+            }
+            catch (LiveAuthException authExp)
+            {
+                //this.tbResponse.Text = authExp.ToString();
+            }
+        }
+
+        private async void btnLiveSignIn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                LiveLoginResult loginResult = await this.authClient.LoginAsync(scopes);
+                if (loginResult.Status == LiveConnectSessionStatus.Connected)
+                {
+                    this.liveClient = new LiveConnectClient(loginResult.Session);
+                    this.GetMe();
+                }
+            }
+            catch (LiveAuthException authExp)
+            {
+                //this.tbResponse.Text = authExp.ToString();
+            }
+        }
+
+        private void btnCustomSignIn_Click(object sender, RoutedEventArgs e)
+        {
+            panelSignin1.Visibility = System.Windows.Visibility.Collapsed;
+            panelSignin2.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void btnCancelSignIn_Click(object sender, RoutedEventArgs e)
+        {
+            panelSignin1.Visibility = System.Windows.Visibility.Visible;
+            panelSignin2.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        /// <summary>
+        ///     Retrieves the user profile information for the Live Connect API service.
+        /// </summary>
+        private async Task GetMe()
+        {
+            try
+            {
+                LiveOperationResult operationResult = await this.liveClient.GetAsync("me");
+                dynamic properties = operationResult.Result;
+                //MessageBox.Show(properties.id);
+                var user = new UserInfo();
+                user.UserId = properties.id;
+                user.UserName = properties.id;
+                Security.SetUserInfo(user);
+                //this.tbResponse.Text = properties.first_name + " " + properties.last_name;
+            }
+            catch (LiveConnectException e)
+            {
+                //this.tbResponse.Text = e.ToString();
+            }
+        }
+        #endregion
+
+        #region "UI Events Other"
 
         private void LayoutRoot_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (user != null && user.UserName != null)
+               if (user != null && user.UserName != null)
                {
                 UpdateContentCollection(user.UserName);
                 //Set the lst collection index to -1 so that no list item is seleted by default
@@ -232,38 +362,7 @@ namespace SpeechApp
                 MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
         }
-
-        async void authService_LoginCompleted(object sender, AuthReference.LoginCompletedEventArgs e)
-        {
-            try
-            {
-                if (e.Error != null || e.Result == false)
-                {
-                    MessageBox.Show("Login failed..");
-                }
-                else
-                {
-                    await Security.SaveUserInfo(UserID.Text, Password.Password);
-                    refreshControls();
-                    RefreshContent(null, null);
-                }
-            }
-            catch (System.ServiceModel.CommunicationException)
-            {
-                MessageBox.Show(SpeechApp.Service.ExceptionHandler.NetworkException);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
-            }
-            finally
-            {
-                UserID.Text = UserID.Name;
-                Password.Password = "";
-                TB_LostFocus(UserID, null);
-                CheckPasswordWatermark();
-            }
-        }
+        
         #endregion
 
         #region textboxbackgroundText
@@ -352,6 +451,7 @@ namespace SpeechApp
 
         void refreshControls()
         {
+            
             user = Security.GetUserInfo;
             myPivot.SelectionChanged -= myPivot_SelectionChanged;
             if (user == null || user.UserName == null)
@@ -417,28 +517,6 @@ namespace SpeechApp
             svc.CloseAsync();
         }
 
-        private void SignIn(object sender, EventArgs e)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(UserID.Text) || UserID.Text == UserID.Name) MessageBox.Show("UserID is required.");
-                else if (string.IsNullOrEmpty(Password.Password) || Password.Password == Password.Name) MessageBox.Show("Password is required.");
-                else
-                {
-                    AuthReference.AuthenticationServiceClient authService = new AuthReference.AuthenticationServiceClient();
-                    //cc = new CookieContainer();
-                    //authService.CookieContainer = cc;
-                    authService.LoginCompleted += authService_LoginCompleted;
-                    authService.LoginAsync(UserID.Text, Password.Password, "", true);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
-            }
-        }
-
-       
         #endregion
 
     }

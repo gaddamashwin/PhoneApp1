@@ -7,11 +7,14 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using SpeechApp.Resources;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace SpeechApp
 {
     public partial class App : Application
     {
+        
+        
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>

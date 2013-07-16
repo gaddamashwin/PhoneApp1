@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Primitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone"
+    xmlns:my="clr-namespace:Microsoft.Live.Controls;assembly=Microsoft.Live.Controls"
     xmlns:s="clr-namespace:SpeechApp"
     x:Class="SpeechApp.MainPage"
     mc:Ignorable="d"
@@ -77,7 +78,11 @@
         <StaticResource ResourceKey="PhoneForegroundBrush"/>
     </phone:PhoneApplicationPage.Foreground>
     <Grid x:Name="LayoutRoot" Background="Transparent" Loaded="LayoutRoot_Loaded">
-        <phone:Pivot Name="myPivot" Title="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" SelectionChanged="myPivot_SelectionChanged"  >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <phone:Pivot Name="myPivot" Visibility="Collapsed" Title="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" SelectionChanged="myPivot_SelectionChanged"  >
             <phone:PivotItem Header="Home" Name="pivotHome">
                 <Grid Height="Auto">
                     <Grid.RowDefinitions>
@@ -101,17 +106,30 @@
             <phone:PivotItem Header="Login" Name="pivotLogin">
                 <Grid Height="Auto">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <TextBox GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" Name="UserID" Text="UserID" Grid.Row="0" Foreground="{StaticResource PhoneTextBoxReadOnlyBrush}"/>
-                    <TextBox x:Name="PasswordWatermark" TextWrapping="Wrap" Text="Password" Grid.Row="1" Foreground="{StaticResource PhoneTextBoxReadOnlyBrush}" IsHitTestVisible="False"/>
-                    <PasswordBox x:Name="Password" LostFocus="PasswordLostFocus" Opacity="0" GotFocus="PasswordGotFocus" Grid.Row="1"/>
-                    <Button Content="Sign in " Name="btnSignIn" Grid.Row="2" Click="btnSignIn_Click" />
-                    <Button Content="Register" Name="btnRegister" Grid.Row="3" Click="btnRegister_Click" />
+                    <StackPanel Name="panelSignin1" Visibility="Visible">
+                        <Button Content="Windows Live Sign in" Name="btnLiveSignIn" Click="btnLiveSignIn_Click" />
+                        <Button Content="2Speech Sign in" Name="btnCustomSignIn" Click="btnCustomSignIn_Click" />
+                    </StackPanel>
+                    <StackPanel Name="panelSignin2" Visibility="Collapsed">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <TextBox GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" Name="UserID" Text="UserID" Grid.Row="1" Foreground="{StaticResource PhoneTextBoxReadOnlyBrush}"/>
+                            <TextBox x:Name="PasswordWatermark" TextWrapping="Wrap" Text="Password" Grid.Row="2" Foreground="{StaticResource PhoneTextBoxReadOnlyBrush}" IsHitTestVisible="False"/>
+                            <PasswordBox x:Name="Password" LostFocus="PasswordLostFocus" Opacity="0" GotFocus="PasswordGotFocus" Grid.Row="2"/>
+                            <Button Content="Sign in " Name="btnSignIn" Grid.Row="3" Click="btnSignIn_Click" />
+                            <Button Content="Register" Name="btnRegister" Grid.Row="4" Click="btnRegister_Click" />
+                            <Button Content="Cancel" Name="btnCancelSignIn" Grid.Row="5" Click="btnCancelSignIn_Click" />
+                        </Grid>
+                    </StackPanel>
                 </Grid>
             </phone:PivotItem>
 
@@ -191,6 +209,8 @@
                 </Grid>
             </phone:PivotItem>
         </phone:Pivot>
-      </Grid>
+
+        <ProgressBar Name="mainProgress" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Height="10" Width="300" IsIndeterminate="True" Visibility="Visible" />
+    </Grid>
 
 </phone:PhoneApplicationPage>
