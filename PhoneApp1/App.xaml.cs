@@ -8,13 +8,16 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using SpeechApp.Resources;
 using Microsoft.WindowsAzure.MobileServices;
+using SpeechApp.DataModel;
+using SpeechApp.Service;
+using SpeechApp.Service.Authentication;
 
 namespace SpeechApp
 {
     public partial class App : Application
     {
-        
-        
+
+        public static Authenticate myAuth;
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>
@@ -64,7 +67,14 @@ namespace SpeechApp
         // This code will not execute when the application is reactivated
         private async void Application_Launching(object sender, LaunchingEventArgs e)
         {
-            await SpeechApp.Service.Security.SetUserInfo();
+            StorageHelper sHelp = new StorageHelper();
+            var user = await sHelp.ReadFromFile<UserInfo>(Constants.UserInfoFile);
+            if (user != null && !string.IsNullOrEmpty(user.LoginSource.ToString()))
+            {
+                if (user.LoginSource == Constants.SpeechSource) myAuth = new Custom();
+                else if (user.LoginSource == Constants.WindowsLiveSouce) myAuth = new WindowsLive();
+                await myAuth.GetUser();
+            }
         }
 
         // Code to execute when the application is activated (brought to foreground)

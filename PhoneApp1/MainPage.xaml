@@ -78,10 +78,10 @@
         <StaticResource ResourceKey="PhoneForegroundBrush"/>
     </phone:PhoneApplicationPage.Foreground>
     <Grid x:Name="LayoutRoot" Background="Transparent" Loaded="LayoutRoot_Loaded">
-        <Grid.RowDefinitions>
+        <!--<Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+        </Grid.RowDefinitions>-->
         <phone:Pivot Name="myPivot" Visibility="Collapsed" Title="{Binding LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" SelectionChanged="myPivot_SelectionChanged"  >
             <phone:PivotItem Header="Home" Name="pivotHome">
                 <Grid Height="Auto">
@@ -210,7 +210,7 @@
             </phone:PivotItem>
         </phone:Pivot>
 
-        <ProgressBar Name="mainProgress" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Height="10" Width="300" IsIndeterminate="True" Visibility="Visible" />
+        <!--<ProgressBar Name="mainProgress" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Height="10" Width="300" IsIndeterminate="True" Visibility="Visible" />-->
     </Grid>
 
 </phone:PhoneApplicationPage>

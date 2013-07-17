@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 
 namespace SpeechApp.Service.Authentication
 {
-    abstract class Authenticate
+    public abstract class Authenticate
     {
-        private Action<UserInfo> RefreshFunction;
-        public Authenticate(Action<UserInfo> refresh)
-        {
-            RefreshFunction = refresh;
-        }
-        public void Sign
-        private abstract void SignMeIn();
-
+        protected static UserInfo user { get; set; }
+        public Action<UserInfo> RefreshFunction { get; set; }
+        public abstract Task<bool> SignMeIn();
+        public abstract Task Logout();
+        public abstract Task<UserInfo> GetUser();
+        //public abstract void SaveUser();
     }
 }

@@ -15,6 +15,8 @@ using Microsoft.Phone.Tasks;
 using SpeechApp.DataModel;
 using Microsoft.Live;
 using Microsoft.WindowsAzure.MobileServices;
+using SpeechApp.Service.Authentication;
+using SpeechApp.Service.WebService;
 
 namespace SpeechApp
 {
@@ -27,8 +29,17 @@ namespace SpeechApp
             try
             {
                 InitializeComponent();
-                InitializePage();
+                this.DataContext = this;
+                ApplicationBar = new ApplicationBar();
+                AppBar = new ApplicationBarHelper();
+                phonesvc = new PhoneSvc();
+                ApplicationBar.IsVisible = false;
+                myPivot.Visibility = System.Windows.Visibility.Visible;
 
+                Service.WebService.PhoneSvc.phoneSvcClient.FileContentInsertCompleted += svc_FileContentInsertCompleted;
+                Service.WebService.PhoneSvc.phoneSvcClient.FileContentMyCollSelectAllCompleted += svc_FileContentMyCollSelectAllCompleted;
+                AppBar.refreshContentbutton.Click += new EventHandler(RefreshContent);
+                AppBar.saveContentbutton.Click += new EventHandler(SaveContent);
             }
             catch (Exception ex)
             {
@@ -37,7 +48,6 @@ namespace SpeechApp
         }
 
         #region "Properties"
-
 
         public bool IsProgressBarVisible
         {
@@ -49,8 +59,6 @@ namespace SpeechApp
         public static readonly DependencyProperty IsProgressBarVisibleProperty =
             DependencyProperty.Register("IsProgressBarVisible", typeof(bool), typeof(MainPage), new PropertyMetadata(false));
 
-        
-
         public List<PhoneServiceRef.FileContentColl> CollectionItems
         {
             get { return (List<PhoneServiceRef.FileContentColl>)GetValue(CollectionItemsProperty); }
@@ -60,22 +68,13 @@ namespace SpeechApp
         // Using a DependencyProperty as the backing store for CollectionItems.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CollectionItemsProperty =
             DependencyProperty.Register("CollectionItems", typeof(List<PhoneServiceRef.FileContentColl>), typeof(MainPage), new PropertyMetadata(null));
+
+        public ApplicationBarHelper AppBar;
+        public PhoneSvc phonesvc;
         #endregion
 
-        #region "Authentication"
+        #region "Authentication Events"
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                SignIn(sender, e);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
-            }
-        }
-
-        private void SignIn(object sender, EventArgs e)
         {
             try
             {
@@ -83,48 +82,17 @@ namespace SpeechApp
                 else if (string.IsNullOrEmpty(Password.Password) || Password.Password == Password.Name) MessageBox.Show("Password is required.");
                 else
                 {
-                    AuthReference.AuthenticationServiceClient authService = new AuthReference.AuthenticationServiceClient();
-                    //cc = new CookieContainer();
-                    //authService.CookieContainer = cc;
-                    authService.LoginCompleted += authService_LoginCompleted;
-                    authService.LoginAsync(UserID.Text, Password.Password, "", true);
+                    var auth = new Custom();
+                    App.myAuth = auth;
+                    auth.RefreshFunction = refreshControls;
+                    auth.UserName = UserID.Text;
+                    auth.Password = Password.Password;
+                    auth.SignMeIn();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
-            }
-        }
-
-        async void authService_LoginCompleted(object sender, AuthReference.LoginCompletedEventArgs e)
-        {
-            try
-            {
-                if (e.Error != null || e.Result == false)
-                {
-                    MessageBox.Show("Login failed..");
-                }
-                else
-                {
-                    await Security.SaveUserInfo(UserID.Text, Password.Password);
-                    refreshControls();
-                    RefreshContent(null, null);
-                }
-            }
-            catch (System.ServiceModel.CommunicationException)
-            {
-                MessageBox.Show(SpeechApp.Service.ExceptionHandler.NetworkException);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
-            }
-            finally
-            {
-                UserID.Text = UserID.Name;
-                Password.Password = "";
-                TB_LostFocus(UserID, null);
-                CheckPasswordWatermark();
             }
         }
 
@@ -141,54 +109,14 @@ namespace SpeechApp
                 MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
         }
-
-        private async void btnLogoff_Click_1(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                await Security.DeleteUserInfo();
-                this.authClient.Logout();
-                refreshControls();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
-            }
-        }
-        
-        #endregion
-
-        #region "Live Authentication"
-        
-        private void InitializePage()
-        {
-            try
-            {
-                refreshControls();
-                this.DataContext = this;
-                ApplicationBar = new ApplicationBar();
-                ApplicationBar.IsVisible = false;
-
-                myPivot.Visibility = System.Windows.Visibility.Visible;
-                mainProgress.Visibility = System.Windows.Visibility.Collapsed;
-                mainProgress.IsIndeterminate = false;
-            }
-            catch (LiveAuthException authExp)
-            {
-                //this.tbResponse.Text = authExp.ToString();
-            }
-        }
-
+       
         private async void btnLiveSignIn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                LiveLoginResult loginResult = await this.authClient.LoginAsync(scopes);
-                if (loginResult.Status == LiveConnectSessionStatus.Connected)
-                {
-                    this.liveClient = new LiveConnectClient(loginResult.Session);
-                    this.GetMe();
-                }
+                App.myAuth = new WindowsLive();
+                App.myAuth.RefreshFunction = refreshControls;
+                await App.myAuth.SignMeIn();
             }
             catch (LiveAuthException authExp)
             {
@@ -208,25 +136,15 @@ namespace SpeechApp
             panelSignin2.Visibility = System.Windows.Visibility.Collapsed;
         }
 
-        /// <summary>
-        ///     Retrieves the user profile information for the Live Connect API service.
-        /// </summary>
-        private async Task GetMe()
+        private async void btnLogoff_Click_1(object sender, RoutedEventArgs e)
         {
             try
             {
-                LiveOperationResult operationResult = await this.liveClient.GetAsync("me");
-                dynamic properties = operationResult.Result;
-                //MessageBox.Show(properties.id);
-                var user = new UserInfo();
-                user.UserId = properties.id;
-                user.UserName = properties.id;
-                Security.SetUserInfo(user);
-                //this.tbResponse.Text = properties.first_name + " " + properties.last_name;
+                await App.myAuth.Logout();
             }
-            catch (LiveConnectException e)
+            catch (Exception ex)
             {
-                //this.tbResponse.Text = e.ToString();
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
         }
         #endregion
@@ -273,7 +191,7 @@ namespace SpeechApp
             {
                 if (string.IsNullOrEmpty(Title.Text) || Title.Text == Title.Name) MessageBox.Show("Title is required.");
                 else if (string.IsNullOrEmpty(Content.Text) || Content.Text == Content.Name) MessageBox.Show("Content is required.");
-                else saveContent(Content.Text, Title.Text);
+                else phonesvc.saveContent(Content.Text, Title.Text);
             }
             catch (Exception ex)
             {
@@ -297,7 +215,7 @@ namespace SpeechApp
                         }
                         else
                         {
-                            var myButton = GetApplicationBarButton(header);
+                            var myButton = AppBar.GetApplicationBarButton(header);
                             if (myButton != null)
                             {
                                 ApplicationBar.IsVisible = true;
@@ -314,18 +232,19 @@ namespace SpeechApp
             }
         }
 
-        private void RefreshContent(object sender, EventArgs e)
+        private async void RefreshContent(object sender, EventArgs e)
         {
             try
             {
-                var user = Security.GetUserInfo;
-                UpdateContentCollection(user.UserName);
+                var usr = await App.myAuth.GetUser();
+                phonesvc.UpdateContentCollection(usr.UserName);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
         }
+        
         void svc_FileContentInsertCompleted(object sender, PhoneServiceRef.FileContentInsertCompletedEventArgs e)
         {
             try
@@ -365,7 +284,7 @@ namespace SpeechApp
         
         #endregion
 
-        #region textboxbackgroundText
+        #region TextBox background Text
 
         private void TB_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -396,15 +315,9 @@ namespace SpeechApp
             {
                 MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
-
         }
 
         private void PasswordLostFocus(object sender, RoutedEventArgs e)
-        {
-            CheckPasswordWatermark();
-        }
-
-        public void CheckPasswordWatermark()
         {
             var passwordEmpty = string.IsNullOrEmpty(Password.Password);
             PasswordWatermark.Opacity = passwordEmpty ? 100 : 0;
@@ -420,39 +333,8 @@ namespace SpeechApp
 
         #region "Functions"
 
-        private ApplicationBarIconButton refreshContentbutton = null;
-        private ApplicationBarIconButton saveContentbutton = null;
-        public ApplicationBarIconButton GetApplicationBarButton(string header)
+        public void refreshControls(UserInfo user)
         {
-            if (header.Contains("Collections"))
-            {
-                if (refreshContentbutton == null)
-                {
-                    refreshContentbutton = new ApplicationBarIconButton();
-                    refreshContentbutton.IconUri = new Uri("/Images/refresh.png", UriKind.Relative);
-                    refreshContentbutton.Text = "Refresh";
-                    refreshContentbutton.Click += new EventHandler(RefreshContent);
-                }
-                return refreshContentbutton;
-            }
-            else if (header.Contains("Convert"))
-            {
-                if (saveContentbutton == null)
-                {
-                    saveContentbutton = new ApplicationBarIconButton();
-                    saveContentbutton.IconUri = new Uri("/Images/save.png", UriKind.Relative);
-                    saveContentbutton.Text = "Save";
-                    saveContentbutton.Click += new EventHandler(SaveContent);
-                }
-                return saveContentbutton;
-            }
-            return null;
-        }
-
-        void refreshControls()
-        {
-            
-            user = Security.GetUserInfo;
             myPivot.SelectionChanged -= myPivot_SelectionChanged;
             if (user == null || user.UserName == null)
             {
@@ -484,37 +366,11 @@ namespace SpeechApp
             }
             myPivot.SelectedIndex = 0;
             myPivot.SelectionChanged += myPivot_SelectionChanged;
-        }
 
-        void saveContent(string content, string title)
-        {
-            IsProgressBarVisible = true;
-            PhoneServiceRef.FileContentForInsert fileContent = new PhoneServiceRef.FileContentForInsert();
-            fileContent.content = content;
-            fileContent.speechRate = 3;
-            fileContent.title = title;
-            fileContent.userID = Security.GetUserInfo.UserName;
-            fileContent.voiceID = 1;
-
-            var svc = new PhoneServiceRef.PhoneSvcClient();
-            svc.FileContentInsertAsync(fileContent);
-            svc.FileContentInsertCompleted += svc_FileContentInsertCompleted;
-            svc.CloseAsync();
-
-            PhoneServiceRef.FileContentColl newFileContent = new PhoneServiceRef.FileContentColl();
-            newFileContent.ContentTitle = title;
-            newFileContent.CreatedDatetime = DateTime.Now;
-            CollectionItems.Add(newFileContent);
-        }
-
-        void UpdateContentCollection(string userName)
-        {
-            IsProgressBarVisible = true;
-            var svc = new PhoneServiceRef.PhoneSvcClient();
-            //Get the data for the list
-            svc.FileContentMyCollSelectAllAsync(userName);
-            svc.FileContentMyCollSelectAllCompleted += svc_FileContentMyCollSelectAllCompleted;
-            svc.CloseAsync();
+            UserID.Text = UserID.Name;
+            Password.Password = "";
+            TB_LostFocus(UserID, null);
+            PasswordLostFocus(null,null);
         }
 
         #endregion

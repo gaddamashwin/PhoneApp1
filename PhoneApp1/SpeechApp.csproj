@@ -129,9 +129,14 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Service\Authentication\Authenticate.cs" />
+    <Compile Include="Service\Authentication\Custom.cs" />
+    <Compile Include="Service\Authentication\WindowsLive.cs" />
+    <Compile Include="Service\Constants.cs" />
     <Compile Include="Service\ExceptionHandler.cs" />
+    <Compile Include="Service\ApplicationBarHelper.cs" />
     <Compile Include="Service\Security.cs" />
     <Compile Include="Service\StorageHelper.cs" />
+    <Compile Include="Service\WebService\PhoneSvc.cs" />
     <Compile Include="WelcomeControl.xaml.cs">
       <DependentUpon>WelcomeControl.xaml</DependentUpon>
     </Compile>
@@ -305,6 +310,7 @@
       <HintPath>..\packages\Microsoft.Net.Http.2.1.10\lib\sl4-windowsphone71\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
@@ -315,5 +321,5 @@
   </Target>
   -->
   <ProjectExtensions />
-  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.7\tools\Microsoft.Bcl.Build.targets" />
+  <!--<Import Project="..\packages\Microsoft.Bcl.Build.1.0.7\tools\Microsoft.Bcl.Build.targets" />-->
 </Project>
