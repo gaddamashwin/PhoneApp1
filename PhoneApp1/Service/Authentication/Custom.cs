@@ -13,14 +13,14 @@ namespace SpeechApp.Service.Authentication
         public string UserName { get; set; }
         public string Password { get; set; }
 
-        public Task<bool> SignMeIn()
+        public override Task SignMeIn()
         {
             //this.UserName = userName;
             //this.Password = password;
             AuthReference.AuthenticationServiceClient authService = new AuthReference.AuthenticationServiceClient();
             authService.LoginCompleted += authService_LoginCompleted;
             authService.LoginAsync(UserName, Password, "", true);
-            return Task.FromResult(true);
+            return Task.FromResult(0);
         }
 
         async void authService_LoginCompleted(object sender, AuthReference.LoginCompletedEventArgs e)

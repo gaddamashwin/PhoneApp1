@@ -9,8 +9,8 @@ namespace SpeechApp.Service
 {
     public class ApplicationBarHelper
     {
-        public ApplicationBarIconButton refreshContentbutton = null;
-        public ApplicationBarIconButton saveContentbutton = null;
+        public ApplicationBarIconButton refreshContentbutton = new ApplicationBarIconButton();
+        public ApplicationBarIconButton saveContentbutton = new ApplicationBarIconButton();
         
         public ApplicationBarIconButton GetApplicationBarButton(string header)
         {
@@ -18,7 +18,7 @@ namespace SpeechApp.Service
             {
                 if (refreshContentbutton == null)
                 {
-                    refreshContentbutton = new ApplicationBarIconButton();
+                    //refreshContentbutton = new ApplicationBarIconButton();
                     refreshContentbutton.IconUri = new Uri("/Images/refresh.png", UriKind.Relative);
                     refreshContentbutton.Text = "Refresh";
                 }
@@ -28,7 +28,7 @@ namespace SpeechApp.Service
             {
                 if (saveContentbutton == null)
                 {
-                    saveContentbutton = new ApplicationBarIconButton();
+                    //saveContentbutton = new ApplicationBarIconButton();
                     saveContentbutton.IconUri = new Uri("/Images/save.png", UriKind.Relative);
                     saveContentbutton.Text = "Save";
                 }

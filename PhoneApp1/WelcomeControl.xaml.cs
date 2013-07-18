@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using SpeechApp.Service;
+using SpeechApp.DataModel;
 
 namespace SpeechApp
 {
@@ -19,9 +20,9 @@ namespace SpeechApp
             
         }
 
-        private void LayoutRoot_Loaded(object sender, RoutedEventArgs e)
+        private async void LayoutRoot_Loaded(object sender, RoutedEventArgs e)
         {
-            var user = Security.GetUserInfo;
+            var user = await Security.GetLoginUser();
             if (user != null && user.UserName != null)
             {
                 txt1.Text = string.Format("Hi {0},", user.UserName);

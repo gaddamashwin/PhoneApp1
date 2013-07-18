@@ -10,8 +10,15 @@ namespace SpeechApp.Service
 {
     public class Security
     {
-       
 
+        public async static Task<UserInfo> GetLoginUser()
+        {
+            if (App.myAuth == null) return null;
+            else 
+            {
+                return await App.myAuth.GetUser();
+            }
+        }
         //public static async Task SaveUserInfo(string userName, string password)
         //{
         //    StorageHelper storage = new StorageHelper();

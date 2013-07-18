@@ -14,7 +14,7 @@ namespace SpeechApp.Service.WebService
      
         public async void saveContent(string content, string title)
         {
-            UserInfo user = await App.myAuth.GetUser();
+            UserInfo user = await Security.GetLoginUser();
             //IsProgressBarVisible = true;
             PhoneServiceRef.FileContentForInsert fileContent = new PhoneServiceRef.FileContentForInsert();
             fileContent.content = content;

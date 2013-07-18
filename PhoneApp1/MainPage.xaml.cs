@@ -22,7 +22,7 @@ namespace SpeechApp
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        private UserInfo user;
+        //private UserInfo user;
         // Constructor
         public MainPage()
         {
@@ -151,16 +151,17 @@ namespace SpeechApp
 
         #region "UI Events Other"
 
-        private void LayoutRoot_Loaded(object sender, RoutedEventArgs e)
+        private async void LayoutRoot_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
-               if (user != null && user.UserName != null)
-               {
-                UpdateContentCollection(user.UserName);
-                //Set the lst collection index to -1 so that no list item is seleted by default
-                lstCollection.SelectedIndex = -1;
-               }
+                if (App.myAuth == null)  refreshControls(null);
+                var user = await Security.GetLoginUser();
+                if (user != null && user.UserName != null)
+                {
+                    phonesvc.UpdateContentCollection(user.UserName);
+                    lstCollection.SelectedIndex = -1;
+                }
             }
             catch (Exception ex)
             {

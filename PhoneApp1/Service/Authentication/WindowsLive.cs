@@ -54,7 +54,7 @@ namespace SpeechApp.Service.Authentication
         }
 
 
-        public async void SignMeIn()
+        public override async Task SignMeIn()
         {
             LiveLoginResult loginResult = await authClient.LoginAsync(scopes);
             if (loginResult.Status == LiveConnectSessionStatus.Connected)
@@ -70,13 +70,13 @@ namespace SpeechApp.Service.Authentication
 
         }
 
-        public bool Logout()
+        public override Task Logout()
         {
             authClient.Logout();
-            return true;
+            return Task.FromResult<object>(null);
         }
 
-        public async Task<DataModel.UserInfo> GetUser()
+        public override async Task<DataModel.UserInfo> GetUser()
         {
             if (user==null)
             {
