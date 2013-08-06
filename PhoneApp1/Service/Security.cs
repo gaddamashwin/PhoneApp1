@@ -11,13 +11,18 @@ namespace SpeechApp.Service
     public class Security
     {
 
+        private static bool inProcessGetLoginUser = false;
         public async static Task<UserInfo> GetLoginUser()
         {
-            if (App.myAuth == null) return null;
-            else 
+            UserInfo rt = null;
+            if (!inProcessGetLoginUser)
             {
-                return await App.myAuth.GetUser();
+                inProcessGetLoginUser = true;
+                //if (App.myAuth != null && App.getUserStatus.IsCompleted) rt = await App.myAuth.GetUser();
+                if (App.myAuth != null) rt = await App.myAuth.GetUser();
+                inProcessGetLoginUser = false;
             }
+            return rt;
         }
         //public static async Task SaveUserInfo(string userName, string password)
         //{

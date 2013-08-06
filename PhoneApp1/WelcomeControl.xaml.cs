@@ -17,16 +17,27 @@ namespace SpeechApp
         public WelcomeControl()
         {
             InitializeComponent();
-            
         }
 
-        private async void LayoutRoot_Loaded(object sender, RoutedEventArgs e)
+
+        public string UserGreeting
         {
-            var user = await Security.GetLoginUser();
-            if (user != null && user.UserName != null)
-            {
-                txt1.Text = string.Format("Hi {0},", user.UserName);
-            }
+            get { return (string)GetValue(UserGreetingProperty); }
+            set { txt1.Text = value; }
+        }
+
+        // Using a DependencyProperty as the backing store for UserGreeting.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty UserGreetingProperty =
+            DependencyProperty.Register("UserGreeting", typeof(string), typeof(string), new PropertyMetadata(0));
+
+        
+        private void LayoutRoot_Loaded(object sender, RoutedEventArgs e)
+        {
+            //var user = await Security.GetLoginUser();
+            //if (user != null && user.UserName != null)
+            //{
+            //    txt1.Text = string.Format("Hi {0},", user.UserName);
+            //}
         }
     }
 }

@@ -73,6 +73,7 @@ namespace SpeechApp.Service.Authentication
         public override Task Logout()
         {
             authClient.Logout();
+            if (RefreshFunction != null) RefreshFunction(null);
             return Task.FromResult<object>(null);
         }
 

@@ -16,7 +16,7 @@ namespace SpeechApp.Service
         {
             if (header.Contains("Collections"))
             {
-                if (refreshContentbutton == null)
+                if (refreshContentbutton.IconUri == null)
                 {
                     //refreshContentbutton = new ApplicationBarIconButton();
                     refreshContentbutton.IconUri = new Uri("/Images/refresh.png", UriKind.Relative);
@@ -26,7 +26,7 @@ namespace SpeechApp.Service
             }
             else if (header.Contains("Convert"))
             {
-                if (saveContentbutton == null)
+                if (saveContentbutton.IconUri == null)
                 {
                     //saveContentbutton = new ApplicationBarIconButton();
                     saveContentbutton.IconUri = new Uri("/Images/save.png", UriKind.Relative);

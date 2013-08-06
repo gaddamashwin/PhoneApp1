@@ -54,6 +54,7 @@ namespace SpeechApp.Service.Authentication
         public async override Task Logout()
         {
             StorageHelper storage = new StorageHelper();
+            if (RefreshFunction != null) RefreshFunction(null);
             await storage.WriteFromFile<UserInfo>(Constants.UserInfoFile, new UserInfo());
         }
 

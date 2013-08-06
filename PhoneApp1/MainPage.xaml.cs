@@ -29,12 +29,29 @@ namespace SpeechApp
             try
             {
                 InitializeComponent();
+                
+                App.onUserUpdated = new Action<UserInfo>((user) =>
+                {
+                    if (App.myAuth == null) refreshControls(null);
+                    else refreshControls(user);
+                    //var user = await Security.GetLoginUser();
+                    if (user != null && user.UserName != null)
+                    {
+                        App.myAuth.RefreshFunction = refreshControls;
+                        phonesvc.UpdateContentCollection(user.UserName);
+                        lstCollection.SelectedIndex = -1;
+                        
+                    }
+                    myPivot.Visibility = System.Windows.Visibility.Visible;
+                }
+                );
+
                 this.DataContext = this;
                 ApplicationBar = new ApplicationBar();
                 AppBar = new ApplicationBarHelper();
                 phonesvc = new PhoneSvc();
                 ApplicationBar.IsVisible = false;
-                myPivot.Visibility = System.Windows.Visibility.Visible;
+               
 
                 Service.WebService.PhoneSvc.phoneSvcClient.FileContentInsertCompleted += svc_FileContentInsertCompleted;
                 Service.WebService.PhoneSvc.phoneSvcClient.FileContentMyCollSelectAllCompleted += svc_FileContentMyCollSelectAllCompleted;
@@ -49,15 +66,15 @@ namespace SpeechApp
 
         #region "Properties"
 
-        public bool IsProgressBarVisible
-        {
-            get { return (bool)GetValue(IsProgressBarVisibleProperty); }
-            set { SetValue(IsProgressBarVisibleProperty, value); }
-        }
+        //public bool IsProgressBarVisible
+        //{
+        //    get { return (bool)GetValue(IsProgressBarVisibleProperty); }
+        //    set { SetValue(IsProgressBarVisibleProperty, value); }
+        //}
 
-        // Using a DependencyProperty as the backing store for IsProgressBarVisible.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsProgressBarVisibleProperty =
-            DependencyProperty.Register("IsProgressBarVisible", typeof(bool), typeof(MainPage), new PropertyMetadata(false));
+        //// Using a DependencyProperty as the backing store for IsProgressBarVisible.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty IsProgressBarVisibleProperty =
+        //    DependencyProperty.Register("IsProgressBarVisible", typeof(bool), typeof(MainPage), new PropertyMetadata(false));
 
         public List<PhoneServiceRef.FileContentColl> CollectionItems
         {
@@ -114,6 +131,8 @@ namespace SpeechApp
         {
             try
             {
+                btnCustomSignIn.IsEnabled = false;
+                btnLiveSignIn.IsEnabled = false;
                 App.myAuth = new WindowsLive();
                 App.myAuth.RefreshFunction = refreshControls;
                 await App.myAuth.SignMeIn();
@@ -121,6 +140,15 @@ namespace SpeechApp
             catch (LiveAuthException authExp)
             {
                 //this.tbResponse.Text = authExp.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
+            }
+            finally
+            {
+                btnCustomSignIn.IsEnabled = true;
+                btnLiveSignIn.IsEnabled = true;
             }
         }
 
@@ -147,27 +175,10 @@ namespace SpeechApp
                 MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
             }
         }
+        
         #endregion
 
         #region "UI Events Other"
-
-        private async void LayoutRoot_Loaded(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (App.myAuth == null)  refreshControls(null);
-                var user = await Security.GetLoginUser();
-                if (user != null && user.UserName != null)
-                {
-                    phonesvc.UpdateContentCollection(user.UserName);
-                    lstCollection.SelectedIndex = -1;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(SpeechApp.Service.ExceptionHandler.ExceptionLog(ex));
-            }
-        }
 
         private void lstCollection_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
@@ -252,7 +263,7 @@ namespace SpeechApp
             {
                 Content.Text = Content.Name;
                 Title.Text = Title.Name;
-                IsProgressBarVisible = false;
+                //IsProgressBarVisible = false;
                 MessageBox.Show("Successfully submitted");
             }
             catch (System.ServiceModel.CommunicationException)
@@ -270,7 +281,7 @@ namespace SpeechApp
             try
             {
                 Title.Text = Title.Name;
-                IsProgressBarVisible = false;
+                //IsProgressBarVisible = false;
                 CollectionItems = e.Result.ToList();
             }
             catch (System.ServiceModel.CommunicationException)
@@ -364,6 +375,7 @@ namespace SpeechApp
                     myPivot.Items.Remove(pivotAbout);
                     myPivot.Items.Add(pivotAbout);
                 }
+                welcome.UserGreeting = string.Format("Hi {0},", user.UserName);
             }
             myPivot.SelectedIndex = 0;
             myPivot.SelectionChanged += myPivot_SelectionChanged;

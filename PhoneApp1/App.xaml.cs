@@ -11,13 +11,15 @@ using Microsoft.WindowsAzure.MobileServices;
 using SpeechApp.DataModel;
 using SpeechApp.Service;
 using SpeechApp.Service.Authentication;
+using System.Threading.Tasks;
 
 namespace SpeechApp
 {
     public partial class App : Application
     {
-
+        //public static Task getUserStatus;
         public static Authenticate myAuth;
+        public static Action<UserInfo> onUserUpdated;    
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>
@@ -73,7 +75,8 @@ namespace SpeechApp
             {
                 if (user.LoginSource == Constants.SpeechSource) myAuth = new Custom();
                 else if (user.LoginSource == Constants.WindowsLiveSouce) myAuth = new WindowsLive();
-                await myAuth.GetUser();
+                var r = await myAuth.GetUser();
+                if (onUserUpdated!=null) onUserUpdated(r);
             }
         }
 
@@ -128,7 +131,8 @@ namespace SpeechApp
 
             // Create the frame but don't set it as RootVisual yet; this allows the splash
             // screen to remain active until the application is ready to render.
-            RootFrame = new PhoneApplicationFrame();
+            //RootFrame = new PhoneApplicationFrame();
+            RootFrame = new TransitionFrame();
             RootFrame.Navigated += CompleteInitializePhoneApplication;
 
             // Handle navigation failures

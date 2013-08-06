@@ -5,8 +5,10 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone">
 
+    
     <!--Application Resources-->
     <Application.Resources>
+        
         <local:LocalizedStrings xmlns:local="clr-namespace:SpeechApp" x:Key="LocalizedStrings"/>
         <!--<Style x:Key="ButtonStyle1" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
@@ -64,9 +66,11 @@
 
     <Application.ApplicationLifetimeObjects>
         <!--Required object that handles lifetime events for the application-->
+        
         <shell:PhoneApplicationService
             Launching="Application_Launching" Closing="Application_Closing"
             Activated="Application_Activated" Deactivated="Application_Deactivated"/>
     </Application.ApplicationLifetimeObjects>
 
+    
 </Application>
