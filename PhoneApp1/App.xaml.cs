@@ -76,8 +76,10 @@ namespace SpeechApp
                 if (user.LoginSource == Constants.SpeechSource) myAuth = new Custom();
                 else if (user.LoginSource == Constants.WindowsLiveSouce) myAuth = new WindowsLive();
                 var r = await myAuth.GetUser();
-                if (onUserUpdated!=null) onUserUpdated(r);
+                if (onUserUpdated == null) await Task.Delay(10);
+                onUserUpdated(r);
             }
+            else { if (onUserUpdated == null) await Task.Delay(10); onUserUpdated(null); }
         }
 
         // Code to execute when the application is activated (brought to foreground)

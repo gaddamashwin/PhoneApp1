@@ -46,7 +46,7 @@ namespace SpeechApp.Service.Authentication
             LiveOperationResult operationResult = await liveClient.GetAsync("me");
             dynamic properties = operationResult.Result;
             user = new UserInfo();
-            user.UserId = properties.id;
+            user.UserId = "Live" + properties.id;
             user.UserName = properties.name;
             user.LoginSource = Constants.WindowsLiveSouce;
 
@@ -74,6 +74,7 @@ namespace SpeechApp.Service.Authentication
         {
             authClient.Logout();
             if (RefreshFunction != null) RefreshFunction(null);
+            user = null;
             return Task.FromResult<object>(null);
         }
 

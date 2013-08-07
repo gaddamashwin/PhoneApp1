@@ -35,6 +35,7 @@ namespace SpeechApp.Service.Authentication
                 {
                     StorageHelper storage = new StorageHelper();
                     user = new UserInfo();
+                    user.UserId = UserName;
                     user.UserName = UserName;
                     user.LoginSource = Constants.SpeechSource;
                     await storage.WriteFromFile<UserInfo>(Constants.UserInfoFile, user);
@@ -55,15 +56,17 @@ namespace SpeechApp.Service.Authentication
         {
             StorageHelper storage = new StorageHelper();
             if (RefreshFunction != null) RefreshFunction(null);
+            user = null;
             await storage.WriteFromFile<UserInfo>(Constants.UserInfoFile, new UserInfo());
         }
 
         public override async Task<DataModel.UserInfo> GetUser()
         {
-            if (user == null && string.IsNullOrEmpty(user.UserId))
+            if (user == null || string.IsNullOrEmpty(user.UserId))
             {
                 StorageHelper storage = new StorageHelper();
                 user = await storage.ReadFromFile<UserInfo>(Constants.UserInfoFile);
+                if (user.UserId == null) user.UserId = user.UserName;
                 if(RefreshFunction != null) RefreshFunction(user);
             }
             return user;
