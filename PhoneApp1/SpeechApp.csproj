@@ -137,6 +137,7 @@
     <Compile Include="Service\ExceptionHandler.cs" />
     <Compile Include="Service\ApplicationBarHelper.cs" />
     <Compile Include="Service\Security.cs" />
+    <Compile Include="Service\SkyDrive.cs" />
     <Compile Include="Service\StorageHelper.cs" />
     <Compile Include="Service\WebService\PhoneSvc.cs" />
     <Compile Include="WelcomeControl.xaml.cs">
@@ -284,8 +285,8 @@
     <WCFMetadataStorage Include="Service References\PhoneServiceRef\" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Live, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Live.Controls, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Live, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Live.Controls, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit">
       <HintPath>..\packages\WPtoolkit.4.2013.06.11\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>

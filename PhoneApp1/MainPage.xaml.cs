@@ -131,7 +131,8 @@ namespace SpeechApp
             {
                 btnCustomSignIn.IsEnabled = false;
                 btnLiveSignIn.IsEnabled = false;
-                App.myAuth = new WindowsLive();
+                var liveLogin = new WindowsLive();
+                App.myAuth = liveLogin;
                 App.myAuth.RefreshFunction = refreshControls;
                 await App.myAuth.SignMeIn();
             }
@@ -386,6 +387,11 @@ namespace SpeechApp
         }
 
         #endregion
+
+        private async void btnSkyDrive_Click(object sender, RoutedEventArgs e)
+        {
+            if (App.myAuth.GetType().Equals(typeof(WindowsLive))) { var r = (WindowsLive)App.myAuth; var result = await r.GetFilesSkyDrive(); }
+        }
 
     }
 }

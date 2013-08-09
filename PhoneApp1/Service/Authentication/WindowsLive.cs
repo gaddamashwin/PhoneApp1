@@ -6,15 +6,33 @@ using System.Threading.Tasks;
 using Microsoft.Live;
 using Microsoft.WindowsAzure.MobileServices;
 using SpeechApp.DataModel;
+using System.Threading;
 
 namespace SpeechApp.Service.Authentication
 {
     public class WindowsLive : Authenticate
     {
+        public class SkyDriveFile
+        {
+            public string ID { get; set; }
+            public string Name { get; set; }
+            public string Type { get; set; }
+            public string Link { get; set; }
+            public DateTime CreationDate { get; set; }
+            public SkyDriveFile(dynamic fileData)
+            {
+                this.Name = fileData.name;
+                this.ID = fileData.id;
+                this.Link = fileData.link;
+                this.Type = fileData.type;
+                this.CreationDate = Convert.ToDateTime(fileData.created_time);
+            }
+        } 
+        
         /// <summary>
         ///     Defines the scopes the application needs.
         /// </summary>
-        private static readonly string[] scopes = new string[] { "wl.signin", "wl.basic", "wl.offline_access" };
+        private static readonly string[] scopes = new string[] { "wl.signin", "wl.basic", "wl.offline_access, wl.skydrive, wl.skydrive_update" };
 
         /// <summary>
         ///     Stores the LiveAuthClient instance.
@@ -26,10 +44,12 @@ namespace SpeechApp.Service.Authentication
         /// </summary>
         private static LiveConnectClient _liveClient = null;
 
+        private static bool inProgressLiveClient = false;
         private async Task<LiveConnectClient> getLiveClient()
         {
-            if (_liveClient == null)
+            if (_liveClient == null && !inProgressLiveClient)
             {
+                inProgressLiveClient = true;
                 LiveLoginResult loginResult = await authClient.InitializeAsync(scopes);
                 if (loginResult.Status == LiveConnectSessionStatus.Connected)
                 {
@@ -37,6 +57,7 @@ namespace SpeechApp.Service.Authentication
                     SaveUser();
                     await UpdateUserRefresh(_liveClient);
                 }
+                inProgressLiveClient = false;
             }
             return _liveClient;
         }
@@ -80,14 +101,7 @@ namespace SpeechApp.Service.Authentication
 
         public override async Task<DataModel.UserInfo> GetUser()
         {
-            if (user==null)
-            {
-                LiveConnectClient liveClient = await getLiveClient();
-                if (liveClient != null)
-                {
-                    await UpdateUserRefresh(liveClient);
-                }
-            }
+            if (user == null) { LiveConnectClient liveClient = await getLiveClient(); }
             return user;
         }
 
@@ -97,6 +111,30 @@ namespace SpeechApp.Service.Authentication
             UserInfo user = new UserInfo();
             user.LoginSource = Constants.WindowsLiveSouce;
             await storage.WriteFromFile<UserInfo>(Constants.UserInfoFile, user);
+        }
+
+
+        public class SkyDriveContent
+        {
+            public string Name { get; set; }
+            public string Description { get; set; }
+        }
+
+        public async Task<List<SkyDriveContent>> GetFilesSkyDrive()
+        {
+            var liveClient = await getLiveClient();
+            //LiveOperationResult operationResult = await liveClient.GetAsync("me/skydrive/files");
+            LiveOperationResult operationResult = await liveClient.GetAsync("folder.f7d511d38e61d6ed.F7D511D38E61D6ED!338/files");
+            var fileList = new List<SkyDriveFile>();
+            dynamic data = operationResult.Result;
+            foreach (var dd in data)
+            {
+                foreach (var d in dd.Value)
+                {
+                    fileList.Add(new SkyDriveFile(d));
+                }
+            }
+            return null;
         }
     }
 }

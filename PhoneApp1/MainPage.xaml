@@ -202,13 +202,14 @@
                 <Grid Height="Auto">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <TextBox x:Name="Title" Grid.Row="0" Text="Title" Foreground="Gray" GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" />
                     <TextBox x:Name="Content" TextWrapping="Wrap" Grid.Row="1" Text="Content" Foreground="Gray" GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" />
-
-                    <ProgressBar Grid.Row="2" VerticalAlignment="Center" Height="10" Width="Auto" IsIndeterminate="{Binding IsProgressBarVisible}" Visibility="{Binding IsProgressBarVisible}" />
+                    <Button Content="2Speech Sign in" Grid.Row="2" Name="btnSkyDrive" Click="btnSkyDrive_Click" />
+                    <ProgressBar Grid.Row="3" VerticalAlignment="Center" Height="10" Width="Auto" IsIndeterminate="{Binding IsProgressBarVisible}" Visibility="{Binding IsProgressBarVisible}" />
                 </Grid>
             </phone:PivotItem>
 
