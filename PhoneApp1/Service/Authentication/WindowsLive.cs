@@ -7,28 +7,12 @@ using Microsoft.Live;
 using Microsoft.WindowsAzure.MobileServices;
 using SpeechApp.DataModel;
 using System.Threading;
+using SpeechApp.Service.WebService;
 
 namespace SpeechApp.Service.Authentication
 {
     public class WindowsLive : Authenticate
-    {
-        public class SkyDriveFile
-        {
-            public string ID { get; set; }
-            public string Name { get; set; }
-            public string Type { get; set; }
-            public string Link { get; set; }
-            public DateTime CreationDate { get; set; }
-            public SkyDriveFile(dynamic fileData)
-            {
-                this.Name = fileData.name;
-                this.ID = fileData.id;
-                this.Link = fileData.link;
-                this.Type = fileData.type;
-                this.CreationDate = Convert.ToDateTime(fileData.created_time);
-            }
-        } 
-        
+    { 
         /// <summary>
         ///     Defines the scopes the application needs.
         /// </summary>
@@ -113,18 +97,12 @@ namespace SpeechApp.Service.Authentication
             await storage.WriteFromFile<UserInfo>(Constants.UserInfoFile, user);
         }
 
-
-        public class SkyDriveContent
-        {
-            public string Name { get; set; }
-            public string Description { get; set; }
-        }
-
-        public async Task<List<SkyDriveContent>> GetFilesSkyDrive()
+        public async Task<List<SkyDriveFile>> GetFilesSkyDrive(string path)
         {
             var liveClient = await getLiveClient();
+            LiveOperationResult operationResult = await liveClient.GetAsync(path);
             //LiveOperationResult operationResult = await liveClient.GetAsync("me/skydrive/files");
-            LiveOperationResult operationResult = await liveClient.GetAsync("folder.f7d511d38e61d6ed.F7D511D38E61D6ED!338/files");
+            //LiveOperationResult operationResult = await liveClient.GetAsync("folder.f7d511d38e61d6ed.F7D511D38E61D6ED!338/files");
             var fileList = new List<SkyDriveFile>();
             dynamic data = operationResult.Result;
             foreach (var dd in data)
@@ -134,7 +112,28 @@ namespace SpeechApp.Service.Authentication
                     fileList.Add(new SkyDriveFile(d));
                 }
             }
-            return null;
+            return fileList;
         }
+
+        public async Task DownloadFileSkyDrive(string fileId, string fileName)
+        {
+            PhoneSvc svc = new PhoneSvc();
+            var liveClient = await getLiveClient();
+            LiveDownloadOperationResult operationResult = await liveClient.DownloadAsync(fileId + "/content");
+            var stream = operationResult.Stream;
+            int streamlen = (int)stream.Length;
+            if (streamlen <= 80000)
+            {
+                var result = new byte[streamlen];
+                await stream.ReadAsync(result, 0, streamlen);
+                svc.saveContent(Encoding.UTF8.GetString(result, 0, streamlen), fileName);
+            }
+            else 
+            { 
+                
+            }
+        }
+
+    
     }
 }

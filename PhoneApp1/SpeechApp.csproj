@@ -96,7 +96,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\SkyDriveFile.cs" />
     <Compile Include="DataModel\UserInfo.cs" />
+    <Compile Include="HeaderedContentControl.cs" />
     <Compile Include="HomeControl.xaml.cs">
       <DependentUpon>HomeControl.xaml</DependentUpon>
     </Compile>
@@ -140,6 +142,9 @@
     <Compile Include="Service\SkyDrive.cs" />
     <Compile Include="Service\StorageHelper.cs" />
     <Compile Include="Service\WebService\PhoneSvc.cs" />
+    <Compile Include="SkyDrive.xaml.cs">
+      <DependentUpon>SkyDrive.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WelcomeControl.xaml.cs">
       <DependentUpon>WelcomeControl.xaml</DependentUpon>
     </Compile>
@@ -162,6 +167,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Play.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SkyDrive.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -37,7 +37,7 @@ namespace SpeechApp
                     if (user != null && user.UserId != null)
                     {
                         App.myAuth.RefreshFunction = refreshControls;
-                        lstCollection.SelectedIndex = -1;
+                        //lstCollection.SelectedIndex = -1;
                     }
                     myPivot.Visibility = System.Windows.Visibility.Visible;
                     mainProgress.Visibility = System.Windows.Visibility.Collapsed;
@@ -183,12 +183,12 @@ namespace SpeechApp
         {
             try
             {
-                if (lstCollection.SelectedIndex != -1)
-                {
+                //if (lstCollection.SelectedIndex != -1)
+                //{
                     PhoneServiceRef.FileContentColl item = (PhoneServiceRef.FileContentColl)e.AddedItems[0];
                     if (!string.IsNullOrEmpty(item.Filepath)) NavigationService.Navigate(new Uri(string.Format("/Play.xaml?Description={0}&Link={1}", item.ContentTitle, item.Filepath), UriKind.Relative));
                     else MessageBox.Show("Conversion in progress...");
-                }
+                //}
             }
             catch (Exception ex)
             {
@@ -281,7 +281,8 @@ namespace SpeechApp
             {
                 Title.Text = Title.Name;
                 IsProgressBarVisible = false;
-                CollectionItems = e.Result.ToList();
+                var rtList = e.Result.ToList();
+                CollectionItems = rtList;
             }
             catch (System.ServiceModel.CommunicationException)
             {
@@ -388,9 +389,9 @@ namespace SpeechApp
 
         #endregion
 
-        private async void btnSkyDrive_Click(object sender, RoutedEventArgs e)
+        private void btnSkyDrive_Click(object sender, RoutedEventArgs e)
         {
-            if (App.myAuth.GetType().Equals(typeof(WindowsLive))) { var r = (WindowsLive)App.myAuth; var result = await r.GetFilesSkyDrive(); }
+            NavigationService.Navigate(new Uri("/SkyDrive.xaml?link=me/skydrive/files", UriKind.Relative));
         }
 
     }

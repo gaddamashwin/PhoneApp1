@@ -160,39 +160,26 @@
             <phone:PivotItem Header="Collections" Name="pivotCollections">
                 <Grid Height="Auto">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
+                        <RowDefinition Height="480" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <ListBox Grid.Row="0" SelectionChanged="lstCollection_SelectionChanged_1" AllowDrop="False" ScrollViewer.ManipulationMode="System" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="lstCollection" Margin="12,17,0,28" ItemsSource="{Binding CollectionItems}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Border Background="{StaticResource PhoneAccentBrush}" BorderThickness="5" >
-                                    <StackPanel>
-                                        <TextBlock Foreground="{Binding ForegroundBrush}" FontSize="40" Text="{Binding ContentTitle}" />
-                                        <TextBlock Foreground="{Binding ForegroundBrush}" FontSize="30" FontStyle="Italic" Text="{Binding CreatedDatetime}"/>
-                                    </StackPanel>
-                                </Border>
+                    <phone:LongListSelector Background="{StaticResource PhoneChromeBrush}" Grid.Row="0" SelectionChanged="lstCollection_SelectionChanged_1" x:Name="lstCollection" ItemsSource="{Binding CollectionItems}">
+                        <phone:LongListSelector.ItemTemplate>
+                            <DataTemplate ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding ContentTitle}" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
+                                    <TextBlock Text="{Binding CreatedDatetime}" Style="{StaticResource PhoneTextNormalStyle}" TextWrapping="Wrap" FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
+                                    <Line Width="2"></Line>
+                                </StackPanel>
                             </DataTemplate>
-                        </ListBox.ItemTemplate>
-                        <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <VirtualizingStackPanel Orientation="Vertical"/>
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate>
-                                            <ContentPresenter
-												HorizontalAlignment="Stretch" 
-												VerticalAlignment="Stretch" />
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-                    </ListBox>
+                        </phone:LongListSelector.ItemTemplate>
+                        <phone:LongListSelector.ListFooterTemplate>
+                            <DataTemplate>
+                                <Rectangle Height="40"/>
+                            </DataTemplate>
+                        </phone:LongListSelector.ListFooterTemplate>
+                    </phone:LongListSelector>
+
                     <ProgressBar Grid.Row="1" VerticalAlignment="Center" Height="10" Width="Auto" IsIndeterminate="{Binding IsProgressBarVisible}" Visibility="{Binding IsProgressBarVisible}" />
                 </Grid>
             </phone:PivotItem>
@@ -208,7 +195,7 @@
                     </Grid.RowDefinitions>
                     <TextBox x:Name="Title" Grid.Row="0" Text="Title" Foreground="Gray" GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" />
                     <TextBox x:Name="Content" TextWrapping="Wrap" Grid.Row="1" Text="Content" Foreground="Gray" GotFocus="TB_GotFocus" LostFocus="TB_LostFocus" />
-                    <Button Content="2Speech Sign in" Grid.Row="2" Name="btnSkyDrive" Click="btnSkyDrive_Click" />
+                    <Button Content="From Skydrive" Grid.Row="2" Name="btnSkyDrive" Click="btnSkyDrive_Click" />
                     <ProgressBar Grid.Row="3" VerticalAlignment="Center" Height="10" Width="Auto" IsIndeterminate="{Binding IsProgressBarVisible}" Visibility="{Binding IsProgressBarVisible}" />
                 </Grid>
             </phone:PivotItem>
