@@ -10,7 +10,7 @@ namespace SpeechApp.Service.Authentication
     public abstract class Authenticate
     {
         protected static UserInfo user { get; set; }
-        public Action<UserInfo> RefreshFunction { get; set; }
+        //public Action<UserInfo> RefreshFunction { get; set; }
         public abstract Task SignMeIn();
         public abstract Task Logout();
         public abstract Task<UserInfo> GetUser();

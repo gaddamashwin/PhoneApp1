@@ -67,19 +67,8 @@ namespace SpeechApp
 
         // Code to execute when the application is launching (eg, from Start)
         // This code will not execute when the application is reactivated
-        private async void Application_Launching(object sender, LaunchingEventArgs e)
+        private void Application_Launching(object sender, LaunchingEventArgs e)
         {
-            StorageHelper sHelp = new StorageHelper();
-            var user = await sHelp.ReadFromFile<UserInfo>(Constants.UserInfoFile);
-            if (user != null && !string.IsNullOrEmpty(user.LoginSource.ToString()))
-            {
-                if (user.LoginSource == Constants.SpeechSource) myAuth = new Custom();
-                else if (user.LoginSource == Constants.WindowsLiveSouce) myAuth = new WindowsLive();
-                var r = await myAuth.GetUser();
-                while (onUserUpdated == null) await Task.Delay(10);
-                onUserUpdated(r);
-            }
-            else { while (onUserUpdated == null) await Task.Delay(10); onUserUpdated(null); }
         }
 
         // Code to execute when the application is activated (brought to foreground)

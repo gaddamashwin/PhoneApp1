@@ -39,7 +39,7 @@ namespace SpeechApp.Service.Authentication
                     user.UserName = UserName;
                     user.LoginSource = Constants.SpeechSource;
                     await storage.WriteFromFile<UserInfo>(Constants.UserInfoFile, user);
-                    RefreshFunction(user);
+                    //RefreshFunction(user);
                 }
             }
             catch (System.ServiceModel.CommunicationException)
@@ -55,7 +55,7 @@ namespace SpeechApp.Service.Authentication
         public async override Task Logout()
         {
             StorageHelper storage = new StorageHelper();
-            if (RefreshFunction != null) RefreshFunction(null);
+            //if (RefreshFunction != null) RefreshFunction(null);
             user = null;
             await storage.WriteFromFile<UserInfo>(Constants.UserInfoFile, new UserInfo());
         }
@@ -67,7 +67,7 @@ namespace SpeechApp.Service.Authentication
                 StorageHelper storage = new StorageHelper();
                 user = await storage.ReadFromFile<UserInfo>(Constants.UserInfoFile);
                 if (user.UserId == null) user.UserId = user.UserName;
-                if(RefreshFunction != null) RefreshFunction(user);
+                //if(RefreshFunction != null) RefreshFunction(user);
             }
             return user;
         }

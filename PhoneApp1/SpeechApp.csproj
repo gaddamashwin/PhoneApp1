@@ -98,11 +98,19 @@
     </Compile>
     <Compile Include="DataModel\SkyDriveFile.cs" />
     <Compile Include="DataModel\UserInfo.cs" />
-    <Compile Include="HeaderedContentControl.cs" />
+    <Compile Include="EnterText.xaml.cs">
+      <DependentUpon>EnterText.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HomeControl.xaml.cs">
       <DependentUpon>HomeControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -138,8 +146,8 @@
     <Compile Include="Service\Constants.cs" />
     <Compile Include="Service\ExceptionHandler.cs" />
     <Compile Include="Service\ApplicationBarHelper.cs" />
+    <Compile Include="Service\FocusEvents.cs" />
     <Compile Include="Service\Security.cs" />
-    <Compile Include="Service\SkyDrive.cs" />
     <Compile Include="Service\StorageHelper.cs" />
     <Compile Include="Service\WebService\PhoneSvc.cs" />
     <Compile Include="SkyDrive.xaml.cs">
@@ -158,7 +166,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="EnterText.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="HomeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -180,6 +200,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\home.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="README_FIRST.txt" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />

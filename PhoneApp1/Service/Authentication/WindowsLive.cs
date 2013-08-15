@@ -55,7 +55,7 @@ namespace SpeechApp.Service.Authentication
             user.UserName = properties.name;
             user.LoginSource = Constants.WindowsLiveSouce;
 
-            if (RefreshFunction != null) RefreshFunction(user);
+            //if (RefreshFunction != null) RefreshFunction(user);
         }
 
 
@@ -70,17 +70,18 @@ namespace SpeechApp.Service.Authentication
             }
             else
             {
-                RefreshFunction(user);
+                //RefreshFunction(user);
             }
 
         }
 
-        public override Task Logout()
+        public async override Task Logout()
         {
+            StorageHelper storage = new StorageHelper();
             authClient.Logout();
-            if (RefreshFunction != null) RefreshFunction(null);
+            //if (RefreshFunction != null) RefreshFunction(null);
             user = null;
-            return Task.FromResult<object>(null);
+            await storage.WriteFromFile<UserInfo>(Constants.UserInfoFile, new UserInfo());           
         }
 
         public override async Task<DataModel.UserInfo> GetUser()

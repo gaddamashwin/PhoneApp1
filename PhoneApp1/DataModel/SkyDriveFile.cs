@@ -38,7 +38,7 @@ namespace SpeechApp.DataModel
             //    this.hyperlinkVisibility = Visibility.Collapsed;
             //    this.checkboxVisibility = Visibility.Visible;
             //}
-            else if (this.Name.EndsWith(".txt") || this.Name.EndsWith(".htm") || this.Name.EndsWith(".html"))
+            else if (this.Name.ToLower().EndsWith("notebook") || this.Name.ToLower().EndsWith(".txt") || this.Name.ToLower().EndsWith(".htm") || this.Name.ToLower().EndsWith(".html"))
             {
                 this.checkboxEnabled = true;
                 this.hyperlinkVisibility = Visibility.Collapsed;
