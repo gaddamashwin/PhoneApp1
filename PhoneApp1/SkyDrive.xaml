@@ -33,9 +33,9 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="Check the files that you have to convert (Only text files can be converted)." Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="Check the files that you have to convert (Only text files can be converted)." Style="{StaticResource PhoneTextNormalStyle}"/>
             
-            <phone:LongListSelector Visibility="Collapsed" Grid.Row="1" Background="{StaticResource PhoneChromeBrush}" x:Name="lstCollection">
+            <phone:LongListSelector Visibility="Collapsed" Grid.Row="2" Background="{StaticResource PhoneChromeBrush}" x:Name="lstCollection">
                 <phone:LongListSelector.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -51,7 +51,7 @@
                 </phone:LongListSelector.ListFooterTemplate>
             </phone:LongListSelector>
 
-            <ProgressBar Name="mainProgress" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Height="10" Width="300" IsIndeterminate="True" Visibility="Visible" />
+            <ProgressBar Name="mainProgress" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Height="10" Width="300" IsIndeterminate="True" Visibility="Visible" />
         </Grid>
     </Grid>
 
